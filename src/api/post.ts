@@ -3,8 +3,8 @@ import { BASE_URL } from "../constants";
 export const postRequest = async (
   x: string | number,
   y: string | number,
-  name: string,
-  color: string
+  name: string | null,
+  color: string | null
 ): Promise<any> => {
   await fetch(`${BASE_URL}`, {
     method: "POST",

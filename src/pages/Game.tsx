@@ -3,21 +3,41 @@ import { Rectangle } from "../components/others/Rectangle";
 import { useDispatch, useSelector } from "react-redux";
 import { postRequest } from "../api/post";
 import styled from "styled-components";
+import { ActionTypes } from "../state/action-types";
+import { Nav } from "../components/headers/Nav";
+import { primary } from "../styles/colors";
+import { LoaderWrapper } from "../components/wrappers/LoaderWrapper";
+import Loader from "react-loader-spinner";
 
 interface IinnerHover {
-  display: boolean;
+  visibility: boolean;
 }
 
 const InnerHover = styled.div<IinnerHover>`
   position: absolute;
   bottom: 0;
   left: 0;
-  padding: 0.3rem;
-  background: #ddd;
-  font-size: 30px;
-  transform: translateY(-50%);
-  display: ${({ display }) => (display ? "block" : "none")};
+  padding: 1rem;
+  background: ${primary};
+  color: #fff;
+  font-size: 16px;
+  visibility: ${({ visibility }) => (visibility ? "visible" : "hidden")};
+  transition: all 0.5s ease-in-out;
   z-index: 10;
+  border-radius: 0.2rem;
+  min-width: 180px;
+  height: 0;
+  opacity: 0;
+  &:hover {
+    height: fit-content;
+    opacity: 1;
+  }
+`;
+
+const GameWrapper = styled.div`
+  width: 100%;
+  min-height: 1200px;
+  position: relative;
 `;
 
 export const Game = (): JSX.Element => {
@@ -32,11 +52,14 @@ export const Game = (): JSX.Element => {
   const getCoords = (e: React.MouseEvent<HTMLDivElement>) => {
     const posX = e.clientX;
     const posY = e.clientY;
-    postRequest(posX, posY, "uuuu", "red");
+
+    const username = localStorage.getItem("username");
+    const color = localStorage.getItem("color");
+    postRequest(posX, posY, username, color);
   };
 
   useEffect(() => {
-    dispatch({ type: "FETCH_BOARD_DATA" });
+    dispatch({ type: ActionTypes.FETCH_BOARD_DATA });
   }, []);
 
   const handleMouseEnter = (index: number) => {
@@ -50,18 +73,11 @@ export const Game = (): JSX.Element => {
   };
 
   return (
-    <div
-      style={{
-        height: "20vh",
-        width: "100%",
-        minHeight: "100vh",
-        margin: "0 auto",
-        position: "relative",
-      }}
-      onClick={(e) => getCoords(e)}
-    >
-      {data && data.length
-        ? data.map(
+    <>
+      <Nav />
+      <GameWrapper onClick={(e) => getCoords(e)}>
+        {data && data.length ? (
+          data.map(
             (
               {
                 data: { color, name },
@@ -86,7 +102,7 @@ export const Game = (): JSX.Element => {
                   onMouseLeave={() => handleMouseLeave()}
                 >
                   {i === hoveredIndex ? (
-                    <InnerHover display={hover}>
+                    <InnerHover visibility={hover}>
                       <p>Name: {name}</p>
                       <p>Color: {color}</p>
                     </InnerHover>
@@ -95,7 +111,12 @@ export const Game = (): JSX.Element => {
               );
             }
           )
-        : null}
-    </div>
+        ) : (
+          <LoaderWrapper>
+            <Loader type="Oval" color="#00BFFF" height={80} width={80} />
+          </LoaderWrapper>
+        )}
+      </GameWrapper>
+    </>
   );
 };

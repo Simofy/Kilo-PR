@@ -1,34 +1,18 @@
 import { ActionTypes } from "../action-types";
 
-interface BoardRequestPendingAction {
-  type: ActionTypes.BOARD_STATE_PENDING;
-}
-
 interface BoardRequestSuccessAction {
   type: ActionTypes.BOARD_STATE_SUCCESS;
-  payload: unknown;
+  payload: any;
 }
 interface BoardRequestErrorAction {
   type: ActionTypes.BOARD_STATE_ERROR;
 }
 
-interface BoardStatusPendingAction {
-  type: ActionTypes.BOARD_STATE_PENDING;
-}
-
-interface BoardStatusSuccessAction {
-  type: ActionTypes.BOARD_STATE_SUCCESS;
-  payload: unknown;
-}
-
-interface BoardStatusErrorAction {
-  type: ActionTypes.BOARD_STATE_ERROR;
+interface FetchBoardRequestAction {
+  type: ActionTypes.FETCH_BOARD_DATA;
 }
 
 export type Action =
-  | BoardRequestPendingAction
   | BoardRequestErrorAction
   | BoardRequestSuccessAction
-  | BoardStatusPendingAction
-  | BoardStatusSuccessAction
-  | BoardStatusErrorAction;
+  | FetchBoardRequestAction;

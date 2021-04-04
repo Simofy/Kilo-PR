@@ -15,7 +15,7 @@ const initialState: IBoardData = {
 
 export const game = (state = initialState, action: Action): IBoardData => {
   switch (action.type) {
-    case ActionTypes.BOARD_STATE_PENDING:
+    case ActionTypes.FETCH_BOARD_DATA:
       return {
         ...state,
         loading: true,
