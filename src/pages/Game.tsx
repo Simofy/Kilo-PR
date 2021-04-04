@@ -1,42 +1,37 @@
-import React, { useState, useEffect } from "react";
-import { BASE_URL } from "../constants";
+import React, { useEffect, useState } from "react";
 import { Rectangle } from "../components/others/Rectangle";
 import { useDispatch, useSelector } from "react-redux";
+import { postRequest } from "../api/post";
+import styled from "styled-components";
+
+interface IinnerHover {
+  display: boolean;
+}
+
+const InnerHover = styled.div<IinnerHover>`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 0.3rem;
+  background: #ddd;
+  font-size: 30px;
+  transform: translateY(-50%);
+  display: ${({ display }) => (display ? "block" : "none")};
+  z-index: 10;
+`;
 
 export const Game = (): JSX.Element => {
   const dispatch = useDispatch();
+  const [hover, setHover] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
   const data = useSelector(
     (state: { boardData: { data: [] } }) => state.boardData.data
   );
 
-  console.log(data);
-
-  const postRequest = async (
-    x: string | number,
-    y: string | number,
-    name: string,
-    color: string
-  ) => {
-    const response = await fetch(`${BASE_URL}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        x,
-        y,
-        name,
-        color,
-      }),
-    });
-    console.log(response);
-  };
-
   const getCoords = (e: React.MouseEvent<HTMLDivElement>) => {
     const posX = e.clientX;
     const posY = e.clientY;
-    console.log(posY, posX);
-
     postRequest(posX, posY, "uuuu", "red");
   };
 
@@ -44,13 +39,22 @@ export const Game = (): JSX.Element => {
     dispatch({ type: "FETCH_BOARD_DATA" });
   }, []);
 
+  const handleMouseEnter = (index: number) => {
+    setHoveredIndex(index);
+    setHover(true);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredIndex(null);
+    setHover(false);
+  };
+
   return (
     <div
       style={{
         height: "20vh",
-        border: "1px solid red",
         width: "100%",
-        minHeight: "1200px",
+        minHeight: "100vh",
         margin: "0 auto",
         position: "relative",
       }}
@@ -60,11 +64,11 @@ export const Game = (): JSX.Element => {
         ? data.map(
             (
               {
-                data: { name, color, createdAt },
+                data: { color, name },
                 x,
                 y,
               }: {
-                data: { name: string; color: string; createdAt: string };
+                data: { name: string; color: string };
                 x: string;
                 y: string;
               },
@@ -78,7 +82,16 @@ export const Game = (): JSX.Element => {
                   height="20px"
                   bgrColor={color}
                   key={i}
-                />
+                  onMouseEnter={() => handleMouseEnter(i)}
+                  onMouseLeave={() => handleMouseLeave()}
+                >
+                  {i === hoveredIndex ? (
+                    <InnerHover display={hover}>
+                      <p>Name: {name}</p>
+                      <p>Color: {color}</p>
+                    </InnerHover>
+                  ) : null}
+                </Rectangle>
               );
             }
           )

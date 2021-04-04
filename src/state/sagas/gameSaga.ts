@@ -10,7 +10,7 @@ export function* getBoardData(): Generator<unknown> {
   const boardData: any = yield call(handleGetRequest);
 
   const prevBoardData: any = yield select((state) => state.boardData.data);
-  yield delay(5);
+  yield delay(5000);
 
   console.log(prevBoardData, boardData);
 

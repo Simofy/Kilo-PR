@@ -17,4 +17,5 @@ export const Rectangle = styled.div<IRectangle>`
   left: ${({ positionX }) => `${positionX}px`};
   width: ${({ width }) => width};
   height: ${({ height }) => height};
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
 `;
