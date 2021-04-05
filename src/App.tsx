@@ -9,7 +9,7 @@ export const App = (): JSX.Element => {
   return (
     <>
       <GlobalStyle />
-      <Router>
+      <Router basename={process.env.PUBLIC_URL}>
         <Route path="/" component={Home} exact />
         <Route path="/game" component={Game} exact />
       </Router>

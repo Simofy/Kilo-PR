@@ -35,8 +35,6 @@ export const LoginFlow = (): JSX.Element => {
     setPickedColor(color.hex);
   };
 
-  console.log(pickedColor);
-
   return (
     <form
       onSubmit={(e) => submitForm(e)}

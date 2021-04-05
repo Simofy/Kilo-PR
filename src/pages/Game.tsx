@@ -34,18 +34,14 @@ const InnerHover = styled.div<IinnerHover>`
   }
 `;
 
-interface IGameWrapper {
-  ref: any;
-}
-
-const GameWrapper = styled.div<IGameWrapper>`
+const GameWrapper = styled.div`
   width: 100%;
   min-height: 1200px;
   position: relative;
 `;
 
 export const Game = (): JSX.Element => {
-  const gameContainerRef: any = useRef();
+  const gameContainerRef = useRef<HTMLDivElement>(null);
   const dispatch = useDispatch();
   const [hover, setHover] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -56,7 +52,7 @@ export const Game = (): JSX.Element => {
 
   const getCoords = (e: React.MouseEvent<HTMLDivElement>) => {
     const posX = e.clientX;
-    const posY = e.clientY - gameContainerRef.current.offsetTop;
+    const posY = e.clientY - gameContainerRef.current!.offsetTop;
 
     const username = localStorage.getItem("username");
     const color = localStorage.getItem("color");

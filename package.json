@@ -2,7 +2,7 @@
   "name": "test-day-boilerplate",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://galvotas.github.io/KiloAcademy-game",
+  "homepage": "https://galvotas.github.io/KiloAcademy-game",
   "dependencies": {
     "@reduxify/utils": "^0.1.1",
     "@types/jest": "^26.0.22",
