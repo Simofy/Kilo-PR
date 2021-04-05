@@ -9,8 +9,7 @@ export const Home = (): JSX.Element => {
       <HomePresentation>
         <h1>Hello there!</h1>
         <h3 style={{ textAlign: "center" }}>
-          Play the most nonsense, <br />
-          but colorfull game on the internet and win absolutely... nothing!
+          Play the most colorfull game <br /> on the internet!
         </h3>
         <div />
       </HomePresentation>
