@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { Rectangle } from "../components/others/Rectangle";
 import { useDispatch, useSelector } from "react-redux";
 import { postRequest } from "../api/post";
@@ -34,13 +34,18 @@ const InnerHover = styled.div<IinnerHover>`
   }
 `;
 
-const GameWrapper = styled.div`
+interface IGameWrapper {
+  ref: any;
+}
+
+const GameWrapper = styled.div<IGameWrapper>`
   width: 100%;
   min-height: 1200px;
   position: relative;
 `;
 
 export const Game = (): JSX.Element => {
+  const gameContainerRef: any = useRef();
   const dispatch = useDispatch();
   const [hover, setHover] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
@@ -51,7 +56,7 @@ export const Game = (): JSX.Element => {
 
   const getCoords = (e: React.MouseEvent<HTMLDivElement>) => {
     const posX = e.clientX;
-    const posY = e.clientY;
+    const posY = e.clientY - gameContainerRef.current.offsetTop;
 
     const username = localStorage.getItem("username");
     const color = localStorage.getItem("color");
@@ -75,7 +80,7 @@ export const Game = (): JSX.Element => {
   return (
     <>
       <Nav />
-      <GameWrapper onClick={(e) => getCoords(e)}>
+      <GameWrapper ref={gameContainerRef} onClick={(e) => getCoords(e)}>
         {data && data.length ? (
           data.map(
             (
