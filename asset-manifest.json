@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.js": "/KiloAcademy-game/static/js/main.4b7c788e.chunk.js",
+    "main.js.map": "/KiloAcademy-game/static/js/main.4b7c788e.chunk.js.map",
+    "runtime-main.js": "/KiloAcademy-game/static/js/runtime-main.4dca6a90.js",
+    "runtime-main.js.map": "/KiloAcademy-game/static/js/runtime-main.4dca6a90.js.map",
+    "static/css/2.ab75b8d7.chunk.css": "/KiloAcademy-game/static/css/2.ab75b8d7.chunk.css",
+    "static/js/2.f07a4a1a.chunk.js": "/KiloAcademy-game/static/js/2.f07a4a1a.chunk.js",
+    "static/js/2.f07a4a1a.chunk.js.map": "/KiloAcademy-game/static/js/2.f07a4a1a.chunk.js.map",
+    "index.html": "/KiloAcademy-game/index.html",
+    "static/css/2.ab75b8d7.chunk.css.map": "/KiloAcademy-game/static/css/2.ab75b8d7.chunk.css.map",
+    "static/js/2.f07a4a1a.chunk.js.LICENSE.txt": "/KiloAcademy-game/static/js/2.f07a4a1a.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.4dca6a90.js",
+    "static/css/2.ab75b8d7.chunk.css",
+    "static/js/2.f07a4a1a.chunk.js",
+    "static/js/main.4b7c788e.chunk.js"
+  ]
+}
