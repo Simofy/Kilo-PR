@@ -45,7 +45,7 @@ export const Nav = ({
       {maxX && maxY && updatedTimes && (
         <StatusWrapper>
           <span>maxX coord: {maxX}</span>
-          <span>maxX coord: {maxX}</span>
+          <span>maxY coord: {maxY}</span>
           <span>Times updated: {updatedTimes}</span>
         </StatusWrapper>
       )}
