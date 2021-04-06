@@ -14,6 +14,10 @@ interface IinnerHover {
   visibility: boolean;
 }
 
+interface IGameWrapper {
+  height?: string;
+}
+
 const InnerHover = styled.div<IinnerHover>`
   position: absolute;
   bottom: 0;
@@ -35,9 +39,9 @@ const InnerHover = styled.div<IinnerHover>`
   }
 `;
 
-const GameWrapper = styled.div`
+const GameWrapper = styled.div<IGameWrapper>`
   width: 100%;
-  min-height: 1200px;
+  min-height: ${({ height }) => (height ? height : "100vh")};
   position: relative;
 `;
 
