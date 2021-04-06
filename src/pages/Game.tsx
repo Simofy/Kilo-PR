@@ -62,7 +62,9 @@ export const Game = ({
 
   const getCoords = (e: React.MouseEvent<HTMLDivElement>) => {
     const posX = e.clientX;
-    const posY = e.clientY - gameContainerRef.current!.offsetTop;
+    const posY =
+      e.clientY - (gameContainerRef.current!.offsetTop - window.scrollY);
+    console.log(window.scrollY);
 
     const username = localStorage.getItem("username");
     const color = localStorage.getItem("color");
