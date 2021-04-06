@@ -12,7 +12,7 @@ const NavBar = styled.header<INav>`
   display: flex;
   width: 100%;
   min-height: 7vh;
-  padding: 0 1rem;
+  padding: 1rem;
   align-items: center;
   justify-content: space-between;
   background-color: ${primary};

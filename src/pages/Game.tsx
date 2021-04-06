@@ -45,7 +45,11 @@ const GameWrapper = styled.div<IGameWrapper>`
   position: relative;
 `;
 
-export const Game = (): JSX.Element => {
+export const Game = ({
+  location: { pathname },
+}: {
+  location: { pathname: string };
+}): JSX.Element => {
   const gameContainerRef = useRef<HTMLDivElement | null>(null);
   const dispatch = useDispatch();
   const [hover, setHover] = useState(false);
