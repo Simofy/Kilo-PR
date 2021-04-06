@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/KiloAcademy-game/static/js/main.12d801bc.chunk.js",
-    "main.js.map": "/KiloAcademy-game/static/js/main.12d801bc.chunk.js.map",
+    "main.js": "/KiloAcademy-game/static/js/main.d5049c54.chunk.js",
+    "main.js.map": "/KiloAcademy-game/static/js/main.d5049c54.chunk.js.map",
     "runtime-main.js": "/KiloAcademy-game/static/js/runtime-main.4dca6a90.js",
     "runtime-main.js.map": "/KiloAcademy-game/static/js/runtime-main.4dca6a90.js.map",
     "static/css/2.ab75b8d7.chunk.css": "/KiloAcademy-game/static/css/2.ab75b8d7.chunk.css",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.4dca6a90.js",
     "static/css/2.ab75b8d7.chunk.css",
     "static/js/2.2ade613e.chunk.js",
-    "static/js/main.12d801bc.chunk.js"
+    "static/js/main.d5049c54.chunk.js"
   ]
 }
