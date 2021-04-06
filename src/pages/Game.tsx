@@ -8,6 +8,7 @@ import { Nav } from "../components/headers/Nav";
 import { primary } from "../styles/colors";
 import { LoaderWrapper } from "../components/wrappers/LoaderWrapper";
 import Loader from "react-loader-spinner";
+import { handleGetBoardStatus } from "../api/get";
 
 interface IinnerHover {
   visibility: boolean;
@@ -41,10 +42,11 @@ const GameWrapper = styled.div`
 `;
 
 export const Game = (): JSX.Element => {
-  const gameContainerRef = useRef<HTMLDivElement>(null);
+  const gameContainerRef = useRef<HTMLDivElement | null>(null);
   const dispatch = useDispatch();
   const [hover, setHover] = useState(false);
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [boardStatus, setBoardStatus] = useState<any>();
 
   const data = useSelector(
     (state: { boardData: { data: [] } }) => state.boardData.data
@@ -63,6 +65,13 @@ export const Game = (): JSX.Element => {
     dispatch({ type: ActionTypes.FETCH_BOARD_DATA });
   }, []);
 
+  useEffect((): any => {
+    return async () => {
+      const boardStatus: any = await handleGetBoardStatus("/status");
+      boardStatus && setBoardStatus(boardStatus);
+    };
+  }, [data]);
+
   const handleMouseEnter = (index: number) => {
     setHoveredIndex(index);
     setHover(true);
@@ -75,7 +84,11 @@ export const Game = (): JSX.Element => {
 
   return (
     <>
-      <Nav />
+      <Nav
+        maxX={boardStatus && boardStatus[0].maxX}
+        maxY={boardStatus && boardStatus[0].maxY}
+        updatedTimes={boardStatus && boardStatus[0].update}
+      />
       <GameWrapper ref={gameContainerRef} onClick={(e) => getCoords(e)}>
         {data && data.length ? (
           data.map(
