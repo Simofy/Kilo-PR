@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React, { useEffect, useState, useRef } from "react";
 import { Rectangle } from "../components/others/Rectangle";
 import { useDispatch, useSelector } from "react-redux";
@@ -61,13 +62,14 @@ export const Game = ({
   );
 
   const getCoords = (e: React.MouseEvent<HTMLDivElement>) => {
+    console.log(pathname);
     const posX = e.clientX;
     const posY =
       e.clientY - (gameContainerRef.current!.offsetTop - window.scrollY);
-    console.log(window.scrollY);
 
     const username = localStorage.getItem("username");
     const color = localStorage.getItem("color");
+
     postRequest(posX, posY, username, color);
   };
 
