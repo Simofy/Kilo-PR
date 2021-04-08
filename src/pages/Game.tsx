@@ -45,11 +45,7 @@ const GameWrapper = styled.div<IGameWrapper>`
   position: relative;
 `;
 
-export const Game = ({
-  location: { pathname },
-}: {
-  location: { pathname: string };
-}): JSX.Element => {
+export const Game = (): JSX.Element => {
   const gameContainerRef = useRef<HTMLDivElement | null>(null);
   const dispatch = useDispatch();
   const [hover, setHover] = useState(false);
@@ -63,8 +59,9 @@ export const Game = ({
   const getCoords = (e: React.MouseEvent<HTMLDivElement>) => {
     const posX = e.clientX;
     const posY =
-      e.clientY - (gameContainerRef.current!.offsetTop - window.scrollY);
-    console.log(window.scrollY);
+      e.clientY -
+      (gameContainerRef.current!.offsetTop - window.scrollY) +
+      10000;
 
     const username = localStorage.getItem("username");
     const color = localStorage.getItem("color");
@@ -94,52 +91,44 @@ export const Game = ({
 
   return (
     <>
-      <Nav
-        maxX={boardStatus && boardStatus[0].maxX}
-        maxY={boardStatus && boardStatus[0].maxY}
-        updatedTimes={boardStatus && boardStatus[0].update}
-      />
+      <Nav />
       <GameWrapper ref={gameContainerRef} onClick={(e) => getCoords(e)}>
-        {data && data.length ? (
-          data.map(
-            (
-              {
-                data: { color, name },
-                x,
-                y,
-              }: {
-                data: { name: string; color: string };
-                x: string;
-                y: string;
-              },
-              i: number
-            ) => {
-              return (
-                <Rectangle
-                  positionX={x}
-                  positionY={y}
-                  width="20px"
-                  height="20px"
-                  bgrColor={color}
-                  key={i}
-                  onMouseEnter={() => handleMouseEnter(i)}
-                  onMouseLeave={() => handleMouseLeave()}
-                >
-                  {i === hoveredIndex ? (
-                    <InnerHover visibility={hover}>
-                      <p>Name: {name}</p>
-                      <p>Color: {color}</p>
-                    </InnerHover>
-                  ) : null}
-                </Rectangle>
-              );
-            }
-          )
-        ) : (
-          <LoaderWrapper>
-            <Loader type="Oval" color="#00BFFF" height={80} width={80} />
-          </LoaderWrapper>
-        )}
+        {data && data.length
+          ? data.map(
+              (
+                {
+                  data: { color, name },
+                  x,
+                  y,
+                }: {
+                  data: { name: string; color: string };
+                  x: string;
+                  y: string;
+                },
+                i: number
+              ) => {
+                return (
+                  <Rectangle
+                    positionX={x}
+                    positionY={Number(y) - 10000}
+                    width="20px"
+                    height="20px"
+                    bgrColor={color}
+                    key={i}
+                    onMouseEnter={() => handleMouseEnter(i)}
+                    onMouseLeave={() => handleMouseLeave()}
+                  >
+                    {i === hoveredIndex ? (
+                      <InnerHover visibility={hover}>
+                        <p>Name: {name}</p>
+                        <p>Color: {color}</p>
+                      </InnerHover>
+                    ) : null}
+                  </Rectangle>
+                );
+              }
+            )
+          : ""}
       </GameWrapper>
     </>
   );

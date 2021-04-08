@@ -3,9 +3,9 @@ import styled from "styled-components";
 import { primary } from "../../styles/colors";
 
 interface INav {
-  maxX: number;
-  maxY: number;
-  updatedTimes: number;
+  maxX?: number;
+  maxY?: number;
+  updatedTimes?: number;
 }
 
 const NavBar = styled.header<INav>`
@@ -33,14 +33,14 @@ export const Nav = ({
   maxY,
   updatedTimes,
 }: {
-  maxX: number;
-  maxY: number;
-  updatedTimes: number;
+  maxX?: number;
+  maxY?: number;
+  updatedTimes?: number;
 }): JSX.Element => {
   const username = localStorage.getItem("username");
 
   return (
-    <NavBar maxX={maxX} maxY={maxY} updatedTimes={updatedTimes}>
+    <NavBar>
       <h1>Colorize</h1>
       {maxX && maxY && updatedTimes && (
         <StatusWrapper>

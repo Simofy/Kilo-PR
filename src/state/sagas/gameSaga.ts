@@ -9,11 +9,11 @@ export function* watchGetBoard(): Generator<unknown> {
 
 export function* getBoardData(): Generator<unknown> {
   const boardData: any = yield call(handleGetRequest);
+  const oldData: any = yield select((state) => state.boardData.data);
 
-  const prevBoardData: any = yield select((state) => state.boardData.data);
-  yield delay(5);
+  yield delay(15);
 
-  if (boardData.length !== prevBoardData.length) {
+  if (boardData.length !== oldData.length) {
     yield put({ type: ActionTypes.BOARD_STATE_SUCCESS, payload: boardData });
     yield put({ type: ActionTypes.FETCH_BOARD_DATA });
   } else {

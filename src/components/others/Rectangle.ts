@@ -3,7 +3,7 @@ import React from "react";
 
 interface IRectangle {
   bgrColor: string;
-  positionY: string;
+  positionY: string | number;
   positionX: string;
   width: string;
   height: string;
