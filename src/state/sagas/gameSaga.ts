@@ -14,7 +14,7 @@ export function* getBoardData(): Generator<unknown> {
   );
   const oldData: any = yield select((state) => state.boardData.data);
 
-  yield delay(5000);
+  yield delay(20);
 
   if (boardData.length !== oldData.length) {
     yield put({ type: ActionTypes.BOARD_STATE_SUCCESS, payload: boardData });
