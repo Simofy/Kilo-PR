@@ -4,9 +4,9 @@ import styled from "styled-components";
 import { PlayButton } from "../components/buttons/PlayButton";
 import { Box } from "../components/wrappers/Box";
 import { useHistory } from "react-router-dom";
-import { BlockPicker } from "react-color";
+import { Link } from "react-router-dom";
 
-const StyledForm = styled.div`
+export const StyledForm = styled.div`
   min-width: 28rem;
   padding: 2rem;
   border: 1px solid #ddd;
@@ -14,25 +14,27 @@ const StyledForm = styled.div`
   width: fit-content;
 `;
 
-const H3 = styled.h3``;
+export const ErrorMsg = styled.p`
+  color: #ff0000;
+  font-size: 12px;
+  padding-bottom: 0.2rem;
+`;
 
 export const LoginFlow = (): JSX.Element => {
-  const [username, setUsername] = useState("");
-  const [pickedColor, setPickedColor] = useState("#d9e3f0");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const history = useHistory();
 
   const submitForm = (e: React.FormEvent) => {
     e.preventDefault();
-    if (username.length) {
-      localStorage.setItem("username", username);
-      localStorage.setItem("color", pickedColor);
+    if (email.length) {
+      localStorage.setItem("username", email);
+      localStorage.setItem("password", password);
       history.push("/game");
     }
-  };
-
-  const handleChangeComplete = (color: any) => {
-    setPickedColor(color.hex);
+    setError("Please check if email and password are entered correctly.");
   };
 
   return (
@@ -41,20 +43,32 @@ export const LoginFlow = (): JSX.Element => {
       style={{ flex: "1", display: "flex" }}
     >
       <StyledForm>
-        <Box pb="1rem">
-          <H3>Enter username</H3>
+        <Box mb="2rem">
+          <h1>Sign in</h1>
+        </Box>
+
+        <Box pb="0.2rem">
+          <label>Email</label>
         </Box>
         <Box pb="1rem">
-          <Input onChange={(e) => setUsername(e.target.value)} />
+          <Input type="text" onChange={(e) => setEmail(e.target.value)} />
         </Box>
-        <Box pb="1rem">Pick a color:</Box>
-        <Box pb="1rem">
-          <BlockPicker
-            color={pickedColor}
-            onChangeComplete={handleChangeComplete}
+        <Box mb="0.5rem">
+          <label htmlFor="">Password</label>
+          <Input
+            type="password"
+            onChange={(e) => setPassword(e.target.value)}
           />
         </Box>
-        <PlayButton type="submit">Play Game</PlayButton>
+        <Box>
+          <ErrorMsg>{error}</ErrorMsg>
+        </Box>
+        <Box mb="1rem">
+          <p>
+            Don`t have account? Sign up <Link to="/signup">here.</Link>
+          </p>
+        </Box>
+        <PlayButton type="submit">Sign in</PlayButton>
       </StyledForm>
     </form>
   );

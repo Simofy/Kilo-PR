@@ -4,6 +4,7 @@ import { Game } from "./pages/Game";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { GlobalStyle } from "./styles/GlobalStyles";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import { SignUpFlow } from "./containers/SignUpFlow";
 
 export const App = (): JSX.Element => {
   return (
@@ -12,6 +13,7 @@ export const App = (): JSX.Element => {
       <Router basename={process.env.PUBLIC_URL}>
         <Route path="/" component={Home} exact />
         <Route path="/game" component={Game} exact />
+        <Route path="/signup" component={SignUpFlow} exact />
       </Router>
     </>
   );

@@ -1,10 +1,10 @@
 import axios from "axios";
 import { BASE_URL } from "../constants";
 
-export const handleGetRequest = async <T>(): Promise<T> => {
+export const handleGetRequest = async <T>(url?: string): Promise<T> => {
   const response = await axios({
     method: "GET",
-    url: BASE_URL + "?x=0&y=10000&w=1200&h=1200",
+    url: BASE_URL + url,
   });
   return response.data;
 };

@@ -8,10 +8,13 @@ export function* watchGetBoard(): Generator<unknown> {
 }
 
 export function* getBoardData(): Generator<unknown> {
-  const boardData: any = yield call(handleGetRequest);
+  const boardData: any = yield call(
+    handleGetRequest,
+    "?x=0&y=10000&w=1200&h=1200"
+  );
   const oldData: any = yield select((state) => state.boardData.data);
 
-  yield delay(15);
+  yield delay(5000);
 
   if (boardData.length !== oldData.length) {
     yield put({ type: ActionTypes.BOARD_STATE_SUCCESS, payload: boardData });

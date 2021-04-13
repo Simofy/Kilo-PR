@@ -5,39 +5,12 @@ import { postRequest } from "../api/post";
 import styled from "styled-components";
 import { ActionTypes } from "../state/action-types";
 import { Nav } from "../components/headers/Nav";
-import { primary } from "../styles/colors";
-import { LoaderWrapper } from "../components/wrappers/LoaderWrapper";
-import Loader from "react-loader-spinner";
 import { handleGetBoardStatus } from "../api/get";
-
-interface IinnerHover {
-  visibility: boolean;
-}
+import { InnerHover } from "../components/others/InnerHover";
 
 interface IGameWrapper {
   height?: string;
 }
-
-const InnerHover = styled.div<IinnerHover>`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  padding: 1rem;
-  background: ${primary};
-  color: #fff;
-  font-size: 16px;
-  visibility: ${({ visibility }) => (visibility ? "visible" : "hidden")};
-  transition: all 0.5s ease-in-out;
-  z-index: 10;
-  border-radius: 0.2rem;
-  min-width: 180px;
-  height: 0;
-  opacity: 0;
-  &:hover {
-    height: fit-content;
-    opacity: 1;
-  }
-`;
 
 const GameWrapper = styled.div<IGameWrapper>`
   width: 100%;
@@ -49,11 +22,14 @@ export const Game = (): JSX.Element => {
   const gameContainerRef = useRef<HTMLDivElement | null>(null);
   const dispatch = useDispatch();
   const [hover, setHover] = useState(false);
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const [hoveredIndex, setHoveredIndex] = useState("");
   const [boardStatus, setBoardStatus] = useState<any>();
 
   const data = useSelector(
     (state: { boardData: { data: [] } }) => state.boardData.data
+  );
+  const loading = useSelector(
+    (state: { boardData: { loading: boolean } }) => state.boardData
   );
 
   const getCoords = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -79,13 +55,13 @@ export const Game = (): JSX.Element => {
     };
   }, [data]);
 
-  const handleMouseEnter = (index: number) => {
+  const handleMouseEnter = (index: string) => {
     setHoveredIndex(index);
     setHover(true);
   };
 
   const handleMouseLeave = () => {
-    setHoveredIndex(null);
+    setHoveredIndex("");
     setHover(false);
   };
 
@@ -95,30 +71,29 @@ export const Game = (): JSX.Element => {
       <GameWrapper ref={gameContainerRef} onClick={(e) => getCoords(e)}>
         {data && data.length
           ? data.map(
-              (
-                {
-                  data: { color, name },
-                  x,
-                  y,
-                }: {
-                  data: { name: string; color: string };
-                  x: string;
-                  y: string;
-                },
-                i: number
-              ) => {
+              ({
+                data: { color, name },
+                _id,
+                x,
+                y,
+              }: {
+                data: { name: string; color: string };
+                x: number;
+                y: number;
+                _id: string;
+              }) => {
                 return (
                   <Rectangle
-                    positionX={x}
+                    positionX={Number(x)}
                     positionY={Number(y) - 10000}
                     width="20px"
                     height="20px"
                     bgrColor={color}
-                    key={i}
-                    onMouseEnter={() => handleMouseEnter(i)}
+                    key={_id}
+                    onMouseEnter={() => handleMouseEnter(_id)}
                     onMouseLeave={() => handleMouseLeave()}
                   >
-                    {i === hoveredIndex ? (
+                    {_id === hoveredIndex ? (
                       <InnerHover visibility={hover}>
                         <p>Name: {name}</p>
                         <p>Color: {color}</p>

@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { primary } from "../../styles/colors";
+import { CirclePicker } from "react-color";
+import { useDispatch, useSelector } from "react-redux";
 
 interface INav {
   maxX?: number;
@@ -21,34 +23,19 @@ const NavBar = styled.header<INav>`
   color: #fff;
 `;
 
-const StatusWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 1rem;
-  border: 1px solid #fff;
-`;
+export const Nav = (): JSX.Element => {
+  const username = localStorage.getItem("email") || "boom";
+  const [pickedColor, setPickedColor] = useState("");
 
-export const Nav = ({
-  maxX,
-  maxY,
-  updatedTimes,
-}: {
-  maxX?: number;
-  maxY?: number;
-  updatedTimes?: number;
-}): JSX.Element => {
-  const username = localStorage.getItem("username");
+  const handleChange = (e: { hex: string }) => {
+    setPickedColor(e.hex);
+  };
 
   return (
     <NavBar>
       <h1>Colorize</h1>
-      {maxX && maxY && updatedTimes && (
-        <StatusWrapper>
-          <span>maxX coord: {maxX}</span>
-          <span>maxY coord: {maxY}</span>
-          <span>Times updated: {updatedTimes}</span>
-        </StatusWrapper>
-      )}
+
+      <CirclePicker color={pickedColor} onChange={(e) => handleChange(e)} />
       <span>User: {username}</span>
     </NavBar>
   );

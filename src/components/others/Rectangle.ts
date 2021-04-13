@@ -3,8 +3,8 @@ import React from "react";
 
 interface IRectangle {
   bgrColor: string;
-  positionY: string | number;
-  positionX: string;
+  positionY: number;
+  positionX: number;
   width: string;
   height: string;
   onClick?: React.MouseEventHandler<HTMLDivElement> & (() => void);

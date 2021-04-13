@@ -5,6 +5,8 @@ export enum ActionTypes {
   BOARD_STATE_SUCCESS = "BOARD_STATE_SUCCESS",
   BOARD_STATE_ERROR = "BOARD_STATE_ERROR",
 
+  CHANGE_COLOR = "CHANGE_COLOR",
+
   /// BOARD_STATUS actions describes overall status that's being taken from /board/status
 
   /* BOARD_STATUS_PENDING = "BOARD_STATUS_PENDING",
