@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { Input } from "../components/inputs/Input";
 import styled from "styled-components";
 import { PlayButton } from "../components/buttons/PlayButton";
@@ -7,11 +7,14 @@ import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 export const StyledForm = styled.div`
-  min-width: 28rem;
+  min-width: 95%;
   padding: 2rem;
   border: 1px solid #ddd;
   margin: auto;
-  width: fit-content;
+  min-width: 22rem;
+  @media only screen and (max-width: 500px) {
+    width: 100% !important;
+  }
 `;
 
 export const ErrorMsg = styled.p`
@@ -21,44 +24,34 @@ export const ErrorMsg = styled.p`
 `;
 
 export const LoginFlow = (): JSX.Element => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
 
   const history = useHistory();
 
+  const ControlledInput = (props: any) => {
+    const inputRef = useRef<HTMLInputElement>(null);
+    return <Input ref={inputRef} {...props} />;
+  };
+
   const submitForm = (e: React.FormEvent) => {
     e.preventDefault();
-    if (email.length) {
-      localStorage.setItem("username", email);
-      localStorage.setItem("password", password);
-      history.push("/game");
-    }
-    setError("Please check if email and password are entered correctly.");
+    console.log(e.target);
   };
 
   return (
     <form
       onSubmit={(e) => submitForm(e)}
-      style={{ flex: "1", display: "flex" }}
+      style={{ flex: "1", display: "flex", padding: "0 1rem" }}
     >
       <StyledForm>
         <Box mb="2rem">
           <h1>Sign in</h1>
         </Box>
-
-        <Box pb="0.2rem">
-          <label>Email</label>
-        </Box>
-        <Box pb="1rem">
-          <Input type="text" onChange={(e) => setEmail(e.target.value)} />
-        </Box>
+        <label htmlFor="email">Email</label>
+        <Input type="text" name="email" />
         <Box mb="0.5rem">
-          <label htmlFor="">Password</label>
-          <Input
-            type="password"
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <label htmlFor="password">Password</label>
+          <ControlledInput type="password" name="password" />
         </Box>
         <Box>
           <ErrorMsg>{error}</ErrorMsg>
