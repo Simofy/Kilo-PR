@@ -1,15 +1,15 @@
 import { ActionTypes } from "../action-types";
 
 interface BoardRequestSuccessAction {
-  type: ActionTypes.BOARD_STATE_SUCCESS;
-  payload: any;
+  type: typeof ActionTypes.BOARD_STATE_SUCCESS;
+  payload: unknown;
 }
 interface BoardRequestErrorAction {
-  type: ActionTypes.BOARD_STATE_ERROR;
+  type: typeof ActionTypes.BOARD_STATE_ERROR;
 }
 
 interface FetchBoardRequestAction {
-  type: ActionTypes.FETCH_BOARD_DATA;
+  type: typeof ActionTypes.FETCH_BOARD_DATA;
 }
 
 export type Action =

@@ -1,27 +1,12 @@
 import React, { useEffect } from "react";
-import { Rectangle } from "../components/others/Rectangle";
-import { useDispatch, useSelector } from "react-redux";
-import { postRequest } from "../api/post";
-import styled from "styled-components";
+import { useDispatch } from "react-redux";
 import { ActionTypes } from "../state/action-types";
 import { Nav } from "../components/headers/Nav";
 import { Map } from "../containers/Map";
+import { ReChart } from "../containers/ReChart";
 
-export const Game = (): JSX.Element => {
+export const CovidMap = (): JSX.Element => {
   const dispatch = useDispatch();
-
-  const data = useSelector(
-    (state: { boardData: { data: [] } }) => state.boardData.data
-  );
-
-  const getCoords = (e: any) => {
-    const posX = e.clientX;
-    const posY = e.clientY - (e.target.offsetTop - window.scrollY) + 10000;
-
-    const username = localStorage.getItem("username");
-    const color = localStorage.getItem("color");
-    postRequest(posX, posY, username, color);
-  };
 
   useEffect(() => {
     dispatch({ type: ActionTypes.FETCH_BOARD_DATA });
@@ -30,7 +15,9 @@ export const Game = (): JSX.Element => {
   return (
     <>
       <Nav />
-      <Map />
+      <Map>
+        <ReChart />
+      </Map>
     </>
   );
 };

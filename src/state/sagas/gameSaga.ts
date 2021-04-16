@@ -12,6 +12,7 @@ export function* getBoardData(): Generator<unknown> {
     handleGetRequest,
     "?x=0&y=10000&w=1200&h=1200"
   );
+
   const oldData: any = yield select((state) => state.boardData.data);
 
   yield delay(20);

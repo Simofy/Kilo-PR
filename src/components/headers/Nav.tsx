@@ -21,11 +21,11 @@ const NavBar = styled.header<INav>`
 `;
 
 export const Nav = (): JSX.Element => {
-  const username = localStorage.getItem("email") || "boom";
+  const username = localStorage.getItem("email") || "unknown";
 
   return (
     <NavBar>
-      <h1>Colorize</h1>
+      <h1>Covidinho</h1>
 
       <span>User: {username}</span>
     </NavBar>
