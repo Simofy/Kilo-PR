@@ -9,7 +9,7 @@ export const CovidMap = (): JSX.Element => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({ type: ActionTypes.FETCH_BOARD_DATA });
+    dispatch({ type: ActionTypes.FETCH_COVID_DATA_BY_COUNTRY });
   }, []);
 
   return (

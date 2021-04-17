@@ -1,7 +1,18 @@
 import React, { useState, useRef, useCallback } from "react";
+import { useDispatch } from "react-redux";
 import ReactMapGL from "react-map-gl";
 import { Marker } from "react-map-gl";
 import Geocoder from "react-map-gl-geocoder";
+import { ActionTypes } from "../state/action-types";
+import { RiVirusFill } from "react-icons/ri";
+import styled from "styled-components";
+
+const IconButton = styled.button`
+  border: none;
+  background: none;
+  display: flex;
+  justify-content: center;
+`;
 
 interface IViewport {
   latitude: number;
@@ -11,17 +22,21 @@ interface IViewport {
   height: string;
 }
 
-const mapToken =
+export const mapToken =
   "pk.eyJ1IjoiZ2Fsdm90YXMiLCJhIjoiY2tuaHBsanE4Mm5vcjJxbGM2MGRrNHN3OCJ9.ODxdS1urs6_NNA5Z4NWiFQ";
 
 export const Map = ({ children }: { children: JSX.Element }): JSX.Element => {
   const [viewport, setViewport] = useState({
     latitude: 45.4211,
     longitude: -75.6903,
-    zoom: 10,
+    zoom: 1,
     width: "100vw",
     height: "93vh",
   });
+
+  const [coordinates, setCoordinates] = useState<any>();
+
+  const dispatch = useDispatch();
 
   const mapRef = useRef(null);
   const handleViewportChange = useCallback(
@@ -38,10 +53,19 @@ export const Map = ({ children }: { children: JSX.Element }): JSX.Element => {
     });
   }, []);
 
-  const handleMapClick = (e: any) => {
-    console.log(e);
+  const handleMapClick = async (e: any) => {
+    const { lngLat } = e;
+    if (e.features.length) {
+      const choosenCountry = e.features[0].properties.iso_3166_1;
+      choosenCountry &&
+        dispatch({ type: ActionTypes.SET_COUNTRY, payload: choosenCountry });
+    }
+    console.log(lngLat);
+
+    setCoordinates({ lng: lngLat[0], lat: lngLat[1] });
   };
 
+  console.log(coordinates);
   return (
     <ReactMapGL
       {...viewport}
@@ -58,9 +82,9 @@ export const Map = ({ children }: { children: JSX.Element }): JSX.Element => {
         position="top-left"
       />
       <Marker longitude={-75.6903} latitude={45.4211}>
-        <button style={{ color: "red", fontSize: "1rem" }}>
-          HERE IS MARKER
-        </button>
+        <IconButton>
+          <RiVirusFill size={30} />
+        </IconButton>
       </Marker>
       {children}
     </ReactMapGL>

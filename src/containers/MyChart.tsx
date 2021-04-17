@@ -1,5 +1,5 @@
 import React from "react";
-import { Chart, Line } from "react-charts";
+import { Chart } from "react-charts";
 
 export const MyChart = (): JSX.Element => {
   const data = React.useMemo(

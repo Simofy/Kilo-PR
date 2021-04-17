@@ -1,18 +1,24 @@
 import { ActionTypes } from "../action-types";
 
 interface BoardRequestSuccessAction {
-  type: typeof ActionTypes.BOARD_STATE_SUCCESS;
+  type: typeof ActionTypes.FETCH_SUCCESS;
   payload: unknown;
 }
 interface BoardRequestErrorAction {
-  type: typeof ActionTypes.BOARD_STATE_ERROR;
+  type: typeof ActionTypes.FETCH_ERROR;
 }
 
 interface FetchBoardRequestAction {
-  type: typeof ActionTypes.FETCH_BOARD_DATA;
+  type: typeof ActionTypes.FETCH_COVID_DATA_BY_COUNTRY;
+}
+
+interface SetChoosenColorAction {
+  type: typeof ActionTypes.SET_COUNTRY;
+  payload: any;
 }
 
 export type Action =
   | BoardRequestErrorAction
   | BoardRequestSuccessAction
-  | FetchBoardRequestAction;
+  | FetchBoardRequestAction
+  | SetChoosenColorAction;
