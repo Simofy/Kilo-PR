@@ -38,8 +38,6 @@ export const ReChart = (): JSX.Element => {
 
   const [chartActive, setChartActive] = useState(false);
 
-  console.log(chartData);
-
   return (
     <ChartWrapper displayStatus={!chartActive}>
       <ResponsiveContainer minWidth={500} height={300}>

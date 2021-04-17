@@ -12,6 +12,8 @@ const IconButton = styled.button`
   background: none;
   display: flex;
   justify-content: center;
+  transform: translate(-50%, -100%);
+  cursor: pointer;
 `;
 
 interface IViewport {
@@ -60,12 +62,10 @@ export const Map = ({ children }: { children: JSX.Element }): JSX.Element => {
       choosenCountry &&
         dispatch({ type: ActionTypes.SET_COUNTRY, payload: choosenCountry });
     }
-    console.log(lngLat);
 
     setCoordinates({ lng: lngLat[0], lat: lngLat[1] });
   };
 
-  console.log(coordinates);
   return (
     <ReactMapGL
       {...viewport}
@@ -81,11 +81,13 @@ export const Map = ({ children }: { children: JSX.Element }): JSX.Element => {
         mapboxApiAccessToken={mapToken}
         position="top-left"
       />
-      <Marker longitude={-75.6903} latitude={45.4211}>
-        <IconButton>
-          <RiVirusFill size={30} />
-        </IconButton>
-      </Marker>
+      {coordinates && (
+        <Marker longitude={coordinates.lng} latitude={coordinates.lat}>
+          <IconButton>
+            <RiVirusFill size={30} />
+          </IconButton>
+        </Marker>
+      )}
       {children}
     </ReactMapGL>
   );

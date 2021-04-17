@@ -26,8 +26,6 @@ export const ErrorMsg = styled.p`
 export const LoginFlow = (): JSX.Element => {
   const [error, setError] = useState("");
 
-  const history = useHistory();
-
   const ControlledInput = (props: any) => {
     const inputRef = useRef<HTMLInputElement>(null);
     return <Input ref={inputRef} {...props} />;
@@ -35,7 +33,6 @@ export const LoginFlow = (): JSX.Element => {
 
   const submitForm = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(e.target);
   };
 
   return (

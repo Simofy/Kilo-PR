@@ -14,8 +14,6 @@ export function* getCovidData(): Generator<unknown> {
 
   const covidData: any = yield call(getCovidDataByCountry, selectedCountry);
 
-  console.log(covidData);
-
   yield put({ type: ActionTypes.FETCH_SUCCESS, payload: covidData });
 }
 

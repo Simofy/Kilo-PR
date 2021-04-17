@@ -26,7 +26,6 @@ export const SignUpFlow = (): JSX.Element => {
 
   const submitForm = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log(e);
   };
 
   return (
