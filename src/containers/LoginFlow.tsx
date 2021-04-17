@@ -3,7 +3,6 @@ import { Input } from "../components/inputs/Input";
 import styled from "styled-components";
 import { PlayButton } from "../components/buttons/PlayButton";
 import { Box } from "../components/wrappers/Box";
-import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 export const StyledForm = styled.div`

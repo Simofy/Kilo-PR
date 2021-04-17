@@ -6,8 +6,9 @@ import {
   CartesianGrid,
   Area,
   ResponsiveContainer,
-  AreaChart,
+  LineChart,
   YAxis,
+  Line,
 } from "recharts";
 import styled from "styled-components";
 
@@ -41,24 +42,37 @@ export const ReChart = (): JSX.Element => {
   return (
     <ChartWrapper displayStatus={!chartActive}>
       <ResponsiveContainer minWidth={500} height={300}>
-        <AreaChart data={chartData && chartData}>
+        <LineChart data={chartData && chartData}>
           <defs>
             <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor="#2451b7" strokeOpacity={0.4} />
               <stop offset="75%" stopColor="#2451b7" stopOpacity={0.05} />
             </linearGradient>
           </defs>
-          <Area dataKey="Cases" stroke="#2451b7" fill="url(#color)" />
+          <Area dataKey="Confirmed" stroke="#2451b7" fill="url(#color)" />
           <XAxis dataKey="dateString" axisLine={false} tickLine={false} />
           <YAxis
-            dataKey="Cases"
+            dataKey="Confirmed"
             axisLine={false}
             tickLine={false}
-            tickCount={8}
+            tickCount={10}
           />
           <Tooltip />
           <CartesianGrid opacity={0.1} vertical={false} />
-        </AreaChart>
+          <Line
+            type="monotone"
+            dataKey="Confirmed"
+            stroke="#2451b7"
+            fill="url(#color)"
+          />
+          <Line type="monotone" dataKey="Deaths" stroke="#FFCCCB" />
+          <Line
+            type="monotone"
+            dataKey="Active"
+            stroke="#2451b7"
+            fill="url(#color)"
+          />
+        </LineChart>
       </ResponsiveContainer>
     </ChartWrapper>
   );

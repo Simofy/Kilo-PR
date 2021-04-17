@@ -1,7 +1,7 @@
 import React, { useState, useRef, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import ReactMapGL from "react-map-gl";
-import { Marker } from "react-map-gl";
+import { Marker, Popup } from "react-map-gl";
 import Geocoder from "react-map-gl-geocoder";
 import { ActionTypes } from "../state/action-types";
 import { RiVirusFill } from "react-icons/ri";
@@ -35,7 +35,7 @@ export const Map = ({ children }: { children: JSX.Element }): JSX.Element => {
     width: "100vw",
     height: "93vh",
   });
-
+  const [showPopup, togglePopup] = React.useState(false);
   const [coordinates, setCoordinates] = useState<any>();
 
   const dispatch = useDispatch();
@@ -47,7 +47,7 @@ export const Map = ({ children }: { children: JSX.Element }): JSX.Element => {
   );
 
   const handleGeocoderViewportChange = useCallback((newViewport) => {
-    const geocoderDefaultOverrides = { transitionDuration: 1000 };
+    const geocoderDefaultOverrides = { transitionDuration: 3000 };
 
     return handleViewportChange({
       ...newViewport,
@@ -82,11 +82,25 @@ export const Map = ({ children }: { children: JSX.Element }): JSX.Element => {
         position="top-left"
       />
       {coordinates && (
-        <Marker longitude={coordinates.lng} latitude={coordinates.lat}>
-          <IconButton>
-            <RiVirusFill size={30} />
-          </IconButton>
-        </Marker>
+        <>
+          {showPopup && (
+            <Popup
+              closeButton={true}
+              closeOnClick={false}
+              onClose={() => togglePopup(!showPopup)}
+              longitude={coordinates.lng}
+              latitude={coordinates.lat}
+              offsetTop={-30}
+            >
+              laba diena
+            </Popup>
+          )}
+          <Marker longitude={coordinates.lng} latitude={coordinates.lat}>
+            <IconButton>
+              <RiVirusFill size={30} />
+            </IconButton>
+          </Marker>
+        </>
       )}
       {children}
     </ReactMapGL>

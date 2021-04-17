@@ -1,4 +1,4 @@
-export const BASE_URL = "https://api.covid19api.com/";
+export const BASE_URL = "https://api.covid19api.com";
 
 export const COUNTRY_BY_COORD =
   "https://www.mapquestapi.com/geocoding/v1/reverse";
