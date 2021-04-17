@@ -28,7 +28,6 @@ export const getCovidDataByCountry = async <T>(
       Date: string;
     }) => {
       dateString = new Date(details.Date).toISOString().substr(0, 10);
-      console.log(details);
 
       const { Confirmed, Deaths, Recovered, Active } = details;
 

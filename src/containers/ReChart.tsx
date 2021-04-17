@@ -29,7 +29,7 @@ const ChartWrapper = styled.div<IChartWrapper>`
     rgba(21, 21, 21, 1) 100%
   );
   padding: 2rem;
-  box-shadow: 1rem 1rem 4rem 2rem #fff;
+  box-shadow: 0rem 0rem 15em 0.2em #fff;
   display: ${(displayStatus) => (displayStatus ? "block" : "none")};
   z-index: 2;
 `;
@@ -65,7 +65,7 @@ export const ReChart = (): JSX.Element => {
             stroke="#2451b7"
             fill="url(#color)"
           />
-          <Line type="monotone" dataKey="Deaths" stroke="#FFCCCB" />
+          <Line type="monotone" dataKey="Deaths" stroke="#d12b28" />
           <Line
             type="monotone"
             dataKey="Active"
