@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import {
   GoogleMap,
   useLoadScript,
@@ -17,7 +18,6 @@ import {
   ComboboxOption,
 } from "@reach/combobox";
 import { formatRelative } from "date-fns";
-import { countriesData } from "../constants/countriesData";
 
 import "@reach/combobox/styles.css";
 import mapStyles from "../styles/mapStyles";
@@ -27,9 +27,10 @@ const mapContainerStyle = {
   height: "93vh",
   width: "100%",
 };
-const options = {
+const options: any = {
   disableDefaultUI: false,
   zoomControl: true,
+  styles: mapStyles,
 };
 const center = {
   lat: 43.6532,
@@ -37,6 +38,10 @@ const center = {
 };
 
 export const CustomGoogleMap = (): any => {
+  const covidData = useSelector((state: any) => state.covidData.data);
+
+  console.log(covidData);
+
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: "AIzaSyDUSy6au1UtftlSlYoHm3xz3y4QS1K6Kwk",
     libraries,
@@ -68,21 +73,22 @@ export const CustomGoogleMap = (): any => {
         options={options}
         onLoad={onMapLoad}
       >
-        {countriesData &&
-          countriesData.ref_country_codes.map((marker: any) => {
+        {covidData &&
+          covidData.map(({ countryInfo }: any) => {
             return (
               <Marker
-                key={`${marker.latitude}-${marker.longitude}`}
-                position={{ lat: marker.latitude, lng: marker.longitude }}
+                key={`${countryInfo.lat}-${countryInfo.long}`}
+                position={{ lat: countryInfo.lat, lng: countryInfo.long }}
                 icon={{
-                  url: "http://s.cdpn.io/3/kiwi.svg",
+                  url:
+                    "data:image/svg+xml,%3Csvg  viewBox='0 0 100 100' fill='blue' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='50'/%3E%3C/svg%3E",
 
                   anchor: new google.maps.Point(17, 46),
                   origin: new window.google.maps.Point(0, 0),
-                  scaledSize: new google.maps.Size(37, 37),
+                  scaledSize: new google.maps.Size(30, 40),
                 }}
-                onClick={() => {
-                  setSelected(marker);
+                onMouseOver={() => {
+                  setSelected(countryInfo);
                 }}
               />
             );
@@ -90,7 +96,7 @@ export const CustomGoogleMap = (): any => {
 
         {selected ? (
           <InfoWindow
-            position={{ lat: selected.latitude, lng: selected.longitude }}
+            position={{ lat: selected.lat, lng: selected.long }}
             onCloseClick={() => {
               setSelected(null);
             }}
@@ -102,7 +108,7 @@ export const CustomGoogleMap = (): any => {
                 </span>{" "}
                 Alert
               </h2>
-              <p>{selected.country}</p>
+              <p>{selected.iso2}</p>
             </div>
           </InfoWindow>
         ) : null}

@@ -9,7 +9,7 @@ export const CovidMap = (): JSX.Element => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({ type: ActionTypes.FETCH_COVID_DATA_BY_COUNTRY });
+    dispatch({ type: ActionTypes.COVID_DATA_BY_COUNTRY });
   }, []);
 
   return (
@@ -20,32 +20,3 @@ export const CovidMap = (): JSX.Element => {
     </>
   );
 };
-
-/*
-{data && data.length
-          ? data.map(
-              ({
-                data: { color },
-                _id,
-                x,
-                y,
-              }: {
-                data: { name: string; color: string };
-                x: number;
-                y: number;
-                _id: string;
-              }) => {
-                return (
-                  <Rectangle
-                    positionX={Number(x)}
-                    positionY={Number(y) - 10000}
-                    width="20px"
-                    height="20px"
-                    bgrColor={color}
-                    key={_id}
-                  />
-                );
-              }
-            )
-          : ""}
-          */

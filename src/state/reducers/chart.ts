@@ -4,13 +4,22 @@ import { ActionTypes } from "../action-types";
 interface IBoardData {
   loading: boolean;
   error: null | boolean;
-  data: [] | unknown;
+  countriesInfo:
+    | {
+        Country: string;
+        Confirmed: number;
+        Deaths: number;
+        Recovered: number;
+        Active: number;
+        Date: string;
+      }[]
+    | unknown;
 }
 
 const initialState: IBoardData = {
   loading: false,
   error: null,
-  data: [],
+  countriesInfo: [],
 };
 
 export const covidReducer = (
@@ -18,18 +27,18 @@ export const covidReducer = (
   action: Action
 ): IBoardData => {
   switch (action.type) {
-    case ActionTypes.COVID_DATA_BY_COUNTRY:
+    case ActionTypes.FETCH_CHART_DATA:
       return {
         ...state,
         loading: true,
       };
-    case ActionTypes.COVID_DATA_SUCCESS:
+    case ActionTypes.CHART_DATA_SUCCESS:
       return {
         ...state,
-        data: action.payload,
+        countriesInfo: action.payload,
         loading: false,
       };
-    case ActionTypes.COVID_DATA_ERROR:
+    case ActionTypes.CHART_DATA_ERROR:
       return {
         ...state,
         error: true,

@@ -1,24 +1,35 @@
 import { ActionTypes } from "../action-types";
 
-interface BoardRequestSuccessAction {
-  type: typeof ActionTypes.FETCH_SUCCESS;
+interface GetCovidDataAction {
+  type: typeof ActionTypes.COVID_DATA_BY_COUNTRY;
+}
+
+interface GetCovidDataSuccessAction {
+  type: typeof ActionTypes.COVID_DATA_SUCCESS;
   payload: unknown;
 }
-interface BoardRequestErrorAction {
-  type: typeof ActionTypes.FETCH_ERROR;
+
+interface GetCovidDataErrorAction {
+  type: typeof ActionTypes.COVID_DATA_ERROR;
 }
 
-interface FetchBoardRequestAction {
-  type: typeof ActionTypes.FETCH_COVID_DATA_BY_COUNTRY;
+interface GetChartCovidDataAction {
+  type: ActionTypes.FETCH_CHART_DATA;
 }
 
-interface SetChoosenColorAction {
-  type: typeof ActionTypes.SET_COUNTRY;
-  payload: any;
+interface GetChartCovidDataSuccessAction {
+  type: ActionTypes.CHART_DATA_SUCCESS;
+  payload: unknown;
+}
+
+interface GetChartCovidDataErrorAction {
+  type: typeof ActionTypes.CHART_DATA_ERROR;
 }
 
 export type Action =
-  | BoardRequestErrorAction
-  | BoardRequestSuccessAction
-  | FetchBoardRequestAction
-  | SetChoosenColorAction;
+  | GetCovidDataAction
+  | GetCovidDataSuccessAction
+  | GetCovidDataErrorAction
+  | GetChartCovidDataAction
+  | GetChartCovidDataSuccessAction
+  | GetChartCovidDataErrorAction;
