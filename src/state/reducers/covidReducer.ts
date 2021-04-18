@@ -1,10 +1,11 @@
 import { Action } from "../actions";
 import { ActionTypes } from "../action-types";
+import { ICovidData } from "../../api/get";
 
 interface IBoardData {
   loading: boolean;
   error: null | boolean;
-  data: [] | unknown;
+  data: ICovidData | [];
 }
 
 const initialState: IBoardData = {

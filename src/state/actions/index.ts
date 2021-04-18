@@ -1,4 +1,5 @@
 import { ActionTypes } from "../action-types";
+import { ICovidData } from "../../api/get";
 
 interface GetCovidDataAction {
   type: typeof ActionTypes.COVID_DATA_BY_COUNTRY;
@@ -6,7 +7,7 @@ interface GetCovidDataAction {
 
 interface GetCovidDataSuccessAction {
   type: typeof ActionTypes.COVID_DATA_SUCCESS;
-  payload: unknown;
+  payload: ICovidData;
 }
 
 interface GetCovidDataErrorAction {

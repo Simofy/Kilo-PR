@@ -1,29 +1,9 @@
 import React from "react";
 import { Marker } from "@react-google-maps/api";
-import { MarkerColors } from "../../styles/colors";
-
-const formatMarkerByCases = (cases: number): string => {
-  if (cases < 1000) {
-    return MarkerColors.lightMarker;
-  } else if (cases > 1000 && cases < 3000) {
-    return MarkerColors.mediumMarker;
-  } else if (cases > 3000 && cases < 10000) {
-    return MarkerColors.mediumStrongMarker;
-  }
-
-  return MarkerColors.strongMarker;
-};
-
-const formatMarkerSizeByCases = (cases: number) => {
-  if (cases < 1000) {
-    return 20;
-  } else if (cases > 1000 && cases < 3000) {
-    return 30;
-  } else if (cases > 3000 && cases < 10000) {
-    return 40;
-  }
-  return 50;
-};
+import {
+  formatMarkerByCases,
+  formatMarkerSizeByCases,
+} from "../../helpers/formatHelpers";
 
 export const CustomMarker = ({
   onClick,
@@ -32,7 +12,7 @@ export const CustomMarker = ({
   onMouseOver,
 }: {
   onClick: () => void;
-  onMouseOver: () => void;
+  onMouseOver?: () => void;
   countryInfo: { lat: number; long: number };
   cases: number;
 }): JSX.Element => {

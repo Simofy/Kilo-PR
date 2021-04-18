@@ -1,5 +1,9 @@
 import { takeEvery, call, put, all, select } from "redux-saga/effects";
-import { handleGetRequest, handleGetChartData } from "../../api/get";
+import {
+  handleGetRequest,
+  handleGetChartData,
+  getVaccineDataRequest,
+} from "../../api/get";
 import { ActionTypes } from "../action-types";
 
 export function* watchGetCovidInfo(): Generator<unknown> {
@@ -17,8 +21,16 @@ export function* getChartData(): Generator<unknown> {
 
   try {
     const chartData = yield call(handleGetChartData, `${selectCountryCode}`);
+    const vaccinesData = yield call(
+      getVaccineDataRequest,
+      `${selectCountryCode}`
+    );
+    console.log(vaccinesData);
 
-    yield put({ type: ActionTypes.CHART_DATA_SUCCESS, payload: chartData });
+    yield put({
+      type: ActionTypes.CHART_DATA_SUCCESS,
+      payload: { chartData, vaccinesData },
+    });
   } catch {
     yield put({ type: ActionTypes.CHART_DATA_ERROR });
   }

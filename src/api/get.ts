@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
-import { PRIMARY_URL, CHART_DATA_URL } from "./constant";
+import { PRIMARY_URL, CHART_DATA_URL, VACCINES_URL } from "./constant";
 
-interface ICovidData {
+export interface ICovidData {
   updated: number;
   country: string;
   countryInfo: {
@@ -31,7 +31,6 @@ interface ICovidData {
   recoveredPerOneMillion: number;
   criticalPerOneMillion: number;
 }
-[];
 
 export const handleGetRequest = async <T>(url?: string): Promise<T> => {
   const response: AxiosResponse<T> = await axios({
@@ -46,6 +45,15 @@ export const handleGetChartData = async <T>(country?: string): Promise<T> => {
   const response: AxiosResponse<T> = await axios({
     method: "GET",
     url: `${CHART_DATA_URL}/total/dayone/country/${country}`,
+  });
+
+  return response.data;
+};
+
+export const getVaccineDataRequest = async <T>(country: string): Promise<T> => {
+  const response: AxiosResponse<T> = await axios({
+    method: "GET",
+    url: `${VACCINES_URL}/${country}?lastdays=90`,
   });
 
   return response.data;

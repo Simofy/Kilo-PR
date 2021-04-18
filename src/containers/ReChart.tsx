@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../hooks";
 import {
   XAxis,
   Tooltip,
@@ -14,9 +14,25 @@ import { BsChevronDown } from "react-icons/bs";
 import { NoResultsContainer } from "../components/wrappers/NoResultsContainer";
 import { ChartWrapper } from "../components/wrappers/ChartWrapper";
 import { CloseChartWrapper } from "../components/wrappers/CloseChartWrapper";
+import { PlayButton } from "../components/buttons/PlayButton";
+import Typography from "react-styled-typography";
+import { Box } from "../components/wrappers/Box";
+import styled from "styled-components";
+
+const ButtonGroup = styled.div`
+  width: fit-content;
+  margin: 0 auto;
+  display: flex;
+  gap: 1rem;
+  &:not(:last-child) {
+    margin-right: 1rem;
+  }
+`;
 
 export const ReChart = (): JSX.Element => {
-  const chartData = useSelector((state: any) => state.chartData.countriesInfo);
+  const chartData: any = useAppSelector(
+    (state) => state.chartData.countriesInfo
+  );
   const [chartActive, setChartActive] = useState<boolean>(true);
 
   if (!chartData.length || chartData === null)
@@ -65,6 +81,15 @@ export const ReChart = (): JSX.Element => {
           <Line type="monotone" dataKey="Deaths" stroke="#d12b28" />
         </LineChart>
       </ResponsiveContainer>
+      <Box mb="1rem" mt="1rem">
+        <Typography variant="h1" color="#fff" align="center">
+          Stats
+        </Typography>
+      </Box>
+      <ButtonGroup>
+        <PlayButton>Overall</PlayButton>
+        <PlayButton>Vaccination</PlayButton>
+      </ButtonGroup>
     </ChartWrapper>
   );
 };
