@@ -32,15 +32,16 @@ const ChartWrapper = styled.div<IChartWrapper>`
   box-shadow: 0rem 0rem 15em 0.2em #fff;
   display: ${(displayStatus) => (displayStatus ? "block" : "none")};
   z-index: 2;
+  display: none !important;
 `;
 
 export const ReChart = (): JSX.Element => {
   const chartData = useSelector((state: any) => state.covidData.data);
 
-  const [chartActive, setChartActive] = useState(false);
+  const [chartActive] = useState(false);
 
   return (
-    <ChartWrapper displayStatus={!chartActive}>
+    <ChartWrapper displayStatus={chartActive}>
       <ResponsiveContainer minWidth={500} height={300}>
         <LineChart data={chartData && chartData}>
           <defs>

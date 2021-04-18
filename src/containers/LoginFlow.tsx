@@ -23,7 +23,7 @@ export const ErrorMsg = styled.p`
 `;
 
 export const LoginFlow = (): JSX.Element => {
-  const [error, setError] = useState("");
+  const [error] = useState("");
 
   const ControlledInput = (props: any) => {
     const inputRef = useRef<HTMLInputElement>(null);

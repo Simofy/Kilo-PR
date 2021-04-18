@@ -1,7 +1,7 @@
 import React, { useState, useRef, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import ReactMapGL from "react-map-gl";
-import { Marker, Popup } from "react-map-gl";
+import { Marker, Popup, Layer } from "react-map-gl";
 import Geocoder from "react-map-gl-geocoder";
 import { ActionTypes } from "../state/action-types";
 import { RiVirusFill } from "react-icons/ri";
@@ -24,6 +24,16 @@ interface IViewport {
   width: string;
   height: string;
 }
+
+const layerStyle = {
+  id: "water",
+  source: "mapbox-streets",
+  sourceLayer: "water",
+  type: "fill",
+  paint: {
+    fillColor: "#00ffff",
+  },
+};
 
 export const mapToken =
   "pk.eyJ1IjoiZ2Fsdm90YXMiLCJhIjoiY2tuaHBsanE4Mm5vcjJxbGM2MGRrNHN3OCJ9.ODxdS1urs6_NNA5Z4NWiFQ";
@@ -62,13 +72,17 @@ export const Map = ({ children }: { children: JSX.Element }): JSX.Element => {
 
   const handleMapClick = async (e: any) => {
     const { lngLat } = e;
-    if (e.features.length) {
+
+    if (
+      e.features.length &&
+      e.features[0].properties.iso_3166_1 !== undefined
+    ) {
       const choosenCountry = e.features[0].properties.iso_3166_1;
       togglePopup(true);
       choosenCountry &&
         dispatch({ type: ActionTypes.SET_COUNTRY, payload: choosenCountry });
-    } else if (showPopup) {
-      togglePopup(false);
+    } else {
+      showPopup && togglePopup(false);
     }
 
     setCoordinates({ lng: lngLat[0], lat: lngLat[1] });
@@ -100,17 +114,15 @@ export const Map = ({ children }: { children: JSX.Element }): JSX.Element => {
               latitude={coordinates.lat}
               offsetTop={-30}
             >
-              <div>
-                Total:
-                {countryData && (
-                  <>
-                    <p>Confirmed: {countryData.Confirmed}</p>
-                    <p>Active: {countryData.Active}</p>
-                    <p>Deaths: {countryData.Deaths}</p>
-                    <p>Recovered: {countryData.Recovered}</p>
-                  </>
-                )}
-              </div>
+              {countryData && (
+                <div>
+                  Total:
+                  <p>Confirmed: {countryData.Confirmed}</p>
+                  <p>Active: {countryData.Active}</p>
+                  <p>Deaths: {countryData.Deaths}</p>
+                  <p>Recovered: {countryData.Recovered}</p>
+                </div>
+              )}
             </Popup>
           )}
           <Marker longitude={coordinates.lng} latitude={coordinates.lat}>

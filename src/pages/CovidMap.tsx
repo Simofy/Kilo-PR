@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { ActionTypes } from "../state/action-types";
 import { Nav } from "../components/headers/Nav";
-import { Map } from "../containers/Map";
+import { CustomGoogleMap } from "../containers/GoogleMap";
 import { ReChart } from "../containers/ReChart";
 
 export const CovidMap = (): JSX.Element => {
@@ -15,9 +15,8 @@ export const CovidMap = (): JSX.Element => {
   return (
     <>
       <Nav />
-      <Map>
-        <ReChart />
-      </Map>
+      <CustomGoogleMap />
+      <ReChart />
     </>
   );
 };
