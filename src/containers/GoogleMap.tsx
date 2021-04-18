@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { GoogleMap, useLoadScript } from "@react-google-maps/api";
 
@@ -22,20 +22,25 @@ export const CustomGoogleMap = ({
   children: JSX.Element;
 }): any => {
   const covidData = useSelector((state: any) => state.covidData.data);
+  const [selected, setSelected] = React.useState<any>(null);
+  const mapRef = React.useRef<any>(null);
   const dispatch = useDispatch();
 
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "",
+    googleMapsApiKey: "AIzaSyDUSy6au1UtftlSlYoHm3xz3y4QS1K6Kwk",
     libraries,
   });
-  const [selected, setSelected] = React.useState<any>(null);
+  console.log("rerender run");
 
-  const mapRef = React.useRef<any>(null);
-  const onMapLoad = React.useCallback((map) => {
+  const onMouseOverHandler = useCallback((countryInfo) => {
+    setSelected(countryInfo);
+  }, []);
+
+  const onMapLoad = useCallback((map) => {
     mapRef.current = map;
   }, []);
 
-  const panTo = React.useCallback(({ lat, lng }) => {
+  const panTo = useCallback(({ lat, lng }) => {
     mapRef.current.panTo({ lat, lng });
     mapRef.current.setZoom(14);
   }, []);
@@ -67,6 +72,7 @@ export const CustomGoogleMap = ({
                 key={countryInfo._id + Math.random() * 10}
                 onClick={() => handleMarkerClick(countryInfo)}
                 countryInfo={countryInfo}
+                onMouseOver={() => onMouseOverHandler(countryInfo)}
               />
             );
           })}

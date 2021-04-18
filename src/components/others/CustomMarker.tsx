@@ -29,13 +29,16 @@ export const CustomMarker = ({
   onClick,
   countryInfo,
   cases,
+  onMouseOver,
 }: {
   onClick: () => void;
+  onMouseOver: () => void;
   countryInfo: { lat: number; long: number };
   cases: number;
 }): JSX.Element => {
   return (
     <Marker
+      onMouseOver={onMouseOver}
       onClick={onClick}
       position={{ lat: countryInfo.lat, lng: countryInfo.long }}
       icon={{
