@@ -10,13 +10,15 @@ export const CovidMap = (): JSX.Element => {
 
   useEffect(() => {
     dispatch({ type: ActionTypes.COVID_DATA_BY_COUNTRY });
+    dispatch({ type: ActionTypes.FETCH_CHART_DATA, payload: "LT" });
   }, []);
 
   return (
     <>
       <Nav />
-      <CustomGoogleMap />
-      <ReChart />
+      <CustomGoogleMap>
+        <ReChart />
+      </CustomGoogleMap>
     </>
   );
 };

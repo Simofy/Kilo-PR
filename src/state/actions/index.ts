@@ -15,6 +15,7 @@ interface GetCovidDataErrorAction {
 
 interface GetChartCovidDataAction {
   type: ActionTypes.FETCH_CHART_DATA;
+  payload: string;
 }
 
 interface GetChartCovidDataSuccessAction {

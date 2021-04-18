@@ -10,39 +10,28 @@ import {
   YAxis,
   Line,
 } from "recharts";
-import styled from "styled-components";
-
-interface IChartWrapper {
-  displayStatus: boolean;
-}
-
-const ChartWrapper = styled.div<IChartWrapper>`
-  width: 100vw;
-  min-height: 30vh;
-  position: absolute;
-  bottom: 0;
-  background: rgb(246, 245, 240);
-  background: linear-gradient(
-    180deg,
-    rgba(246, 245, 240, 0.3617822128851541) 0%,
-    rgba(21, 21, 21, 0.7035189075630253) 0%,
-    rgba(21, 21, 21, 1) 100%
-  );
-  padding: 2rem;
-  box-shadow: 0rem 0rem 15em 0.2em #fff;
-  display: ${(displayStatus) => (displayStatus ? "block" : "none")};
-  z-index: 2;
-  display: none !important;
-`;
+import { BsChevronDown } from "react-icons/bs";
+import { NoResultsContainer } from "../components/wrappers/NoResultsContainer";
+import { ChartWrapper } from "../components/wrappers/ChartWrapper";
+import { CloseChartWrapper } from "../components/wrappers/CloseChartWrapper";
 
 export const ReChart = (): JSX.Element => {
-  const chartData = useSelector((state: any) => state.covidData.data);
+  const chartData = useSelector((state: any) => state.chartData.countriesInfo);
+  const [chartActive, setChartActive] = useState<boolean>(true);
 
-  const [chartActive] = useState(false);
+  if (!chartData.length || chartData === null)
+    return (
+      <NoResultsContainer>
+        <h4>No results on this location, unfortunately.</h4>
+      </NoResultsContainer>
+    );
 
   return (
-    <ChartWrapper displayStatus={chartActive}>
-      <ResponsiveContainer minWidth={500} height={300}>
+    <ChartWrapper display={chartActive ? true : false}>
+      <CloseChartWrapper onClick={() => setChartActive(false)}>
+        <BsChevronDown size={30} color="#fff" />
+      </CloseChartWrapper>
+      <ResponsiveContainer minWidth={500} height={225}>
         <LineChart data={chartData && chartData}>
           <defs>
             <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
@@ -51,7 +40,7 @@ export const ReChart = (): JSX.Element => {
             </linearGradient>
           </defs>
           <Area dataKey="Confirmed" stroke="#2451b7" fill="url(#color)" />
-          <XAxis dataKey="dateString" axisLine={false} tickLine={false} />
+          <XAxis dataKey="Date" axisLine={false} tickLine={false} />
           <YAxis
             dataKey="Confirmed"
             axisLine={false}
@@ -66,13 +55,14 @@ export const ReChart = (): JSX.Element => {
             stroke="#2451b7"
             fill="url(#color)"
           />
-          <Line type="monotone" dataKey="Deaths" stroke="#d12b28" />
           <Line
             type="monotone"
             dataKey="Active"
             stroke="#2451b7"
             fill="url(#color)"
           />
+          <Line type="monotone" dataKey="Recovered" stroke="green" />
+          <Line type="monotone" dataKey="Deaths" stroke="#d12b28" />
         </LineChart>
       </ResponsiveContainer>
     </ChartWrapper>

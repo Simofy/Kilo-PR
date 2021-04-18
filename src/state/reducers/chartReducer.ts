@@ -4,6 +4,7 @@ import { ActionTypes } from "../action-types";
 interface IBoardData {
   loading: boolean;
   error: null | boolean;
+  countryCode: string;
   countriesInfo:
     | {
         Country: string;
@@ -20,9 +21,10 @@ const initialState: IBoardData = {
   loading: false,
   error: null,
   countriesInfo: [],
+  countryCode: "",
 };
 
-export const covidReducer = (
+export const chartReducer = (
   state = initialState,
   action: Action
 ): IBoardData => {
@@ -30,6 +32,7 @@ export const covidReducer = (
     case ActionTypes.FETCH_CHART_DATA:
       return {
         ...state,
+        countryCode: action.payload,
         loading: true,
       };
     case ActionTypes.CHART_DATA_SUCCESS:
