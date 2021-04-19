@@ -27,7 +27,7 @@ export const CustomGoogleMap = ({
   console.log(covidData);
 
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "AIzaSyDUSy6au1UtftlSlYoHm3xz3y4QS1K6Kwk",
+    googleMapsApiKey: "",
     libraries,
   });
 

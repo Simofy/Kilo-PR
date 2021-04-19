@@ -19,5 +19,4 @@ export const ChartWrapper = styled.div<IChartWrapper>`
   padding: 2rem;
   box-shadow: 0rem 0rem 15em 0.2em #fff;
   display: ${({ display }) => (display ? "block" : "none")};
-  z-index: 2;
 `;
