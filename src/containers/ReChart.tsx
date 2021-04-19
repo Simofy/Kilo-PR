@@ -15,15 +15,16 @@ import { NoResultsContainer } from "../components/wrappers/NoResultsContainer";
 import { ChartWrapper } from "../components/wrappers/ChartWrapper";
 import { CloseChartWrapper } from "../components/wrappers/CloseChartWrapper";
 import { VaccineChart } from "./VaccinesChart";
+import Typography from "react-styled-typography";
 
 export const ReChart = (): JSX.Element => {
-  const chartData: any = useAppSelector(
-    (state) => state.chartData.countriesInfo
+  const { countriesInfo, error }: any = useAppSelector(
+    (state) => state.chartData
   );
 
   const [chartActive, setChartActive] = useState<boolean>(true);
 
-  if (!chartData.length || chartData == null)
+  if (error || countriesInfo == null || !countriesInfo.length)
     return (
       <NoResultsContainer>
         <h4>No results on this location, unfortunately.</h4>
@@ -35,8 +36,12 @@ export const ReChart = (): JSX.Element => {
       <CloseChartWrapper onClick={() => setChartActive(false)}>
         <BsChevronDown size={30} color="#fff" />
       </CloseChartWrapper>
-      <ResponsiveContainer minWidth={500} height={125}>
-        <LineChart data={chartData && chartData}>
+      <Typography variant="h2" marginB="10" color="#fff" align="center">
+        Overall
+      </Typography>
+
+      <ResponsiveContainer minWidth={300} height={125}>
+        <LineChart data={countriesInfo && countriesInfo}>
           <defs>
             <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor="#2451b7" strokeOpacity={0.4} />

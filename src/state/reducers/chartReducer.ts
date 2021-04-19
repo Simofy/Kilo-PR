@@ -1,7 +1,7 @@
 import { Action } from "../actions";
 import { ActionTypes } from "../action-types";
 
-interface IVaccinationData {
+export interface IVaccinationData {
   country: string;
   timeline: any;
 }
@@ -40,13 +40,12 @@ export const chartReducer = (state = initialState, action: any): IChartData => {
         loading: true,
       };
     case ActionTypes.CHART_DATA_SUCCESS:
-      console.log(action.payload);
-
       return {
         ...state,
         countriesInfo: action.payload.chartData,
         vaccinated: action.payload.vaccinesData,
         loading: false,
+        error: false,
       };
     case ActionTypes.CHART_DATA_ERROR:
       return {

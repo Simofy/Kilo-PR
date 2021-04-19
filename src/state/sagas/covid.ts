@@ -20,12 +20,20 @@ export function* getChartData(): Generator<unknown> {
   );
 
   try {
-    const chartData = yield call(handleGetChartData, `${selectCountryCode}`);
+    let chartData: any = yield call(handleGetChartData, `${selectCountryCode}`);
+    chartData = chartData.map((item: any) => {
+      return {
+        ...item,
+        Date: new Date(item.Date).toLocaleDateString(),
+      };
+    });
+
     const vaccinesData = yield call(
       getVaccineDataRequest,
       `${selectCountryCode}`
     );
-    console.log(vaccinesData);
+
+    console.log(chartData);
 
     yield put({
       type: ActionTypes.CHART_DATA_SUCCESS,

@@ -11,6 +11,7 @@ import {
   Line,
 } from "recharts";
 import Typography from "react-styled-typography";
+import { IVaccinationData } from "../state/reducers/chartReducer";
 
 export const VaccineChart = (): JSX.Element => {
   const vaccineData: any = useAppSelector(
@@ -24,7 +25,7 @@ export const VaccineChart = (): JSX.Element => {
     if (vaccineData.timeline) {
       Object.entries(vaccineData.timeline).map((key) => {
         formattedData.push({
-          date: key[0],
+          date: new Date(key[0]).toLocaleDateString(),
           value: key[1],
         });
       });
@@ -48,7 +49,7 @@ export const VaccineChart = (): JSX.Element => {
       >
         Vaccination
       </Typography>
-      <ResponsiveContainer minWidth={600} height={100}>
+      <ResponsiveContainer minWidth={300} height={100}>
         <LineChart data={data && data}>
           <defs>
             <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">

@@ -24,10 +24,9 @@ export const CustomGoogleMap = ({
   const [selected, setSelected] = React.useState(null);
   const mapRef = React.useRef<any>(null);
   const dispatch = useDispatch();
-  console.log(covidData);
 
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "",
+    googleMapsApiKey: "AIzaSyDUSy6au1UtftlSlYoHm3xz3y4QS1K6Kwk",
     libraries,
   });
 
