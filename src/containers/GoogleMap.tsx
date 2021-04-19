@@ -21,7 +21,7 @@ export const CustomGoogleMap = ({
   children: JSX.Element;
 }): JSX.Element => {
   const covidData: any = useAppSelector((state) => state.covidData.data);
-  const [selected, setSelected] = React.useState(null);
+  const [selected, setSelected] = React.useState<any>(null);
   const mapRef = React.useRef<any>(null);
   const dispatch = useDispatch();
 
@@ -32,6 +32,10 @@ export const CustomGoogleMap = ({
 
   const onMapLoad = useCallback((map) => {
     mapRef.current = map;
+  }, []);
+
+  const handleMarkerMouseOver = useCallback((countryInfo) => {
+    setSelected(countryInfo);
   }, []);
 
   const panTo = useCallback(({ lat, lng }) => {
@@ -50,7 +54,7 @@ export const CustomGoogleMap = ({
     <div>
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
-        zoom={6}
+        zoom={4}
         center={center}
         options={options}
         onLoad={onMapLoad}
@@ -66,6 +70,7 @@ export const CustomGoogleMap = ({
                 key={countryInfo._id + Math.random() * 10}
                 onClick={() => handleMarkerClick(countryInfo)}
                 countryInfo={countryInfo}
+                onMouseOver={() => handleMarkerMouseOver(countryInfo)}
               />
             );
           })}
