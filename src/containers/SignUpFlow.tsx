@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import { Input } from "../components/inputs/Input";
 import styled from "styled-components";
-import { PlayButton } from "../components/buttons/PlayButton";
+import { Button } from "../components/buttons/Button";
 import { Box } from "../components/wrappers/Box";
 import { Link } from "react-router-dom";
 import { StyledForm, ErrorMsg } from "./LoginFlow";
+import { auth } from "../config/firebase";
+import { useHistory } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 const SignUpWrapper = styled.div`
   width: 100vw;
@@ -15,11 +18,36 @@ const SignUpWrapper = styled.div`
 `;
 
 export const SignUpFlow = (): JSX.Element => {
-  const [error] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { signup } = useAuth();
+  const history = useHistory();
 
-  const submitForm = (e: React.FormEvent) => {
-    e.preventDefault();
-  };
+  const submitForm = useCallback<React.FormEventHandler<HTMLFormElement>>(
+    async (e) => {
+      e.preventDefault();
+      const {
+        target: {
+          email: { value: email },
+          password: { value: password },
+        },
+      }: any = e;
+
+      try {
+        setError("");
+        setLoading(true);
+        await signup(email, password);
+        history.push("/");
+      } catch (err) {
+        console.log(err);
+
+        setError("Failed to create an account");
+      }
+
+      setLoading(false);
+    },
+    []
+  );
 
   return (
     <SignUpWrapper>
@@ -30,16 +58,13 @@ export const SignUpFlow = (): JSX.Element => {
           </Box>
           <Box pb="1rem">
             <label htmlFor="email">Email</label>
-            <Input type="text" name="email" />
+            <Input type="text" name="email" required />
           </Box>
           <Box mb="0.5rem">
             <label htmlFor="password">Password</label>
-            <Input type="password" name="password" />
+            <Input type="password" name="password" required />
           </Box>
-          <Box mb="0.5rem">
-            <label htmlFor="password2">Repeat password</label>
-            <Input type="password" name="password2" />
-          </Box>
+
           <Box>
             <ErrorMsg>{error}</ErrorMsg>
           </Box>
@@ -48,7 +73,9 @@ export const SignUpFlow = (): JSX.Element => {
               Already have an account? Sign in <Link to="/">here.</Link>
             </p>
           </Box>
-          <PlayButton type="submit">Sign up</PlayButton>
+          <Button type="submit" disabled={loading}>
+            Sign up
+          </Button>
         </StyledForm>
       </form>
     </SignUpWrapper>

@@ -1,22 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Home } from "./pages/Home";
 import { CovidMap } from "./pages/CovidMap";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Route, RouteProps, Redirect, useHistory } from "react-router-dom";
 import { GlobalStyle } from "./styles/GlobalStyles";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { SignUpFlow } from "./containers/SignUpFlow";
-import { ReChart } from "./containers/ReChart";
+import { useAuth } from "./contexts/AuthContext";
+
+const PrivateRoute = ({
+  children,
+  ...props
+}: React.PropsWithChildren<RouteProps>) => {
+  const { currentUser } = useAuth();
+
+  if (!currentUser && currentUser == null) return <Redirect to="/" />;
+  return <Route {...props}>{children}</Route>;
+};
 
 export const App = (): JSX.Element => {
+  const currentUser = useAuth();
+  const history = useHistory();
+
+  useEffect(() => {
+    currentUser && history.push("/covidmap");
+  }, [currentUser]);
+
   return (
     <>
       <GlobalStyle />
-      <Router basename={process.env.PUBLIC_URL}>
-        <Route path="/" component={Home} exact />
-        <Route path="/covidmap" component={CovidMap} exact />
-        <Route path="/signup" component={SignUpFlow} exact />
-        <Route path="/chart" component={ReChart} exact />
-      </Router>
+      <Route path="/" component={Home} exact />
+      <PrivateRoute path="/covidmap" component={CovidMap} exact />
+      <Route path="/signup" component={SignUpFlow} exact />
     </>
   );
 };

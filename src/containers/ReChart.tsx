@@ -18,7 +18,10 @@ import { VaccineChart } from "./VaccinesChart";
 import Typography from "react-styled-typography";
 
 export const ReChart = (): JSX.Element => {
-  const { countriesInfo, error }: any = useAppSelector(
+  const {
+    countriesInfo,
+    error,
+  }: { countriesInfo: any; error: boolean | null } = useAppSelector(
     (state) => state.chartData
   );
 

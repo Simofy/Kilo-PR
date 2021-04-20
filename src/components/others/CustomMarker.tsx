@@ -16,8 +16,6 @@ export const CustomMarker = ({
   countryInfo: { lat: number; long: number };
   cases: number;
 }): JSX.Element => {
-  console.log(countryInfo.lat, countryInfo.long);
-
   return (
     <Marker
       onMouseOver={onMouseOver}

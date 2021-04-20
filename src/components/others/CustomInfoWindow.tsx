@@ -27,12 +27,7 @@ export const CustomInfoWindow = ({
       onCloseClick={onCloseClick}
     >
       <div>
-        <h2>
-          <span role="img" aria-label="bear">
-            🐻
-          </span>{" "}
-          Alert
-        </h2>
+        <h2>Population:</h2>
         <p>{selected.iso2}</p>
       </div>
     </InfoWindow>

@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import { Input } from "../components/inputs/Input";
 import styled from "styled-components";
-import { PlayButton } from "../components/buttons/PlayButton";
+import { Button } from "../components/buttons/Button";
 import { Box } from "../components/wrappers/Box";
 import { Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
+import { useAuth } from "../contexts/AuthContext";
 
 export const StyledForm = styled.div`
   min-width: 95%;
@@ -23,10 +25,44 @@ export const ErrorMsg = styled.p`
 `;
 
 export const LoginFlow = (): JSX.Element => {
-  const [error] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { login } = useAuth();
+
+  const history = useHistory();
+
+  const submitForm = useCallback<React.FormEventHandler<HTMLFormElement>>(
+    async (e) => {
+      e.preventDefault();
+      const {
+        target: {
+          email: { value: email },
+          password: { value: password },
+        },
+      }: any = e;
+
+      try {
+        setError("");
+
+        setLoading(true);
+
+        await login(email, password);
+
+        history.push("/covidmap");
+      } catch (err) {
+        console.log(err);
+        setError("Ooops, something went wrong.");
+      }
+      setLoading(false);
+    },
+    []
+  );
 
   return (
-    <form style={{ flex: "1", display: "flex", padding: "0 1rem" }}>
+    <form
+      onSubmit={submitForm}
+      style={{ flex: "1", display: "flex", padding: "0 1rem" }}
+    >
       <StyledForm>
         <Box mb="2rem">
           <h1>Sign in</h1>
@@ -45,7 +81,9 @@ export const LoginFlow = (): JSX.Element => {
             Don`t have account? Sign up <Link to="/signup">here.</Link>
           </p>
         </Box>
-        <PlayButton type="submit">Sign in</PlayButton>
+        <Button type="submit" disabled={loading}>
+          Sign in
+        </Button>
       </StyledForm>
     </form>
   );

@@ -1,14 +1,17 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useCallback, useState } from "react";
+import styled, { css } from "styled-components";
 import { primary } from "../../styles/colors";
+import { ProfileButton } from "../buttons/Button";
+import { useAuth } from "../../contexts/AuthContext";
+import Typography from "react-styled-typography";
+import { AiOutlineUser } from "react-icons/ai";
+import { useHistory } from "react-router-dom";
 
-interface INav {
-  maxX?: number;
-  maxY?: number;
-  updatedTimes?: number;
+interface IProfilePopup {
+  driveIn: boolean;
 }
 
-const NavBar = styled.header<INav>`
+const NavBar = styled.header`
   display: flex;
   width: 100%;
   min-height: 7vh;
@@ -20,14 +23,83 @@ const NavBar = styled.header<INav>`
   color: #fff;
 `;
 
+const IconButton = styled.button`
+  border: none;
+  background: none;
+  cursor: pointer;
+`;
+
+const DropDown = styled.div`
+  position: relative;
+  display: inline-block;
+`;
+
+const ProfilePopup = styled.div<IProfilePopup>`
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  top: 0;
+  min-height: 150px;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #ffff;
+  border-radius: 0.5rem;
+  color: #000;
+  padding: 0.5rem 1rem;
+  z-index: 50;
+  gap: 1rem;
+  transform: translateX(30rem);
+  transition: 0.3s ease-in-out;
+  opacity: 0;
+  ${({ driveIn }) =>
+    driveIn &&
+    css`
+      opacity: 1;
+      transform: translate(0, 2rem);
+    `}
+`;
+
 export const Nav = (): JSX.Element => {
-  const username = localStorage.getItem("email") || "unknown";
+  const [error, setError] = useState("");
+  const { logout, currentUser } = useAuth();
+  const [popupActive, setPopUpActive] = useState(false);
+  const history = useHistory();
+
+  const handleMouseEnter = useCallback(() => {
+    setPopUpActive(true);
+  }, []);
+
+  const handleMouseLeave = useCallback(() => {
+    setPopUpActive(false);
+  }, []);
+
+  const handleLogout = async () => {
+    setError("");
+
+    try {
+      await logout();
+      history.push("/");
+    } catch {
+      setError("Failed to log out");
+    }
+  };
 
   return (
     <NavBar>
       <h1>Covidinho</h1>
-
-      <span>User: {username}</span>
+      <DropDown onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+        <IconButton>
+          <AiOutlineUser size={30} color="#fff" />
+        </IconButton>
+        <ProfilePopup driveIn={popupActive}>
+          <Typography variant="h6">User: {currentUser.email} </Typography>
+          <ProfileButton>Reset password</ProfileButton>
+          <ProfileButton onClick={handleLogout}>Log out</ProfileButton>
+        </ProfilePopup>
+      </DropDown>
     </NavBar>
   );
 };
