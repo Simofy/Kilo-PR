@@ -11,7 +11,6 @@ import {
   Line,
 } from "recharts";
 import Typography from "react-styled-typography";
-import { IVaccinationData } from "../state/reducers/chartReducer";
 
 export const VaccineChart = (): JSX.Element => {
   const vaccineData: any = useAppSelector(
@@ -26,7 +25,7 @@ export const VaccineChart = (): JSX.Element => {
       Object.entries(vaccineData.timeline).map((key) => {
         formattedData.push({
           date: new Date(key[0]).toLocaleDateString(),
-          value: key[1],
+          Vaccinated: key[1],
         });
       });
     }
@@ -61,7 +60,7 @@ export const VaccineChart = (): JSX.Element => {
           <Area dataKey="value" stroke="#2451b7" fill="url(#color)" />
           <XAxis dataKey="date" axisLine={false} tickLine={false} />
           <YAxis
-            dataKey="value"
+            dataKey="Vaccinated"
             axisLine={false}
             tickLine={false}
             tickCount={10}
@@ -70,7 +69,7 @@ export const VaccineChart = (): JSX.Element => {
           <CartesianGrid opacity={0.1} vertical={false} />
           <Line
             type="monotone"
-            dataKey="value"
+            dataKey="Vaccinated"
             stroke="#2451b7"
             fill="url(#color)"
           />

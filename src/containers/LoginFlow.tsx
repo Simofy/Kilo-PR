@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { Input } from "../components/inputs/Input";
 import styled from "styled-components";
 import { PlayButton } from "../components/buttons/PlayButton";
@@ -25,20 +25,8 @@ export const ErrorMsg = styled.p`
 export const LoginFlow = (): JSX.Element => {
   const [error] = useState("");
 
-  const ControlledInput = (props: any) => {
-    const inputRef = useRef<HTMLInputElement>(null);
-    return <Input ref={inputRef} {...props} />;
-  };
-
-  const submitForm = (e: React.FormEvent) => {
-    e.preventDefault();
-  };
-
   return (
-    <form
-      onSubmit={(e) => submitForm(e)}
-      style={{ flex: "1", display: "flex", padding: "0 1rem" }}
-    >
+    <form style={{ flex: "1", display: "flex", padding: "0 1rem" }}>
       <StyledForm>
         <Box mb="2rem">
           <h1>Sign in</h1>
@@ -47,7 +35,7 @@ export const LoginFlow = (): JSX.Element => {
         <Input type="text" name="email" />
         <Box mb="0.5rem">
           <label htmlFor="password">Password</label>
-          <ControlledInput type="password" name="password" />
+          <Input type="password" name="password" />
         </Box>
         <Box>
           <ErrorMsg>{error}</ErrorMsg>

@@ -16,11 +16,14 @@ export const CustomMarker = ({
   countryInfo: { lat: number; long: number };
   cases: number;
 }): JSX.Element => {
+  console.log(countryInfo.lat, countryInfo.long);
+
   return (
     <Marker
       onMouseOver={onMouseOver}
       onClick={onClick}
       position={{ lat: countryInfo.lat, lng: countryInfo.long }}
+      clickable={true}
       icon={{
         url: `data:image/svg+xml,%3Csvg  viewBox='0 0 100 100' fill='${formatMarkerByCases(
           cases
@@ -28,6 +31,7 @@ export const CustomMarker = ({
 
         anchor: new google.maps.Point(17, 46),
         origin: new window.google.maps.Point(0, 0),
+
         scaledSize: new google.maps.Size(
           formatMarkerSizeByCases(cases),
           formatMarkerSizeByCases(cases)

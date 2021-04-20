@@ -15,16 +15,15 @@ export const CustomInfoWindow = ({
   setSelected,
 }: {
   selected: ICountryDetails;
-  setSelected: any;
+  setSelected: (args: null | ICountryDetails) => void;
 }): JSX.Element => {
   const onCloseClick = useCallback(() => {
     setSelected(null);
   }, []);
-  console.log(selected);
 
   return (
     <InfoWindow
-      position={{ lat: selected.lat + 1, lng: selected.long + 0.3 }}
+      position={{ lat: selected.lat, lng: selected.long }}
       onCloseClick={onCloseClick}
     >
       <div>

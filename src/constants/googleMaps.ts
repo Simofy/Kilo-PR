@@ -1,11 +1,15 @@
 import mapStyles from "../styles/mapStyles";
 
-export const libraries: any = ["places"];
+export const libraries: string[] | any = ["places"];
 export const mapContainerStyle = {
   height: "93vh",
   width: "100%",
 };
-export const options: any = {
+export const options: {
+  disableDefaultUI: boolean;
+  zoomControl: boolean;
+  styles: any;
+} = {
   disableDefaultUI: false,
   zoomControl: true,
   styles: mapStyles,

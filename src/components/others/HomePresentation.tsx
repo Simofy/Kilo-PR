@@ -10,4 +10,7 @@ export const HomePresentation = styled.div`
   align-items: center;
   color: #fff;
   background: ${primary};
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
 `;

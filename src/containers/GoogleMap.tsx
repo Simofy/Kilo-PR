@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { GoogleMap, useLoadScript } from "@react-google-maps/api";
 import { useAppSelector } from "../hooks";
@@ -12,6 +12,8 @@ import {
   options,
   center,
 } from "../constants/googleMaps";
+import Typography from "react-styled-typography";
+import { CustomLoader } from "../components/others/CustomLoader";
 
 import { GoogleMapsSearch } from "../components/others/GoogleMapsSearch";
 
@@ -47,8 +49,32 @@ export const CustomGoogleMap = ({
     dispatch({ type: ActionTypes.FETCH_CHART_DATA, payload: country.iso2 });
   };
 
-  if (loadError) return <div>error</div>;
-  if (!isLoaded) return <div>loading</div>;
+  const savedData = useMemo(
+    () =>
+      covidData
+        ? covidData.map((item: any) => {
+            const { countryInfo, casesPerOneMillion } = item;
+            return (
+              <CustomMarker
+                cases={casesPerOneMillion}
+                key={countryInfo._id + Math.random() * 10}
+                onClick={() => handleMarkerClick(countryInfo)}
+                countryInfo={countryInfo}
+                onMouseOver={() => handleMarkerMouseOver(countryInfo)}
+              />
+            );
+          })
+        : [],
+    [covidData]
+  );
+
+  if (loadError)
+    return (
+      <Typography variant="h3" color="#000">
+        Something went wrong. Please try reloading page.
+      </Typography>
+    );
+  if (!isLoaded) return <CustomLoader />;
 
   return (
     <div>
@@ -60,21 +86,7 @@ export const CustomGoogleMap = ({
         onLoad={onMapLoad}
       >
         <GoogleMapsSearch panTo={panTo} />
-        {covidData &&
-          covidData.map((item: any) => {
-            const { countryInfo, casesPerOneMillion } = item;
-
-            return (
-              <CustomMarker
-                cases={casesPerOneMillion}
-                key={countryInfo._id + Math.random() * 10}
-                onClick={() => handleMarkerClick(countryInfo)}
-                countryInfo={countryInfo}
-                onMouseOver={() => handleMarkerMouseOver(countryInfo)}
-              />
-            );
-          })}
-
+        {savedData}
         {selected ? (
           <CustomInfoWindow selected={selected} setSelected={setSelected} />
         ) : null}

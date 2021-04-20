@@ -33,8 +33,6 @@ export function* getChartData(): Generator<unknown> {
       `${selectCountryCode}`
     );
 
-    console.log(chartData);
-
     yield put({
       type: ActionTypes.CHART_DATA_SUCCESS,
       payload: { chartData, vaccinesData },

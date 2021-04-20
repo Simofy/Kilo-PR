@@ -1,6 +1,10 @@
 import React from "react";
 
-export const GoogleMapsLocate = ({ panTo }: { panTo: any }): JSX.Element => {
+export const GoogleMapsLocate = ({
+  panTo,
+}: {
+  panTo: ({ lat, lng }: { lat: number; lng: number }) => void;
+}): JSX.Element => {
   return (
     <button
       className="locate"

@@ -22,11 +22,11 @@ export const GoogleMapsSearch = ({ panTo }: any) => {
 
   // https://developers.google.com/maps/documentation/javascript/reference/places-autocomplete-service#AutocompletionRequest
 
-  const handleInput = (e: any) => {
+  const handleInput = (e: { target: { value: string } }) => {
     setValue(e.target.value);
   };
 
-  const handleSelect = async (address: any) => {
+  const handleSelect = async (address: string) => {
     setValue(address, false);
 
     clearSuggestions();
@@ -52,7 +52,7 @@ export const GoogleMapsSearch = ({ panTo }: any) => {
         <ComboboxPopover>
           <ComboboxList>
             {status === "OK" &&
-              data.map(({ id, description }: any) => (
+              data.map(({ id, description }) => (
                 <ComboboxOption key={id} value={description} />
               ))}
           </ComboboxList>
