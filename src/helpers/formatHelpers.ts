@@ -19,6 +19,10 @@ export const formatMarkerSizeByCases = (cases: number): number => {
     return 80;
   } else if (cases > 3000 && cases < 10000) {
     return 90;
+  } else if (cases < 100) {
+    return 5;
+  } else if (cases > 100 && cases < 1000) {
+    return 20;
   }
-  return 100;
+  return 90;
 };
