@@ -10,12 +10,9 @@ import {
   YAxis,
   Line,
 } from "recharts";
-import { BsChevronDown } from "react-icons/bs";
 import { NoResultsContainer } from "../components/wrappers/NoResultsContainer";
 import { ChartWrapper } from "../components/wrappers/ChartWrapper";
-import { CloseChartWrapper } from "../components/wrappers/CloseChartWrapper";
 import { VaccineChart } from "./VaccinesChart";
-import Typography from "react-styled-typography";
 
 export const ReChart = (): JSX.Element => {
   const {
@@ -25,8 +22,6 @@ export const ReChart = (): JSX.Element => {
     (state) => state.chartData
   );
 
-  const [chartActive, setChartActive] = useState<boolean>(true);
-
   if (error || countriesInfo == null || !countriesInfo.length)
     return (
       <NoResultsContainer>
@@ -35,15 +30,8 @@ export const ReChart = (): JSX.Element => {
     );
 
   return (
-    <ChartWrapper display={chartActive ? true : false}>
-      <CloseChartWrapper onClick={() => setChartActive(false)}>
-        <BsChevronDown size={30} color="#fff" />
-      </CloseChartWrapper>
-      <Typography variant="h2" marginB="10" color="#fff" align="center">
-        Overall
-      </Typography>
-
-      <ResponsiveContainer minWidth={300} height={125}>
+    <ChartWrapper>
+      <ResponsiveContainer minWidth={300} height={175}>
         <LineChart data={countriesInfo && countriesInfo}>
           <defs>
             <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">

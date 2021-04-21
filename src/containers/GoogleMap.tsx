@@ -88,7 +88,11 @@ export const CustomGoogleMap = ({
         <GoogleMapsSearch panTo={panTo} />
         {savedData}
         {selected ? (
-          <CustomInfoWindow selected={selected} setSelected={setSelected} />
+          <CustomInfoWindow
+            onMouseLeave={() => setSelected(null)}
+            selected={selected}
+            setSelected={setSelected}
+          />
         ) : null}
         {children}
       </GoogleMap>

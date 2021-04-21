@@ -10,7 +10,6 @@ import {
   YAxis,
   Line,
 } from "recharts";
-import Typography from "react-styled-typography";
 
 export const VaccineChart = (): JSX.Element => {
   const vaccineData: any = useAppSelector(
@@ -39,16 +38,7 @@ export const VaccineChart = (): JSX.Element => {
 
   return (
     <>
-      <Typography
-        variant="h2"
-        marginT="10"
-        marginB="10"
-        color="#fff"
-        align="center"
-      >
-        Vaccination
-      </Typography>
-      <ResponsiveContainer minWidth={300} height={100}>
+      <ResponsiveContainer height={175}>
         <LineChart data={data && data}>
           <defs>
             <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">

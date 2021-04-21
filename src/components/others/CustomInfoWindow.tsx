@@ -14,6 +14,7 @@ export const CustomInfoWindow = ({
   selected,
   setSelected,
 }: {
+  onMouseLeave: () => void;
   selected: ICountryDetails;
   setSelected: (args: null | ICountryDetails) => void;
 }): JSX.Element => {

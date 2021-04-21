@@ -14,15 +14,13 @@ export const formatMarkerByCases = (cases: number): string => {
 
 export const formatMarkerSizeByCases = (cases: number): number => {
   if (cases < 1000) {
-    return 70;
+    return 10;
   } else if (cases > 1000 && cases < 3000) {
-    return 80;
+    return 15;
   } else if (cases > 3000 && cases < 10000) {
-    return 90;
+    return 25;
   } else if (cases < 100) {
     return 5;
-  } else if (cases > 100 && cases < 1000) {
-    return 20;
   }
-  return 90;
+  return 30;
 };
