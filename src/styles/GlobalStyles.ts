@@ -27,10 +27,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .search input {
-  padding: 0.5rem;
+  padding: 0.85rem 0.5rem;
   font-size: 0.9rem;
   transform: translateX(-50%);
 width: 100%;
+border: none;
+box-shadow: 1rem 0px 7rem 0.1rem #000;
+border-radius: 0.15rem;
 }
 
 
