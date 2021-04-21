@@ -3,19 +3,19 @@ import { useDispatch } from "react-redux";
 import { GoogleMap, useLoadScript } from "@react-google-maps/api";
 import { useAppSelector } from "../hooks";
 import { ActionTypes } from "../state/action-types";
-import { CustomMarker } from "../components/others/CustomMarker";
+import { CustomMarker } from "../components/map/CustomMarker";
 import "@reach/combobox/styles.css";
-import { CustomInfoWindow } from "../components/others/CustomInfoWindow";
+import { CustomInfoWindow } from "../components/map/CustomInfoWindow";
 import {
   libraries,
   mapContainerStyle,
   options,
   center,
 } from "../constants/googleMaps";
+import Loader from "react-loader-spinner";
 import Typography from "react-styled-typography";
-import { CustomLoader } from "../components/others/CustomLoader";
 
-import { GoogleMapsSearch } from "../components/others/GoogleMapsSearch";
+import { GoogleMapsSearch } from "../components/map/GoogleMapsSearch";
 
 export const CustomGoogleMap = ({
   children,
@@ -25,7 +25,6 @@ export const CustomGoogleMap = ({
   const covidData: any = useAppSelector((state) => state.covidData.data);
   const [selected, setSelected] = React.useState<any>(null);
   const mapRef = React.useRef<any>(null);
-  const dispatch = useDispatch();
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: "",
@@ -36,18 +35,14 @@ export const CustomGoogleMap = ({
     mapRef.current = map;
   }, []);
 
-  const handleMarkerMouseOver = useCallback((countryInfo) => {
-    setSelected(countryInfo);
+  const handleMarkerMouseOver = useCallback((item) => {
+    setSelected(item);
   }, []);
 
   const panTo = useCallback(({ lat, lng }) => {
     mapRef.current.panTo({ lat, lng });
     mapRef.current.setZoom(14);
   }, []);
-
-  const handleMarkerClick = (country: { iso2: string }) => {
-    dispatch({ type: ActionTypes.FETCH_CHART_DATA, payload: country.iso2 });
-  };
 
   const savedData = useMemo(
     () =>
@@ -58,9 +53,8 @@ export const CustomGoogleMap = ({
               <CustomMarker
                 cases={casesPerOneMillion}
                 key={countryInfo._id + Math.random() * 10}
-                onClick={() => handleMarkerClick(countryInfo)}
                 countryInfo={countryInfo}
-                onMouseOver={() => handleMarkerMouseOver(countryInfo)}
+                onMouseOver={() => handleMarkerMouseOver(item)}
               />
             );
           })
@@ -74,7 +68,8 @@ export const CustomGoogleMap = ({
         Something went wrong. Please try reloading page.
       </Typography>
     );
-  if (!isLoaded) return <CustomLoader />;
+  if (!isLoaded)
+    return <Loader type="Puff" height={25} width={25} color="#00BFFF" />;
 
   return (
     <div>

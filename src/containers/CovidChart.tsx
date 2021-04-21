@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useAppSelector } from "../hooks";
 import {
   ResponsiveContainer,
@@ -14,7 +14,7 @@ import { NoResultsContainer } from "../components/wrappers/NoResultsContainer";
 import { ChartWrapper } from "../components/wrappers/ChartWrapper";
 import { VaccineChart } from "./VaccinesChart";
 
-export const ReChart = (): JSX.Element => {
+export const CovidChart = (): JSX.Element => {
   const {
     countriesInfo,
     error,

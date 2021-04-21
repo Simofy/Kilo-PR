@@ -1,27 +1,14 @@
 import React, { useState, useCallback } from "react";
 import { Input } from "../components/inputs/Input";
-import styled from "styled-components";
+import { ButtonGroup } from "../components/buttons/ButtonGroup";
 import { Button } from "../components/buttons/Button";
 import { Box } from "../components/wrappers/Box";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-
-export const StyledForm = styled.div`
-  min-width: 30rem;
-  padding: 2rem;
-  border: 1px solid #ddd;
-  margin: auto;
-  @media only screen and (max-width: 500px) {
-    width: 100% !important;
-  }
-`;
-
-export const ErrorMsg = styled.p`
-  color: #ff0000;
-  font-size: 12px;
-  padding-bottom: 0.2rem;
-`;
+import { ErrorMsg } from "../components/errors/ErrorMsg";
+import { StyledForm } from "../components/forms/StyledForm";
+import Loader from "react-loader-spinner";
 
 export const LoginFlow = (): JSX.Element => {
   const [error, setError] = useState("");
@@ -47,10 +34,10 @@ export const LoginFlow = (): JSX.Element => {
 
         await login(email, password);
 
-        history.push("/covidmap");
+        history.push("/");
       } catch (err) {
         console.log(err);
-        setError("Ooops, something went wrong.");
+        setError(err.message);
       }
       setLoading(false);
     },
@@ -58,21 +45,18 @@ export const LoginFlow = (): JSX.Element => {
   );
 
   return (
-    <form
-      onSubmit={submitForm}
-      style={{ flex: "1", display: "flex", padding: "0 1rem" }}
-    >
-      <StyledForm>
+    <StyledForm style={{ margin: "auto" }}>
+      <form onSubmit={submitForm}>
         <Box mb="2rem">
           <h1>Sign in</h1>
         </Box>
         <Box mb="1rem">
           <label htmlFor="email">Email</label>
-          <Input type="text" name="email" />
+          <Input type="email" name="email" required />
         </Box>
         <Box mb="0.5rem">
           <label htmlFor="password">Password</label>
-          <Input type="password" name="password" />
+          <Input type="password" name="password" required />
         </Box>
         <Box>
           <ErrorMsg>{error}</ErrorMsg>
@@ -82,10 +66,19 @@ export const LoginFlow = (): JSX.Element => {
             Don`t have account? Sign up <Link to="/signup">here.</Link>
           </p>
         </Box>
-        <Button type="submit" disabled={loading}>
-          Sign in
-        </Button>
-      </StyledForm>
-    </form>
+        <ButtonGroup>
+          <Button type="submit" disabled={loading}>
+            {loading ? (
+              <Loader type="Puff" height={15} width={15} color="#fff" />
+            ) : (
+              "Sign in"
+            )}
+          </Button>
+          <Button type="submit" disabled={loading}>
+            Continue as guest
+          </Button>
+        </ButtonGroup>
+      </form>
+    </StyledForm>
   );
 };

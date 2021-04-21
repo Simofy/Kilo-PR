@@ -51,6 +51,7 @@ export const chartReducer = (state = initialState, action: any): IChartData => {
       return {
         ...state,
         error: true,
+        loading: false,
       };
 
     default:

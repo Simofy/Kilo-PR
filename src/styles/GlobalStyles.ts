@@ -18,12 +18,12 @@ h1, h2, h3, h4, h5, h6 {
 
 .search {
   position: absolute;
-  top: 0.5rem;
-  left: 50%;
-  width: 100%;
-  z-index: 10;
   max-width: 400px;
-  
+  right: 1em;
+  top: 0.75em;
+  @media only screen and (max-width: 600px) {
+  display: none;
+}
 }
 
 .search input {
@@ -34,6 +34,7 @@ width: 100%;
 border: none;
 box-shadow: 1rem 0px 7rem 0.1rem #000;
 border-radius: 0.15rem;
+
 }
 
 

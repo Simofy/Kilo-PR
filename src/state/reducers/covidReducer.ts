@@ -34,6 +34,7 @@ export const covidReducer = (
       return {
         ...state,
         error: true,
+        loading: false,
       };
 
     default:

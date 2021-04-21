@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { AuthWrapper } from "../components/wrappers/AuthWrapper";
 import { LoginFlow } from "../containers/LoginFlow";
-import { HomePresentation } from "../components/others/HomePresentation";
+import { HomePresentation } from "../layouts/HomePresentation";
 import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 
@@ -10,8 +10,6 @@ export const Home = (): JSX.Element => {
   const history = useHistory();
 
   useEffect(() => {
-    console.log(currentUser);
-
     currentUser ? history.push("/covidmap") : history.push("/");
   }, [currentUser]);
   return (

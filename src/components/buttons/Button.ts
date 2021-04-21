@@ -9,10 +9,5 @@ export const Button = styled.button`
   background: ${primary};
   color: #fff;
   font-size: 16px;
-`;
-
-export const ProfileButton = styled(Button)`
-  padding: 0.3rem;
-  font-size: 11px;
-  width: 100%;
+  min-width: 5rem;
 `;

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useAppSelector } from "../hooks";
+import styled from "styled-components";
 import {
   ResponsiveContainer,
   XAxis,
@@ -10,6 +11,12 @@ import {
   YAxis,
   Line,
 } from "recharts";
+
+const VaccineChartWrapper = styled(ResponsiveContainer)`
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
+`;
 
 export const VaccineChart = (): JSX.Element => {
   const vaccineData: any = useAppSelector(
@@ -38,7 +45,7 @@ export const VaccineChart = (): JSX.Element => {
 
   return (
     <>
-      <ResponsiveContainer minWidth={300} height={175}>
+      <VaccineChartWrapper minWidth={300} height={175}>
         <LineChart data={data && data}>
           <defs>
             <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
@@ -64,7 +71,7 @@ export const VaccineChart = (): JSX.Element => {
             fill="url(#color)"
           />
         </LineChart>
-      </ResponsiveContainer>
+      </VaccineChartWrapper>
     </>
   );
 };

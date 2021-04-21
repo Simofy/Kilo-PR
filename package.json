@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://galvotas.github.io/Kilo-PR",
   "dependencies": {
+    "@material-ui/core": "^4.11.3",
     "@reach/combobox": "^0.15.0",
     "@react-google-maps/api": "^2.1.1",
     "@reduxify/utils": "^0.1.1",

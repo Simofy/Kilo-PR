@@ -11,6 +11,7 @@ import { GlobalStyle } from "./styles/GlobalStyles";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { SignUpFlow } from "./containers/SignUpFlow";
 import { useAuth } from "./contexts/AuthContext";
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 
 const PrivateRoute = ({
   children,

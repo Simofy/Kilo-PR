@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { ActionTypes } from "../state/action-types";
 import { Nav } from "../components/headers/Nav";
 import { CustomGoogleMap } from "../containers/GoogleMap";
-import { ReChart } from "../containers/ReChart";
+import { CovidChart } from "../containers/CovidChart";
 
 export const CovidMap = (): JSX.Element => {
   const dispatch = useDispatch();
@@ -17,7 +17,7 @@ export const CovidMap = (): JSX.Element => {
     <>
       <Nav />
       <CustomGoogleMap>
-        <ReChart />
+        <CovidChart />
       </CustomGoogleMap>
     </>
   );
