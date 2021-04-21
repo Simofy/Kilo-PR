@@ -49,17 +49,28 @@ const ProfilePopup = styled.div<IProfilePopup>`
   border-radius: 0.5rem;
   color: #000;
   padding: 0.5rem 1rem;
-  z-index: 50;
   gap: 1rem;
-  transform: translateX(30rem);
+  transform: translateY(25%);
   transition: 0.3s ease-in-out;
   opacity: 0;
+  z-index: -1;
   ${({ driveIn }) =>
     driveIn &&
     css`
       opacity: 1;
-      transform: translate(0, 2rem);
+      z-index: 50;
     `}
+`;
+
+const SimpleButton = styled.button`
+  background: none;
+  border: none;
+  color: #000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  &:hover {
+    color: #ddd;
+  }
 `;
 
 export const Nav = (): JSX.Element => {
@@ -95,8 +106,8 @@ export const Nav = (): JSX.Element => {
         </IconButton>
         <ProfilePopup driveIn={popupActive}>
           <Typography variant="h6">User: {currentUser.email} </Typography>
-          <ProfileButton>Reset password</ProfileButton>
-          <ProfileButton onClick={handleLogout}>Log out</ProfileButton>
+          <SimpleButton>Reset password</SimpleButton>
+          <SimpleButton onClick={handleLogout}>Log out</SimpleButton>
         </ProfilePopup>
       </DropDown>
     </NavBar>
