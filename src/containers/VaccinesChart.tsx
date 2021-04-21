@@ -38,7 +38,7 @@ export const VaccineChart = (): JSX.Element => {
 
   return (
     <>
-      <ResponsiveContainer height={175}>
+      <ResponsiveContainer minWidth={300} height={175}>
         <LineChart data={data && data}>
           <defs>
             <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">

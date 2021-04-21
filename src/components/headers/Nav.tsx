@@ -78,7 +78,6 @@ export const Nav = (): JSX.Element => {
 
   const handleLogout = async () => {
     setError("");
-
     try {
       await logout();
       history.push("/");

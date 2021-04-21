@@ -18,32 +18,21 @@ h1, h2, h3, h4, h5, h6 {
 
 .search {
   position: absolute;
-  top: 1rem;
+  top: 0.5rem;
   left: 50%;
-  transform: translateX(-50%);
   width: 100%;
-  max-width: 400px;
   z-index: 10;
+  max-width: 400px;
+  
 }
 
 .search input {
   padding: 0.5rem;
-  font-size: 1.5rem;
-  width: 100%;
+  font-size: 0.9rem;
+  transform: translateX(-50%);
+width: 100%;
 }
 
-.locate {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-  background: none;
-  border: none;
-  z-index: 10;
-}
-.locate img {
-  width: 30px;
-  cursor: pointer;
-}
 
 
 h3 {
