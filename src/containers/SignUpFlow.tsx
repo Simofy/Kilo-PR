@@ -20,12 +20,12 @@ export const SignUpFlow = (): JSX.Element => {
     async (e) => {
       e.preventDefault();
       const {
-        target: {
+        currentTarget: {
           email: { value: email },
           password: { value: password },
           password2: { value: password2 },
         },
-      }: any = e;
+      } = e;
 
       if (password !== password2) {
         setError("Ooops, looks like your passwords does not match.");

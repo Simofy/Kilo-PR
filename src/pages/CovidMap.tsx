@@ -9,8 +9,8 @@ export const CovidMap = (): JSX.Element => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch({ type: ActionTypes.COVID_DATA_BY_COUNTRY });
-    dispatch({ type: ActionTypes.FETCH_CHART_DATA, payload: "LT" });
+    dispatch({ type: ActionTypes.GET_COVID_DATA });
+    dispatch({ type: ActionTypes.GET_CHART_DATA, payload: "LT" });
   }, []);
 
   return (

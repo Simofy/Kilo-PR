@@ -1,57 +1,46 @@
 import { Action } from "../actions";
 import { ActionTypes } from "../action-types";
+import { ICountriesInfo, ICovidData } from "../../types/covidTypes";
 
 export interface IVaccinationData {
   country: string;
-  timeline: any;
+  timeline?: any;
 }
 
 interface IChartData {
-  loading: boolean;
-  error: null | boolean;
   countryCode: string;
-  vaccinated: IVaccinationData[] | [];
-  countriesInfo:
-    | {
-        Country: string;
-        Confirmed: number;
-        Deaths: number;
-        Recovered: number;
-        Active: number;
-        Date: string;
-      }[]
-    | unknown;
+  vaccinated: IVaccinationData[];
+  countriesInfo: ICountriesInfo[];
+  covidData: ICovidData[];
 }
 
 const initialState: IChartData = {
-  loading: false,
-  error: null,
   vaccinated: [],
   countriesInfo: [],
   countryCode: "",
+  covidData: [],
 };
 
-export const chartReducer = (state = initialState, action: any): IChartData => {
+export const chartReducer = (
+  state = initialState,
+  action: Action | any
+): IChartData => {
   switch (action.type) {
-    case ActionTypes.FETCH_CHART_DATA:
+    case ActionTypes.GET_CHART_DATA:
       return {
         ...state,
         countryCode: action.payload,
-        loading: true,
       };
-    case ActionTypes.CHART_DATA_SUCCESS:
+    case ActionTypes.GET_CHART_DATA_SUCCESS:
       return {
         ...state,
-        countriesInfo: action.payload.chartData,
+        countriesInfo: action.payload.modifiedChartData,
         vaccinated: action.payload.vaccinesData,
-        loading: false,
-        error: false,
       };
-    case ActionTypes.CHART_DATA_ERROR:
+    case ActionTypes.GET_COVID_DATA_SUCCESS:
       return {
         ...state,
-        error: true,
-        loading: false,
+        covidData: action.payload,
       };
 
     default:

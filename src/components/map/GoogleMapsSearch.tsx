@@ -11,7 +11,11 @@ import {
   ComboboxOption,
 } from "@reach/combobox";
 
-export const GoogleMapsSearch = ({ panTo }: any) => {
+export const GoogleMapsSearch = ({
+  panTo,
+}: {
+  panTo: ({ lat, lng }: { lat: number; lng: number }) => void;
+}): JSX.Element => {
   const {
     ready,
     value,

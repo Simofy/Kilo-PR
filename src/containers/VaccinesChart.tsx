@@ -11,6 +11,7 @@ import {
   YAxis,
   Line,
 } from "recharts";
+import { IVaccinationData } from "../state/reducers/chartReducer";
 
 const VaccineChartWrapper = styled(ResponsiveContainer)`
   @media only screen and (max-width: 600px) {

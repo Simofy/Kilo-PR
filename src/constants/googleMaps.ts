@@ -1,6 +1,6 @@
 import mapStyles from "../styles/mapStyles";
 
-export const libraries: string[] | any = ["places"];
+export const libraries: any = ["places"];
 export const mapContainerStyle = {
   height: "93vh",
   width: "100%",

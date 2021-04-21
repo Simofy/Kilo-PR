@@ -1,8 +1,6 @@
 import React, { useCallback, useMemo } from "react";
-import { useDispatch } from "react-redux";
 import { GoogleMap, useLoadScript } from "@react-google-maps/api";
 import { useAppSelector } from "../hooks";
-import { ActionTypes } from "../state/action-types";
 import { CustomMarker } from "../components/map/CustomMarker";
 import "@reach/combobox/styles.css";
 import { CustomInfoWindow } from "../components/map/CustomInfoWindow";
@@ -14,6 +12,7 @@ import {
 } from "../constants/googleMaps";
 import Loader from "react-loader-spinner";
 import Typography from "react-styled-typography";
+import { ICovidData } from "../types/covidTypes";
 
 import { GoogleMapsSearch } from "../components/map/GoogleMapsSearch";
 
@@ -22,12 +21,14 @@ export const CustomGoogleMap = ({
 }: {
   children: JSX.Element;
 }): JSX.Element => {
-  const covidData: any = useAppSelector((state) => state.covidData.data);
-  const [selected, setSelected] = React.useState<any>(null);
+  const covidData: ICovidData[] = useAppSelector(
+    (state) => state.chartData.covidData
+  );
+  const [selected, setSelected] = React.useState<ICovidData | null>(null);
   const mapRef = React.useRef<any>(null);
 
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: "",
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_TOKEN!,
     libraries,
   });
 
@@ -40,14 +41,14 @@ export const CustomGoogleMap = ({
   }, []);
 
   const panTo = useCallback(({ lat, lng }) => {
-    mapRef.current.panTo({ lat, lng });
-    mapRef.current.setZoom(14);
+    mapRef.current?.panTo({ lat, lng });
+    mapRef.current?.setZoom(14);
   }, []);
 
   const savedData = useMemo(
     () =>
       covidData
-        ? covidData.map((item: any) => {
+        ? covidData.map((item: ICovidData) => {
             const { countryInfo, casesPerOneMillion } = item;
             return (
               <CustomMarker

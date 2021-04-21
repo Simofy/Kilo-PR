@@ -1,40 +1,40 @@
 import { Action } from "../actions";
 import { ActionTypes } from "../action-types";
-import { ICovidData } from "../../api/get";
 
-interface IBoardData {
+interface ILoadingAndError {
   loading: boolean;
   error: null | boolean;
-  data: ICovidData | [];
 }
 
-const initialState: IBoardData = {
+const initialState: ILoadingAndError = {
   loading: false,
   error: null,
-  data: [],
 };
 
-export const covidReducer = (
+export const loadingAndErrorReducer = (
   state = initialState,
   action: Action
-): IBoardData => {
+): ILoadingAndError => {
   switch (action.type) {
-    case ActionTypes.COVID_DATA_BY_COUNTRY:
+    case ActionTypes.LOADING_TRUE:
       return {
         ...state,
         loading: true,
       };
-    case ActionTypes.COVID_DATA_SUCCESS:
+    case ActionTypes.LOADING_FALSE:
       return {
         ...state,
-        data: action.payload,
         loading: false,
       };
-    case ActionTypes.COVID_DATA_ERROR:
+    case ActionTypes.ERROR_TRUE:
       return {
         ...state,
         error: true,
-        loading: false,
+      };
+    case ActionTypes.ERROR_FALSE:
+      return {
+        ...state,
+        error: false,
       };
 
     default:

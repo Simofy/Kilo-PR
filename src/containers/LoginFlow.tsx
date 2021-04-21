@@ -21,11 +21,11 @@ export const LoginFlow = (): JSX.Element => {
     async (e) => {
       e.preventDefault();
       const {
-        target: {
+        currentTarget: {
           email: { value: email },
           password: { value: password },
         },
-      }: any = e;
+      } = e;
 
       try {
         setError("");

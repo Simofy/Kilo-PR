@@ -10,6 +10,7 @@ import { ActionTypes } from "../../state/action-types";
 import { useAppSelector } from "../../hooks";
 import Loader from "react-loader-spinner";
 import { primary } from "../../styles/colors";
+import { ICovidData } from "../../types/covidTypes";
 
 const ChartIcon = styled(BsFillBarChartFill)`
   transition: 0.2s ease;
@@ -46,18 +47,18 @@ export const CustomInfoWindow = ({
 }: {
   onMouseLeave: () => void;
   selected: ICountryObject;
-  setSelected: (args: null | ICountryDetails) => void;
+  setSelected: (args: null | ICovidData) => void;
 }): JSX.Element => {
   const onCloseClick = useCallback(() => {
     setSelected(null);
   }, []);
 
-  const { loading } = useAppSelector((state) => state.chartData);
+  const { loading } = useAppSelector((state) => state.loadingAndError);
 
   const dispatch = useDispatch();
 
   const handleChartClick = (iso2: string) => {
-    dispatch({ type: ActionTypes.FETCH_CHART_DATA, payload: iso2 });
+    dispatch({ type: ActionTypes.GET_CHART_DATA, payload: iso2 });
   };
 
   return (

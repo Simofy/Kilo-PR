@@ -15,14 +15,9 @@ import { ChartWrapper } from "../components/wrappers/ChartWrapper";
 import { VaccineChart } from "./VaccinesChart";
 
 export const CovidChart = (): JSX.Element => {
-  const {
-    countriesInfo,
-    error,
-  }: { countriesInfo: any; error: boolean | null } = useAppSelector(
-    (state) => state.chartData
-  );
+  const { countriesInfo } = useAppSelector((state) => state.chartData);
 
-  if (error || countriesInfo == null || !countriesInfo.length)
+  if (countriesInfo == null || !countriesInfo.length)
     return (
       <NoResultsContainer>
         <h4>No results on this location, unfortunately.</h4>
