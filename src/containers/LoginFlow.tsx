@@ -8,11 +8,10 @@ import { useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
 
 export const StyledForm = styled.div`
-  min-width: 95%;
+  min-width: 30rem;
   padding: 2rem;
   border: 1px solid #ddd;
   margin: auto;
-  min-width: 22rem;
   @media only screen and (max-width: 500px) {
     width: 100% !important;
   }
@@ -67,8 +66,10 @@ export const LoginFlow = (): JSX.Element => {
         <Box mb="2rem">
           <h1>Sign in</h1>
         </Box>
-        <label htmlFor="email">Email</label>
-        <Input type="text" name="email" />
+        <Box mb="1rem">
+          <label htmlFor="email">Email</label>
+          <Input type="text" name="email" />
+        </Box>
         <Box mb="0.5rem">
           <label htmlFor="password">Password</label>
           <Input type="password" name="password" />
