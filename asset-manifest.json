@@ -1,20 +1,20 @@
 {
   "files": {
-    "main.js": "/Kilo-PR/static/js/main.97a9ddaa.chunk.js",
-    "main.js.map": "/Kilo-PR/static/js/main.97a9ddaa.chunk.js.map",
+    "main.js": "/Kilo-PR/static/js/main.23bf2799.chunk.js",
+    "main.js.map": "/Kilo-PR/static/js/main.23bf2799.chunk.js.map",
     "runtime-main.js": "/Kilo-PR/static/js/runtime-main.9f01a6de.js",
     "runtime-main.js.map": "/Kilo-PR/static/js/runtime-main.9f01a6de.js.map",
     "static/css/2.1707616c.chunk.css": "/Kilo-PR/static/css/2.1707616c.chunk.css",
-    "static/js/2.d372fd89.chunk.js": "/Kilo-PR/static/js/2.d372fd89.chunk.js",
-    "static/js/2.d372fd89.chunk.js.map": "/Kilo-PR/static/js/2.d372fd89.chunk.js.map",
+    "static/js/2.05d1f01c.chunk.js": "/Kilo-PR/static/js/2.05d1f01c.chunk.js",
+    "static/js/2.05d1f01c.chunk.js.map": "/Kilo-PR/static/js/2.05d1f01c.chunk.js.map",
     "index.html": "/Kilo-PR/index.html",
     "static/css/2.1707616c.chunk.css.map": "/Kilo-PR/static/css/2.1707616c.chunk.css.map",
-    "static/js/2.d372fd89.chunk.js.LICENSE.txt": "/Kilo-PR/static/js/2.d372fd89.chunk.js.LICENSE.txt"
+    "static/js/2.05d1f01c.chunk.js.LICENSE.txt": "/Kilo-PR/static/js/2.05d1f01c.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.9f01a6de.js",
     "static/css/2.1707616c.chunk.css",
-    "static/js/2.d372fd89.chunk.js",
-    "static/js/main.97a9ddaa.chunk.js"
+    "static/js/2.05d1f01c.chunk.js",
+    "static/js/main.23bf2799.chunk.js"
   ]
 }
