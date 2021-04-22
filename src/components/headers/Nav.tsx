@@ -49,7 +49,11 @@ export const Nav = (): JSX.Element => {
   return (
     <NavBar>
       <h1>Covidinho</h1>
-      <Dropdown onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+      <Dropdown
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        onClick={handleMouseEnter}
+      >
         <IconButton>
           <AiOutlineUser size={30} color="#fff" />
         </IconButton>

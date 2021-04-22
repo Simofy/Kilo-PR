@@ -55,8 +55,9 @@ export const CustomGoogleMap = ({
                 cases={casesPerOneMillion}
                 key={countryInfo._id + Math.random() * 10}
                 countryInfo={countryInfo}
+                onClick={() => handleMarkerMouseOver(item)}
                 onMouseOver={() => handleMarkerMouseOver(item)}
-              />
+              ></CustomMarker>
             );
           })
         : [],

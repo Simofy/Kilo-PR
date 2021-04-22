@@ -16,8 +16,9 @@ import { VaccineChart } from "./VaccinesChart";
 
 export const CovidChart = (): JSX.Element => {
   const { countriesInfo } = useAppSelector((state) => state.chartData);
+  const error = useAppSelector((state) => state.loadingAndError.error);
 
-  if (countriesInfo == null || !countriesInfo.length)
+  if (error || countriesInfo == null || !countriesInfo.length)
     return (
       <NoResultsContainer>
         <h4>No results on this location, unfortunately.</h4>
@@ -36,12 +37,18 @@ export const CovidChart = (): JSX.Element => {
           </defs>
 
           <Area dataKey="Confirmed" stroke="#2451b7" fill="url(#color)" />
-          <XAxis dataKey="Date" axisLine={false} tickLine={false} />
+          <XAxis
+            dataKey="Date"
+            axisLine={false}
+            tickLine={false}
+            stroke="#fff"
+          />
           <YAxis
             dataKey="Confirmed"
             axisLine={false}
             tickLine={false}
             tickCount={10}
+            stroke="#fff"
           />
           <Tooltip />
           <CartesianGrid opacity={0.1} vertical={false} />

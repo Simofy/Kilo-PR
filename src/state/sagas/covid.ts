@@ -36,6 +36,9 @@ export function* getChartData(): Generator<unknown> {
       type: ActionTypes.GET_CHART_DATA_SUCCESS,
       payload: { modifiedChartData, vaccinesData },
     });
+    yield put({
+      type: ActionTypes.ERROR_FALSE,
+    });
   } catch {
     yield put({ type: ActionTypes.ERROR_TRUE });
     console.log("errrroooooooor");

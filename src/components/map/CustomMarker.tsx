@@ -9,13 +9,16 @@ export const CustomMarker = ({
   countryInfo,
   cases,
   onMouseOver,
+  onClick,
 }: {
   onMouseOver?: () => void;
+  onClick: () => void;
   countryInfo: { lat: number; long: number };
   cases: number;
 }): JSX.Element => {
   return (
     <Marker
+      onClick={onClick}
       onMouseOver={onMouseOver}
       position={{ lat: countryInfo.lat, lng: countryInfo.long }}
       clickable={true}
@@ -32,6 +35,6 @@ export const CustomMarker = ({
           formatMarkerSizeByCases(cases)
         ),
       }}
-    />
+    ></Marker>
   );
 };

@@ -73,7 +73,11 @@ export const CustomInfoWindow = ({
         <Box mb="0.3rem">
           <CountryInfo>
             <h5>{selected.country}</h5>
-            <img src={selected.countryInfo.flag} style={{ height: "15px" }} />
+
+            <img
+              srcSet={selected.countryInfo.flag}
+              style={{ height: "15px" }}
+            />
           </CountryInfo>
         </Box>
         <h6>Population: {selected.population}</h6>

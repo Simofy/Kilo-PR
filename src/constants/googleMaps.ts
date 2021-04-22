@@ -1,5 +1,3 @@
-import mapStyles from "../styles/mapStyles";
-
 export const libraries: any = ["places"];
 export const mapContainerStyle = {
   height: "93vh",
@@ -8,11 +6,9 @@ export const mapContainerStyle = {
 export const options: {
   disableDefaultUI: boolean;
   zoomControl: boolean;
-  styles: any;
 } = {
   disableDefaultUI: false,
   zoomControl: true,
-  styles: mapStyles,
 };
 export const center = {
   lat: 43.6532,

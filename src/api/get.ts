@@ -4,7 +4,7 @@ import { URLS } from "./constant";
 export const handleGetRequest = async <T>(url?: string): Promise<T> => {
   const response: AxiosResponse<T> = await axios({
     method: "GET",
-    url: `${URLS.PRIMARY_URL}/${url}`,
+    url: `${URLS.CORS}${URLS.PRIMARY_URL}/${url}`,
   });
 
   return response.data;
@@ -13,7 +13,7 @@ export const handleGetRequest = async <T>(url?: string): Promise<T> => {
 export const handleGetChartData = async <T>(country?: string): Promise<T> => {
   const response: AxiosResponse<T> = await axios({
     method: "GET",
-    url: `${URLS.CHART_DATA}/total/dayone/country/${country}`,
+    url: `${URLS.CORS}${URLS.CHART_DATA}/total/dayone/country/${country}`,
   });
 
   return response.data;
@@ -22,7 +22,7 @@ export const handleGetChartData = async <T>(country?: string): Promise<T> => {
 export const getVaccineDataRequest = async <T>(country: string): Promise<T> => {
   const response: AxiosResponse<T> = await axios({
     method: "GET",
-    url: `${URLS.PRIMARY_URL}/vaccine/coverage/countries/${country}?lastdays=90`,
+    url: `${URLS.CORS}${URLS.PRIMARY_URL}/vaccine/coverage/countries/${country}?lastdays=90`,
   });
 
   return response.data;

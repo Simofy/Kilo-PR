@@ -11,7 +11,6 @@ import {
   YAxis,
   Line,
 } from "recharts";
-import { IVaccinationData } from "../state/reducers/chartReducer";
 
 const VaccineChartWrapper = styled(ResponsiveContainer)`
   @media only screen and (max-width: 600px) {
@@ -56,12 +55,18 @@ export const VaccineChart = (): JSX.Element => {
           </defs>
 
           <Area dataKey="value" stroke="#2451b7" fill="url(#color)" />
-          <XAxis dataKey="date" axisLine={false} tickLine={false} />
+          <XAxis
+            dataKey="date"
+            axisLine={false}
+            tickLine={false}
+            stroke="#fff"
+          />
           <YAxis
             dataKey="Vaccinated"
             axisLine={false}
             tickLine={false}
             tickCount={10}
+            stroke="#fff"
           />
           <Tooltip />
           <CartesianGrid opacity={0.1} vertical={false} />
