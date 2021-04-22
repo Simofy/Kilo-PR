@@ -42,4 +42,12 @@ border-radius: 0.15rem;
 h3 {
     line-height: 34px;
 }
+
+.gm-style .gm-style-iw-c {
+  transform: translate(-50%, -140%)
+}
+
+.gm-style .gm-style-iw-t::after {
+  display: none;
+}
 `;

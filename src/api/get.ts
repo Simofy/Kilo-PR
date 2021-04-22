@@ -4,7 +4,7 @@ import { URLS } from "./constant";
 export const handleGetRequest = async <T>(url?: string): Promise<T> => {
   const response: AxiosResponse<T> = await axios({
     headers: {
-      require: [],
+      "X-Requested-With": "XMLHttpRequest",
     },
     method: "GET",
     url: `${URLS.CORS}${URLS.PRIMARY_URL}/${url}`,
@@ -16,8 +16,9 @@ export const handleGetRequest = async <T>(url?: string): Promise<T> => {
 export const handleGetChartData = async <T>(country?: string): Promise<T> => {
   const response: AxiosResponse<T> = await axios({
     headers: {
-      require: [],
+      "X-Requested-With": "XMLHttpRequest",
     },
+
     method: "GET",
     url: `${URLS.CORS}${URLS.CHART_DATA}/total/dayone/country/${country}`,
   });
@@ -28,8 +29,9 @@ export const handleGetChartData = async <T>(country?: string): Promise<T> => {
 export const getVaccineDataRequest = async <T>(country: string): Promise<T> => {
   const response: AxiosResponse<T> = await axios({
     headers: {
-      require: [],
+      "X-Requested-With": "XMLHttpRequest",
     },
+
     method: "GET",
     url: `${URLS.CORS}${URLS.PRIMARY_URL}/vaccine/coverage/countries/${country}?lastdays=90`,
   });
