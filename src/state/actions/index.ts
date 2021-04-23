@@ -12,7 +12,7 @@ interface GetCovidDataSuccessAction {
 
 interface GetChartCovidDataAction {
   type: ActionTypes.GET_CHART_DATA;
-  payload: string;
+  payload: any;
 }
 
 interface GetChartCovidDataSuccessAction {

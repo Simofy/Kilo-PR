@@ -9,19 +9,23 @@ export const CustomMarker = ({
   countryInfo,
   cases,
   onMouseOver,
+  onMouseOut,
   onClick,
 }: {
+  onClick: any;
+  onMouseOut?: () => void;
   onMouseOver?: () => void;
-  onClick: () => void;
   countryInfo: { lat: number; long: number };
   cases: number;
 }): JSX.Element => {
   return (
     <Marker
-      onClick={onClick}
+      animation={window.google.maps.Animation.DROP}
+      onMouseOut={onMouseOut}
       onMouseOver={onMouseOver}
       position={{ lat: countryInfo.lat, lng: countryInfo.long }}
       clickable={true}
+      onClick={onClick}
       icon={{
         url: `data:image/svg+xml,%3Csvg  viewBox='0 0 100 100' fill='${formatMarkerByCases(
           cases

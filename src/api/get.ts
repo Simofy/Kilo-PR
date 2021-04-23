@@ -1,7 +1,7 @@
 import axios, { AxiosResponse } from "axios";
 import { URLS } from "./constant";
 
-export const handleGetRequest = async <T>(url?: string): Promise<T> => {
+export const handleGetCovidData = async <T>(url?: string): Promise<T> => {
   const response: AxiosResponse<T> = await axios({
     headers: {
       "X-Requested-With": "XMLHttpRequest",

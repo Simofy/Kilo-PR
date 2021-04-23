@@ -1,28 +1,16 @@
 import React, { useCallback } from "react";
 import { InfoWindow } from "@react-google-maps/api";
 import styled from "styled-components";
-import { BsFillBarChartFill } from "react-icons/bs";
-import { IconButton } from "../buttons/IconButton";
 import { Box } from "../wrappers/Box";
-import { Tooltip } from "@material-ui/core";
-import { useDispatch } from "react-redux";
-import { ActionTypes } from "../../state/action-types";
 import { useAppSelector } from "../../hooks";
 import Loader from "react-loader-spinner";
-import { primary } from "../../styles/colors";
 import { ICovidData } from "../../types/covidTypes";
-
-const ChartIcon = styled(BsFillBarChartFill)`
-  transition: 0.2s ease;
-  &:hover {
-    color: #ddd;
-  }
-`;
+import Typography from "react-styled-typography";
 
 const CountryInfo = styled.div`
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
+  min-width: 10rem;
 `;
 
 interface ICountryDetails {
@@ -45,8 +33,7 @@ export const CustomInfoWindow = ({
   selected,
   setSelected,
 }: {
-  onMouseLeave: () => void;
-  selected: ICountryObject;
+  selected: ICountryObject | any;
   setSelected: (args: null | ICovidData) => void;
 }): JSX.Element => {
   const onCloseClick = useCallback(() => {
@@ -54,12 +41,6 @@ export const CustomInfoWindow = ({
   }, []);
 
   const { loading } = useAppSelector((state) => state.loadingAndError);
-
-  const dispatch = useDispatch();
-
-  const handleChartClick = (iso2: string) => {
-    dispatch({ type: ActionTypes.GET_CHART_DATA, payload: iso2 });
-  };
 
   return (
     <InfoWindow
@@ -73,29 +54,23 @@ export const CustomInfoWindow = ({
         <Box mb="0.3rem">
           <CountryInfo>
             <h5>{selected.country}</h5>
-
             <img
               srcSet={selected.countryInfo.flag}
               style={{ height: "15px" }}
             />
           </CountryInfo>
         </Box>
-        <h6>Population: {selected.population}</h6>
-        <h6>Total cases: {selected.cases}</h6>
-        <Box mt="0.3rem">
-          <Tooltip title="Show in chart">
-            <IconButton
-              onClick={() => handleChartClick(selected.countryInfo.iso2)}
-              aria-label="show in chart"
-            >
-              {loading ? (
-                <Loader type="Puff" width="20" height="20" color={primary} />
-              ) : (
-                <ChartIcon size={20} />
-              )}
-            </IconButton>
-          </Tooltip>
-        </Box>
+        <Typography variant="h6" marginT="10">
+          Population: {selected.population}
+        </Typography>
+        <Typography variant="h6" marginT="5" marginB="10">
+          Total cases: {selected.cases}
+        </Typography>
+        {loading ? (
+          <Loader type="Puff" width={10} height={10} color="#000" />
+        ) : (
+          ""
+        )}
       </div>
     </InfoWindow>
   );

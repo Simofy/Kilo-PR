@@ -8,7 +8,6 @@ export interface IVaccinationData {
 }
 
 interface IChartData {
-  countryCode: string;
   vaccinated: IVaccinationData[];
   countriesInfo: ICountriesInfo[];
   covidData: ICovidData[];
@@ -17,7 +16,6 @@ interface IChartData {
 const initialState: IChartData = {
   vaccinated: [],
   countriesInfo: [],
-  countryCode: "",
   covidData: [],
 };
 
@@ -26,11 +24,6 @@ export const chartReducer = (
   action: Action | any
 ): IChartData => {
   switch (action.type) {
-    case ActionTypes.GET_CHART_DATA:
-      return {
-        ...state,
-        countryCode: action.payload,
-      };
     case ActionTypes.GET_CHART_DATA_SUCCESS:
       return {
         ...state,

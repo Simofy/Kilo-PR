@@ -37,8 +37,6 @@ border-radius: 0.15rem;
 
 }
 
-
-
 h3 {
     line-height: 34px;
 }
@@ -49,5 +47,9 @@ h3 {
 
 .gm-style .gm-style-iw-t::after {
   display: none;
+}
+
+.gm-ui-hover-effect {
+  display: none !important;
 }
 `;

@@ -1,30 +1,29 @@
-import { takeEvery, call, put, all, select } from "redux-saga/effects";
+import { takeEvery, call, put, all } from "redux-saga/effects";
 import {
-  handleGetRequest,
+  handleGetCovidData,
   handleGetChartData,
   getVaccineDataRequest,
 } from "../../api/get";
 import { ActionTypes } from "../action-types";
 import { ICountriesInfo } from "../../types/covidTypes";
 
-export function* watchGetCovidInfo(): Generator<unknown> {
-  yield takeEvery(ActionTypes.GET_COVID_DATA, getCovidData);
-}
-
 export function* watchChartAction(): Generator<unknown> {
   yield takeEvery(ActionTypes.GET_CHART_DATA, getChartData);
 }
 
-export function* getChartData(): Generator<unknown> {
-  const selectCountryCode = yield select(
-    (state) => state.chartData.countryCode
-  );
+export function* watchGetCovidInfo(): Generator<unknown> {
+  yield takeEvery(ActionTypes.GET_COVID_DATA, getCovidData);
+}
 
+export function* getChartData(action: {
+  type: string;
+  payload: string;
+}): Generator<unknown> {
   try {
     yield put({ type: ActionTypes.LOADING_TRUE });
     const [vaccinesData, chartData]: any = yield all([
-      call(getVaccineDataRequest, `${selectCountryCode}`),
-      call(handleGetChartData, `${selectCountryCode}`),
+      call(getVaccineDataRequest, `${action.payload}`),
+      call(handleGetChartData, `${action.payload}`),
     ]);
     const modifiedChartData = chartData.map((item: ICountriesInfo) => {
       return {
@@ -48,7 +47,7 @@ export function* getChartData(): Generator<unknown> {
 }
 
 export function* getCovidData(): Generator<unknown> {
-  const covidData: unknown = yield call(handleGetRequest, "countries");
+  const covidData: unknown = yield call(handleGetCovidData, "countries");
 
   yield put({ type: ActionTypes.GET_COVID_DATA_SUCCESS, payload: covidData });
 }
