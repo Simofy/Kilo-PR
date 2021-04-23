@@ -20,7 +20,7 @@ export const handleGetChartData = async <T>(country?: string): Promise<T> => {
     },
 
     method: "GET",
-    url: `${URLS.CORS}${URLS.CHART_DATA}/total/dayone/country/${country}`,
+    url: `${URLS.CORS}${URLS.PRIMARY_URL}/historical/${country}?lastdays=360`,
   });
 
   return response.data;

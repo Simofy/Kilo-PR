@@ -22,12 +22,12 @@ export const CustomGoogleMap = ({
 }: {
   children: JSX.Element;
 }): JSX.Element => {
-  const covidData: ICovidData[] | any = useAppSelector(
+  const covidData: ICovidData[] = useAppSelector(
     (state) => state.chartData.covidData
   );
   const dispatch = useDispatch();
   const [selected, setSelected] = React.useState<ICovidData | null>(null);
-  const mapRef = React.useRef<any>(null);
+  const mapRef = React.useRef<React.MutableRefObject<null> | any>(null);
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_TOKEN!,
@@ -44,10 +44,10 @@ export const CustomGoogleMap = ({
 
   const panTo = useCallback(({ lat, lng }) => {
     mapRef.current?.panTo({ lat, lng });
-    mapRef.current?.setZoom(14);
+    mapRef.current?.setZoom();
   }, []);
 
-  const handleMouseClick = (e: any, item: { iso2: string }) => {
+  const handleMouseClick = (item: { iso2: string }) => {
     dispatch({ type: ActionTypes.GET_CHART_DATA, payload: item.iso2 });
   };
 
@@ -61,7 +61,7 @@ export const CustomGoogleMap = ({
                 cases={casesPerOneMillion}
                 key={countryInfo._id + Math.random() * 10}
                 countryInfo={countryInfo}
-                onClick={(e: any) => handleMouseClick(e, countryInfo)}
+                onClick={() => handleMouseClick(countryInfo)}
                 onMouseOver={() => handleMarkerMouseOver(item)}
                 onMouseOut={() => setSelected(null)}
               ></CustomMarker>

@@ -12,7 +12,7 @@ export const AuthProvider = ({
 }: {
   children: JSX.Element;
 }): JSX.Element => {
-  const [currentUser, setCurrentUser] = useState<any | null>();
+  const [currentUser, setCurrentUser] = useState<any>();
   const [loading, setLoading] = useState(true);
 
   const signup = (email: string, password: string) => {

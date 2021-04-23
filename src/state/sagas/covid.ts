@@ -25,16 +25,29 @@ export function* getChartData(action: {
       call(getVaccineDataRequest, `${action.payload}`),
       call(handleGetChartData, `${action.payload}`),
     ]);
-    const modifiedChartData = chartData.map((item: ICountriesInfo) => {
+
+    const casesToPropoObjects = Object.entries(chartData.timeline.cases).map(
+      (key) => {
+        return {
+          Date: key[0],
+          Cases: key[1],
+        };
+      }
+    );
+
+    const modifiedChartData = casesToPropoObjects.map((each, i: number) => {
       return {
-        ...item,
-        Date: new Date(item.Date).toLocaleDateString(),
+        ...each,
+        Recovered: Object.values(chartData.timeline.recovered)[i],
+        Deaths: Object.values(chartData.timeline.deaths)[i],
       };
     });
+
     yield put({
       type: ActionTypes.GET_CHART_DATA_SUCCESS,
       payload: { modifiedChartData, vaccinesData },
     });
+
     yield put({
       type: ActionTypes.ERROR_FALSE,
     });

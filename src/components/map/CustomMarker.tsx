@@ -12,7 +12,7 @@ export const CustomMarker = ({
   onMouseOut,
   onClick,
 }: {
-  onClick: any;
+  onClick: () => void;
   onMouseOut?: () => void;
   onMouseOver?: () => void;
   countryInfo: { lat: number; long: number };

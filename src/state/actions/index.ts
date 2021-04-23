@@ -1,5 +1,9 @@
 import { ActionTypes } from "../action-types";
-import { ICovidData } from "../../types/covidTypes";
+import {
+  ICovidData,
+  ICountriesInfo,
+  IVaccinationData,
+} from "../../types/covidTypes";
 
 interface GetCovidDataAction {
   type: typeof ActionTypes.GET_COVID_DATA;
@@ -7,17 +11,19 @@ interface GetCovidDataAction {
 
 interface GetCovidDataSuccessAction {
   type: typeof ActionTypes.GET_COVID_DATA_SUCCESS;
-  payload: unknown;
+  payload: ICovidData[];
 }
 
 interface GetChartCovidDataAction {
   type: ActionTypes.GET_CHART_DATA;
-  payload: any;
 }
 
 interface GetChartCovidDataSuccessAction {
   type: ActionTypes.GET_CHART_DATA_SUCCESS;
-  payload: unknown;
+  payload: {
+    modifiedChartData: ICountriesInfo[];
+    vaccinesData: IVaccinationData[];
+  };
 }
 
 interface ErrorTrueAction {

@@ -1,4 +1,4 @@
-export const libraries: any = ["places"];
+export const libraries: ["places"] = ["places"];
 export const mapContainerStyle = {
   height: "93vh",
   width: "100%",

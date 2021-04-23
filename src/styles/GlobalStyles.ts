@@ -52,4 +52,8 @@ h3 {
 .gm-ui-hover-effect {
   display: none !important;
 }
+
+::placeholder {
+  font-size: 12px;
+}
 `;

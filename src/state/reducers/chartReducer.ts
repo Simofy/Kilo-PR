@@ -1,11 +1,10 @@
 import { Action } from "../actions";
 import { ActionTypes } from "../action-types";
-import { ICountriesInfo, ICovidData } from "../../types/covidTypes";
-
-export interface IVaccinationData {
-  country: string;
-  timeline?: any;
-}
+import {
+  ICountriesInfo,
+  ICovidData,
+  IVaccinationData,
+} from "../../types/covidTypes";
 
 interface IChartData {
   vaccinated: IVaccinationData[];
@@ -21,7 +20,7 @@ const initialState: IChartData = {
 
 export const chartReducer = (
   state = initialState,
-  action: Action | any
+  action: Action
 ): IChartData => {
   switch (action.type) {
     case ActionTypes.GET_CHART_DATA_SUCCESS:

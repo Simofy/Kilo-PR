@@ -10,6 +10,7 @@ interface IBox {
   mr?: string;
   mb?: string;
   ml?: string;
+  width?: string;
 }
 
 export const Box = styled.div<IBox>`
@@ -22,4 +23,5 @@ export const Box = styled.div<IBox>`
   margin-right: ${({ mr }) => `${mr}`};
   margin-bottom: ${({ mb }) => `${mb}`};
   margin-left: ${({ ml }) => `${ml}`};
+  width: ${({ width }) => `${width}`};
 `;

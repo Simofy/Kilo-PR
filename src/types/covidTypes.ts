@@ -37,3 +37,8 @@ export interface ICovidData {
   recoveredPerOneMillion: number;
   criticalPerOneMillion: number;
 }
+
+export interface IVaccinationData {
+  country: string;
+  timeline?: any;
+}

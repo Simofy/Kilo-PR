@@ -33,7 +33,7 @@ export const CustomInfoWindow = ({
   selected,
   setSelected,
 }: {
-  selected: ICountryObject | any;
+  selected: ICountryObject;
   setSelected: (args: null | ICovidData) => void;
 }): JSX.Element => {
   const onCloseClick = useCallback(() => {

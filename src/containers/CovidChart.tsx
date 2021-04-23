@@ -18,10 +18,12 @@ export const CovidChart = (): JSX.Element => {
   const { countriesInfo } = useAppSelector((state) => state.chartData);
   const error = useAppSelector((state) => state.loadingAndError.error);
 
-  if (error || countriesInfo == null || !countriesInfo.length)
+  console.log(countriesInfo);
+
+  if (error || !countriesInfo.length)
     return (
       <NoResultsContainer>
-        <h4>No results on this location, unfortunately.</h4>
+        No data available on this destination, unfortunately.
       </NoResultsContainer>
     );
 
@@ -36,7 +38,7 @@ export const CovidChart = (): JSX.Element => {
             </linearGradient>
           </defs>
 
-          <Area dataKey="Confirmed" stroke="#2451b7" fill="url(#color)" />
+          <Area dataKey="Cases" stroke="#2451b7" fill="url(#color)" />
           <XAxis
             dataKey="Date"
             axisLine={false}
@@ -44,7 +46,7 @@ export const CovidChart = (): JSX.Element => {
             stroke="#fff"
           />
           <YAxis
-            dataKey="Confirmed"
+            dataKey="Cases"
             axisLine={false}
             tickLine={false}
             tickCount={10}
@@ -54,16 +56,11 @@ export const CovidChart = (): JSX.Element => {
           <CartesianGrid opacity={0.1} vertical={false} />
           <Line
             type="monotone"
-            dataKey="Confirmed"
+            dataKey="Cases"
             stroke="#2451b7"
             fill="url(#color)"
           />
-          <Line
-            type="monotone"
-            dataKey="Active"
-            stroke="#2451b7"
-            fill="url(#color)"
-          />
+
           <Line type="monotone" dataKey="Recovered" stroke="green" />
           <Line type="monotone" dataKey="Deaths" stroke="#d12b28" />
         </LineChart>

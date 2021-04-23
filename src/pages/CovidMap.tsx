@@ -17,7 +17,9 @@ export const CovidMap = (): JSX.Element => {
     <>
       <Nav />
       <CustomGoogleMap>
-        <CovidChart />
+        <>
+          <CovidChart />
+        </>
       </CustomGoogleMap>
     </>
   );

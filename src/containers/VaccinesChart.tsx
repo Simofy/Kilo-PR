@@ -11,6 +11,7 @@ import {
   YAxis,
   Line,
 } from "recharts";
+import { IVaccinationData } from "../types/covidTypes";
 
 const VaccineChartWrapper = styled(ResponsiveContainer)`
   @media only screen and (max-width: 600px) {
@@ -19,14 +20,14 @@ const VaccineChartWrapper = styled(ResponsiveContainer)`
 `;
 
 export const VaccineChart = (): JSX.Element => {
-  const vaccineData: any = useAppSelector(
+  const vaccineData: IVaccinationData[] | any = useAppSelector(
     (state) => state.chartData.vaccinated
   );
 
-  const [data, setData] = useState();
+  const [data, setData] = useState<{ date: string; Vaccinated: unknown }[]>();
 
   const formatVaccineData = () => {
-    const formattedData: any = [];
+    const formattedData: { date: string; Vaccinated: unknown }[] = [];
     if (vaccineData.timeline) {
       Object.entries(vaccineData.timeline).map((key) => {
         formattedData.push({
