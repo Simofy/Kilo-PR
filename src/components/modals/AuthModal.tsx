@@ -18,11 +18,7 @@ const Modal = styled.div`
   justify-content: center;
 `;
 
-export const AuthModal = ({
-  children,
-}: {
-  children?: JSX.Element;
-}): JSX.Element => {
+export const AuthModal = (): JSX.Element => {
   return (
     <Modal>
       <form>

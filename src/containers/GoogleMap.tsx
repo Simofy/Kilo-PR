@@ -44,7 +44,7 @@ export const CustomGoogleMap = ({
 
   const panTo = useCallback(({ lat, lng }) => {
     mapRef.current?.panTo({ lat, lng });
-    mapRef.current?.setZoom();
+    mapRef.current?.setZoom(8);
   }, []);
 
   const handleMouseClick = (item: { iso2: string }) => {

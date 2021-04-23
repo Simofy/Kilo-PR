@@ -42,6 +42,11 @@ interface LoadingFalseAction {
   type: ActionTypes.LOADING_FALSE;
 }
 
+interface SetCountryAction {
+  type: ActionTypes.SET_COUNTRY;
+  payload: string;
+}
+
 export type Action =
   | GetCovidDataAction
   | GetCovidDataSuccessAction

@@ -10,4 +10,6 @@ export enum ActionTypes {
 
   ERROR_TRUE = "ERROR_TRUE",
   ERROR_FALSE = "ERROR_FALSE",
+
+  SET_COUNTRY = "SET_COUNTRY",
 }

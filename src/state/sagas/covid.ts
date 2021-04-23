@@ -40,6 +40,7 @@ export function* getChartData(action: {
         ...each,
         Recovered: Object.values(chartData.timeline.recovered)[i],
         Deaths: Object.values(chartData.timeline.deaths)[i],
+        country: chartData.country,
       };
     });
 
