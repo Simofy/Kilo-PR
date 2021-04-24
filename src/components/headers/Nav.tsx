@@ -17,7 +17,12 @@ const NavBar = styled.header`
   padding: 1rem;
   align-items: center;
   justify-content: space-between;
-  background-color: ${primary};
+  background: linear-gradient(
+    180deg,
+    rgba(246, 245, 240, 0.0617822128851541) 0%,
+    rgba(21, 21, 21, 0.7035189075630253) 0%,
+    rgba(21, 21, 21, 1) 100%
+  );
   box-shadow: 30px 0rem 50px #000;
   color: #fff;
 `;
