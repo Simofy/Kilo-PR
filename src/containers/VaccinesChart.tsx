@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useAppSelector } from "../hooks";
-import styled from "styled-components";
 import {
   ResponsiveContainer,
   XAxis,
@@ -12,12 +11,6 @@ import {
   Line,
 } from "recharts";
 import { IVaccinationData } from "../types/covidTypes";
-
-const VaccineChartWrapper = styled(ResponsiveContainer)`
-  @media only screen and (max-width: 600px) {
-    display: none;
-  }
-`;
 
 export const VaccineChart = (): JSX.Element => {
   const vaccineData: IVaccinationData[] | any = useAppSelector(
@@ -40,45 +33,39 @@ export const VaccineChart = (): JSX.Element => {
     return setData(formattedData);
   };
 
+  console.log(data);
+
   useEffect(() => {
     formatVaccineData();
   }, [vaccineData]);
 
   return (
-    <>
-      <VaccineChartWrapper minWidth={300} height={175}>
-        <LineChart data={data && data}>
-          <defs>
-            <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#2451b7" strokeOpacity={0.4} />
-              <stop offset="75%" stopColor="#2451b7" stopOpacity={0.05} />
-            </linearGradient>
-          </defs>
-
-          <Area dataKey="value" stroke="#2451b7" fill="url(#color)" />
-          <XAxis
-            dataKey="date"
-            axisLine={false}
-            tickLine={false}
-            stroke="#fff"
-          />
-          <YAxis
-            dataKey="Vaccinated"
-            axisLine={false}
-            tickLine={false}
-            tickCount={10}
-            stroke="#fff"
-          />
-          <Tooltip />
-          <CartesianGrid opacity={0.1} vertical={false} />
-          <Line
-            type="monotone"
-            dataKey="Vaccinated"
-            stroke="#2451b7"
-            fill="url(#color)"
-          />
-        </LineChart>
-      </VaccineChartWrapper>
-    </>
+    <ResponsiveContainer minHeight={175} minWidth={300}>
+      <LineChart data={data}>
+        <defs>
+          <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#2451b7" strokeOpacity={0.4} />
+            <stop offset="75%" stopColor="#2451b7" stopOpacity={0.05} />
+          </linearGradient>
+        </defs>
+        <Area dataKey="" stroke="#2451b7" fill="url(#color)" />
+        <XAxis dataKey="date" axisLine={false} tickLine={false} stroke="#fff" />
+        <YAxis
+          dataKey="Vaccinated"
+          axisLine={false}
+          tickLine={false}
+          tickCount={10}
+          stroke="#fff"
+        />
+        <Tooltip />
+        <CartesianGrid opacity={0.1} vertical={false} />
+        <Line
+          type="monotone"
+          dataKey="Vaccinated"
+          stroke="#2451b7"
+          fill="url(#color)"
+        />{" "}
+      </LineChart>
+    </ResponsiveContainer>
   );
 };
