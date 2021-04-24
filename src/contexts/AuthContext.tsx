@@ -1,5 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import { auth } from "../config/firebase";
+import { postLocationToFirestore } from "../helpers/firestore";
+import { formatLocation } from "../helpers/formatLocation";
+import Geocode from "react-geocode";
+import { ActionTypes } from "../state/action-types";
+import { useDispatch } from "react-redux";
 
 const AuthContext = React.createContext<any>(null);
 
@@ -14,6 +19,8 @@ export const AuthProvider = ({
 }): JSX.Element => {
   const [currentUser, setCurrentUser] = useState<any>();
   const [loading, setLoading] = useState(true);
+
+  const dispatch = useDispatch();
 
   const signup = (email: string, password: string) => {
     return auth.createUserWithEmailAndPassword(email, password);
@@ -35,6 +42,35 @@ export const AuthProvider = ({
 
     return unsubscribe;
   }, []);
+
+  useEffect((): any => {
+    if (currentUser && "geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(function ({
+        coords: { latitude, longitude },
+      }) {
+        Geocode.fromLatLng(latitude.toString(), longitude.toString()).then(
+          (response) => {
+            const address = formatLocation(response);
+            dispatch({
+              type: ActionTypes.GET_CHART_DATA,
+              payload: address.countryCode,
+            });
+            postLocationToFirestore(
+              address.country,
+              address.countryCode,
+              latitude,
+              longitude,
+              currentUser.uid
+            );
+          },
+          (error) => {
+            console.error(error);
+          }
+        );
+      });
+    }
+    return dispatch({ type: ActionTypes.GET_CHART_DATA, payload: "LT" });
+  }, [currentUser]);
 
   const value = {
     currentUser,
