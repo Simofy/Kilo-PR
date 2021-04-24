@@ -8,6 +8,7 @@ export const ProfilePopup = styled.div<IProfilePopup>`
   position: absolute;
   right: 0;
   top: 0;
+  bottom: 0;
   min-height: 100px;
   min-width: 140px;
   padding: 0.5rem;
@@ -18,7 +19,7 @@ export const ProfilePopup = styled.div<IProfilePopup>`
   background: #ffff;
   border-radius: 0.2rem;
   color: #000;
-  transform: translateY(25%);
+  transform: translateY(35%);
   transition: 0.3s ease-in-out;
   opacity: 0;
   z-index: -1;
