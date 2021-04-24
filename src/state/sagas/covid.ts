@@ -5,7 +5,6 @@ import {
   getVaccineDataRequest,
 } from "../../api/get";
 import { ActionTypes } from "../action-types";
-import { ICountriesInfo } from "../../types/covidTypes";
 
 export function* watchChartAction(): Generator<unknown> {
   yield takeEvery(ActionTypes.GET_CHART_DATA, getChartData);
@@ -62,7 +61,11 @@ export function* getChartData(action: {
 
 export function* getCovidData(): Generator<unknown> {
   const covidData: unknown = yield call(handleGetCovidData, "countries");
+  console.log(covidData);
 
+  const globalCases = yield call(handleGetCovidData, "all");
+
+  yield put({ type: ActionTypes.SET_GLOBAL_CASES, payload: globalCases });
   yield put({ type: ActionTypes.GET_COVID_DATA_SUCCESS, payload: covidData });
 }
 

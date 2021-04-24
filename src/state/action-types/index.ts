@@ -12,4 +12,6 @@ export enum ActionTypes {
   ERROR_FALSE = "ERROR_FALSE",
 
   SET_COUNTRY = "SET_COUNTRY",
+
+  SET_GLOBAL_CASES = "SET_GLOBAL_CASES",
 }

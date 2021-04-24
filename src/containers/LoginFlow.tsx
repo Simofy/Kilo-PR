@@ -74,9 +74,6 @@ export const LoginFlow = (): JSX.Element => {
               "Sign in"
             )}
           </Button>
-          <Button type="submit" disabled={loading}>
-            Continue as guest
-          </Button>
         </ButtonGroup>
       </form>
     </StyledForm>

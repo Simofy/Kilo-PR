@@ -47,6 +47,11 @@ interface SetCountryAction {
   payload: string;
 }
 
+interface SetGlobalCasesAction {
+  type: ActionTypes.SET_GLOBAL_CASES;
+  payload: unknown;
+}
+
 export type Action =
   | GetCovidDataAction
   | GetCovidDataSuccessAction
@@ -55,4 +60,6 @@ export type Action =
   | ErrorTrueAction
   | ErrorFalseAction
   | LoadingTrueAction
-  | LoadingFalseAction;
+  | LoadingFalseAction
+  | SetCountryAction
+  | SetGlobalCasesAction;

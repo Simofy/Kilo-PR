@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from "react";
 import styled from "styled-components";
-import { primary } from "../../styles/colors";
 import { SimpleButton } from "../buttons/SimpleButton";
 import { useAuth } from "../../contexts/AuthContext";
 import Typography from "react-styled-typography";
@@ -9,6 +8,7 @@ import { useHistory } from "react-router-dom";
 import { IconButton } from "../buttons/IconButton";
 import { ProfilePopup } from "../profile/ProfilePopup";
 import { Dropdown } from "../others/Dropdown";
+import { useAppSelector } from "../../hooks";
 
 const NavBar = styled.header`
   display: flex;
@@ -17,19 +17,35 @@ const NavBar = styled.header`
   padding: 1rem;
   align-items: center;
   justify-content: space-between;
-  background: linear-gradient(
-    180deg,
-    rgba(246, 245, 240, 0.0617822128851541) 0%,
-    rgba(21, 21, 21, 0.7035189075630253) 0%,
-    rgba(21, 21, 21, 1) 100%
-  );
+  background: #000;
+
   box-shadow: 30px 0rem 50px #000;
   color: #fff;
 `;
 
+const GlobalCases = styled.div`
+  display: flex;
+  background: #000;
+  min-height: 100%;
+  color: #fff;
+  border: 1px solid #fff;
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
+`;
+
+const GlobalCasesContent = styled.div`
+  padding: 1rem;
+`;
+
+const nf = Intl.NumberFormat();
+
 export const Nav = (): JSX.Element => {
   const [error, setError] = useState("");
   const { logout, currentUser } = useAuth();
+  const { deaths, cases }: any = useAppSelector(
+    (state) => state.chartData.globalCases
+  );
   const [popupActive, setPopUpActive] = useState(false);
   const history = useHistory();
 
@@ -54,6 +70,25 @@ export const Nav = (): JSX.Element => {
   return (
     <NavBar>
       <h1>Covidinho</h1>
+      <GlobalCases>
+        <GlobalCasesContent>
+          <Typography variant="p" align="center">
+            Global cases
+          </Typography>
+          <Typography variant="h2" color="red">
+            {cases ? nf.format(cases) : ""}
+          </Typography>
+        </GlobalCasesContent>
+        <GlobalCasesContent>
+          <Typography variant="p" align="center">
+            Deaths
+          </Typography>
+          <Typography variant="h2" color="red">
+            {deaths ? nf.format(deaths) : ""}
+          </Typography>
+        </GlobalCasesContent>
+      </GlobalCases>
+
       <Dropdown
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
@@ -71,5 +106,3 @@ export const Nav = (): JSX.Element => {
     </NavBar>
   );
 };
-
-//          <SimpleButton>Change password</SimpleButton>

@@ -31,15 +31,10 @@ interface ICountryObject {
 
 export const CustomInfoWindow = ({
   selected,
-  setSelected,
 }: {
   selected: ICountryObject;
   setSelected: (args: null | ICovidData) => void;
 }): JSX.Element => {
-  const onCloseClick = useCallback(() => {
-    setSelected(null);
-  }, []);
-
   const { loading } = useAppSelector((state) => state.loadingAndError);
 
   return (
@@ -48,7 +43,6 @@ export const CustomInfoWindow = ({
         lat: selected.countryInfo.lat,
         lng: selected.countryInfo.long,
       }}
-      onCloseClick={onCloseClick}
     >
       <div>
         <Box mb="0.3rem">

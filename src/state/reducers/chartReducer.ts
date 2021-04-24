@@ -11,6 +11,7 @@ interface IChartData {
   countriesInfo: ICountriesInfo[];
   covidData: ICovidData[];
   countryCode: string;
+  globalCases: unknown;
 }
 
 const initialState: IChartData = {
@@ -18,13 +19,19 @@ const initialState: IChartData = {
   countriesInfo: [],
   covidData: [],
   countryCode: "",
+  globalCases: [],
 };
 
 export const chartReducer = (
   state = initialState,
-  action: Action | any
+  action: Action
 ): IChartData => {
   switch (action.type) {
+    case ActionTypes.SET_GLOBAL_CASES:
+      return {
+        ...state,
+        globalCases: action.payload,
+      };
     case ActionTypes.SET_COUNTRY:
       return {
         ...state,

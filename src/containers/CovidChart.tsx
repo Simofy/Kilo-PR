@@ -43,6 +43,8 @@ export const CovidChart = (): JSX.Element => {
       </NoResultsContainer>
     );
 
+  console.log(countriesInfo);
+
   return (
     <Footer>
       <Typography variant="h1" color="#fff" marginB="15" align="right">

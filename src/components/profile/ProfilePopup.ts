@@ -6,20 +6,18 @@ interface IProfilePopup {
 
 export const ProfilePopup = styled.div<IProfilePopup>`
   position: absolute;
-  bottom: 0;
   right: 0;
   top: 0;
-  min-height: 150px;
-  min-width: 200px;
+  min-height: 100px;
+  min-width: 140px;
+  padding: 0.5rem;
+
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-around;
   background: #ffff;
-  border-radius: 0.5rem;
+  border-radius: 0.2rem;
   color: #000;
-  padding: 0.5rem 1rem;
-  gap: 1rem;
   transform: translateY(25%);
   transition: 0.3s ease-in-out;
   opacity: 0;
