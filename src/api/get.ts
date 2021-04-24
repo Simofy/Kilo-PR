@@ -7,7 +7,7 @@ export const handleGetCovidData = async <T>(url?: string): Promise<T> => {
       "X-Requested-With": "XMLHttpRequest",
     },
     method: "GET",
-    url: `${URLS.PRIMARY_URL}/${url}`,
+    url: `${URLS.PRIMARY_API}/${url}`,
   });
 
   return response.data;
@@ -20,7 +20,7 @@ export const handleGetChartData = async <T>(country?: string): Promise<T> => {
     },
 
     method: "GET",
-    url: `${URLS.PRIMARY_URL}/historical/${country}?lastdays=360`,
+    url: `${URLS.PRIMARY_API}/historical/${country}?lastdays=360`,
   });
 
   return response.data;
@@ -33,7 +33,7 @@ export const getVaccineDataRequest = async <T>(country: string): Promise<T> => {
     },
 
     method: "GET",
-    url: `${URLS.PRIMARY_URL}/vaccine/coverage/countries/${country}?lastdays=90`,
+    url: `${URLS.PRIMARY_API}/vaccine/coverage/countries/${country}?lastdays=90`,
   });
 
   return response.data;
