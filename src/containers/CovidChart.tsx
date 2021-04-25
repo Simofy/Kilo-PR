@@ -50,6 +50,11 @@ export const CovidChart = (): JSX.Element => {
   const { countriesInfo }: { countriesInfo: ICountriesInfo[] } = useAppSelector(
     (state) => state.chartData
   );
+
+  const kaz: any = useAppSelector((state) => state.chartData.covidData);
+
+  console.log(kaz);
+
   const { error } = useAppSelector((state) => state.loadingAndError);
 
   if (error || !countriesInfo.length)
