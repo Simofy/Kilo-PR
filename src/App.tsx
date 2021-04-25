@@ -12,6 +12,7 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
 import { SignUpFlow } from "./containers/SignUpFlow";
 import { useAuth } from "./contexts/AuthContext";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
+import { Table } from "./components/tables/Table";
 
 const PrivateRoute = ({
   children,
@@ -29,6 +30,7 @@ export const App = (): JSX.Element => {
       <Route path="/" component={Home} exact />
       <PrivateRoute path="/covidmap" component={CovidMap} exact />
       <Route path="/signup" component={SignUpFlow} exact />
+      <Route path="/table" component={Table} exact />
     </Router>
   );
 };

@@ -5,3 +5,4 @@ declare module "date-fns";
 declare module "@reach/combobox";
 declare module "*.svg";
 declare module "react-styled-typography";
+declare module "react-uuid";

@@ -47,8 +47,6 @@ export const Nav = (): JSX.Element => {
     (state) => state.chartData.globalCases
   );
 
-  console.log(cases, deaths);
-
   const [popupActive, setPopUpActive] = useState(false);
   const history = useHistory();
 
