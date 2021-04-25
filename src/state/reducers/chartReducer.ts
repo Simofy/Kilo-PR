@@ -7,19 +7,19 @@ import {
 } from "../../types/covidTypes";
 
 interface IChartData {
-  vaccinated: IVaccinationData[];
+  vaccinated: IVaccinationData;
   countriesInfo: ICountriesInfo[];
   covidData: ICovidData[];
   countryCode: string;
-  globalCases: unknown;
+  globalCases: ICovidData | "";
 }
 
 const initialState: IChartData = {
-  vaccinated: [],
+  vaccinated: { country: "", timeline: "" },
   countriesInfo: [],
   covidData: [],
   countryCode: "",
-  globalCases: [],
+  globalCases: "",
 };
 
 export const chartReducer = (

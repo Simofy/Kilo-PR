@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useMemo } from "react";
 import { GoogleMap, useLoadScript } from "@react-google-maps/api";
 import { useAppSelector } from "../hooks";
 import { CustomMarker } from "../components/map/CustomMarker";
@@ -27,14 +27,14 @@ export const CustomGoogleMap = ({
   );
   const dispatch = useDispatch();
   const [selected, setSelected] = React.useState<ICovidData | null>(null);
-  const mapRef = React.useRef<React.MutableRefObject<null> | any>(null);
+  const mapRef: any = React.useRef(null);
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_TOKEN!,
     libraries,
   });
 
-  const onMapLoad = useCallback((map) => {
+  const onMapLoad = useCallback((map: google.maps.Map) => {
     mapRef.current = map;
   }, []);
 

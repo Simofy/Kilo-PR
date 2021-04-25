@@ -22,7 +22,7 @@ interface GetChartCovidDataSuccessAction {
   type: ActionTypes.GET_CHART_DATA_SUCCESS;
   payload: {
     modifiedChartData: ICountriesInfo[];
-    vaccinesData: IVaccinationData[];
+    vaccinesData: IVaccinationData;
   };
 }
 
@@ -49,7 +49,7 @@ interface SetCountryAction {
 
 interface SetGlobalCasesAction {
   type: ActionTypes.SET_GLOBAL_CASES;
-  payload: unknown;
+  payload: ICovidData;
 }
 
 export type Action =

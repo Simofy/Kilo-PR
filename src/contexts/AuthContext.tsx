@@ -1,10 +1,10 @@
-import React, { useContext, useState, useEffect } from "react";
-import { auth } from "../config/firebase";
+import React, { useContext, useState, useEffect, SetStateAction } from "react";
 import { postLocationToFirestore } from "../helpers/firestore";
 import { formatLocation } from "../helpers/formatLocation";
 import Geocode from "react-geocode";
 import { ActionTypes } from "../state/action-types";
 import { useDispatch } from "react-redux";
+import { auth } from "../config/firebase";
 
 const AuthContext = React.createContext<any>(null);
 
@@ -36,7 +36,7 @@ export const AuthProvider = ({
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      setCurrentUser(user);
+      setCurrentUser(user?.uid);
       setLoading(false);
     });
 

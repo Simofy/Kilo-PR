@@ -1,5 +1,5 @@
 export interface ICountriesInfo {
-  Country: string;
+  country: string;
   Confirmed: number;
   Deaths: number;
   Recovered: number;
@@ -40,5 +40,5 @@ export interface ICovidData {
 
 export interface IVaccinationData {
   country: string;
-  timeline?: any;
+  timeline: any;
 }

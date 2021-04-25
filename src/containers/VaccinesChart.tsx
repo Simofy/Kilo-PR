@@ -13,9 +13,11 @@ import {
 import { IVaccinationData } from "../types/covidTypes";
 
 export const VaccineChart = (): JSX.Element => {
-  const vaccineData: IVaccinationData[] | any = useAppSelector(
+  const vaccineData: IVaccinationData = useAppSelector(
     (state) => state.chartData.vaccinated
   );
+
+  console.log(vaccineData);
 
   const [data, setData] = useState<{ date: string; Vaccinated: unknown }[]>();
 

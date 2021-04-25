@@ -43,9 +43,10 @@ const nf = Intl.NumberFormat();
 export const Nav = (): JSX.Element => {
   const [error, setError] = useState("");
   const { logout, currentUser } = useAuth();
-  const { deaths, cases }: any = useAppSelector(
+  const { cases, deaths }: any = useAppSelector(
     (state) => state.chartData.globalCases
   );
+
   const [popupActive, setPopUpActive] = useState(false);
   const history = useHistory();
 

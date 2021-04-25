@@ -15,6 +15,7 @@ import { ChartsWrapper } from "../components/wrappers/ChartWrapper";
 import { VaccineChart } from "./VaccinesChart";
 import styled from "styled-components";
 import Typography from "react-styled-typography";
+import { ICountriesInfo } from "../types/covidTypes";
 
 const Footer = styled.footer`
   width: 100vw;
@@ -46,7 +47,9 @@ const ChartDescription = styled.div`
 `;
 
 export const CovidChart = (): JSX.Element => {
-  const { countriesInfo }: any = useAppSelector((state) => state.chartData);
+  const { countriesInfo }: { countriesInfo: ICountriesInfo[] } = useAppSelector(
+    (state) => state.chartData
+  );
   const { error } = useAppSelector((state) => state.loadingAndError);
 
   if (error || !countriesInfo.length)
