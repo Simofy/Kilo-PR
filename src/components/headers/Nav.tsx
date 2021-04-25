@@ -69,7 +69,7 @@ export const Nav = (): JSX.Element => {
 
   return (
     <NavBar>
-      <h1>Covidinho</h1>
+      <h1>C19</h1>
       <GlobalCases>
         <GlobalCasesContent>
           <Typography variant="p" align="center">

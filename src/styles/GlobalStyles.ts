@@ -54,4 +54,10 @@ h3 {
 ::placeholder {
   font-size: 12px;
 }
+
+.vaccine-chart {
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
+}
 `;

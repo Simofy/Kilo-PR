@@ -33,14 +33,16 @@ export const VaccineChart = (): JSX.Element => {
     return setData(formattedData);
   };
 
-  console.log(data);
-
   useEffect(() => {
     formatVaccineData();
   }, [vaccineData]);
 
   return (
-    <ResponsiveContainer minHeight={175} minWidth={300}>
+    <ResponsiveContainer
+      className="custom-chart vaccine-chart"
+      minHeight={175}
+      minWidth={300}
+    >
       <LineChart data={data}>
         <defs>
           <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">

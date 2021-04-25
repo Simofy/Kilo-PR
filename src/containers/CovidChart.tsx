@@ -32,6 +32,19 @@ const Footer = styled.footer`
   box-shadow: 0rem 0rem 15em 0.2em #fff;
 `;
 
+const ChartsDescriptionWrapper = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 1rem;
+  color: #ddd;
+`;
+const ChartDescription = styled.div`
+  @media only screen and (max-width: 600px) {
+    display: none;
+  }
+`;
+
 export const CovidChart = (): JSX.Element => {
   const { countriesInfo }: any = useAppSelector((state) => state.chartData);
   const { error } = useAppSelector((state) => state.loadingAndError);
@@ -48,8 +61,19 @@ export const CovidChart = (): JSX.Element => {
       <Typography variant="h1" color="#fff" marginB="15" align="right">
         {countriesInfo.length && countriesInfo[0].country}
       </Typography>
+      <ChartsDescriptionWrapper>
+        <Typography variant="h4">Total cases/deaths/recovered</Typography>
+
+        <ChartDescription>
+          <Typography variant="h4">Total vaccinated</Typography>
+        </ChartDescription>
+      </ChartsDescriptionWrapper>
       <ChartsWrapper>
-        <ResponsiveContainer minWidth={300} height={175}>
+        <ResponsiveContainer
+          className="custom-chart covid-chart"
+          minWidth={300}
+          height={175}
+        >
           <LineChart data={countriesInfo && countriesInfo}>
             <defs>
               <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
