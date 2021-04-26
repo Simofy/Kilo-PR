@@ -10,6 +10,7 @@ export interface ICountriesInfo {
 export interface ICovidData {
   updated: number;
   country: string;
+  tests: number;
   countryInfo: {
     _id: number;
     iso2: string;
