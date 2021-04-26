@@ -43,8 +43,11 @@ const ChartsDescriptionWrapper = styled.div`
   align-items: center;
   margin-bottom: 1rem;
   color: #ddd;
+  @media only screen and (max-width: 600px) {
+    display: block;
+  }
 `;
-const ChartDescription = styled.div`
+export const HideOnMobile = styled.div`
   @media only screen and (max-width: 600px) {
     display: none;
   }
@@ -84,7 +87,9 @@ export const CovidChart = (): JSX.Element => {
         {countriesInfo.length && countriesInfo[0].country}
       </Typography>
       <ChartsDescriptionWrapper>
-        <Typography variant="h4">Total cases/deaths/recovered</Typography>
+        <Typography variant="h4" marginB="10">
+          Total cases/deaths/recovered
+        </Typography>
         <Box width="300px">
           <Select placeholder="Control chart" onChange={onChartPeriodChange}>
             <option value="360">Control chart</option>{" "}
@@ -93,7 +98,11 @@ export const CovidChart = (): JSX.Element => {
             <option value="60">60 days</option>
           </Select>
         </Box>
-        <Typography variant="h4">Total vaccinated</Typography>
+        <HideOnMobile>
+          <Typography variant="h4" marginB="10">
+            Total vaccinated
+          </Typography>
+        </HideOnMobile>
       </ChartsDescriptionWrapper>
       <ChartsWrapper>
         {" "}

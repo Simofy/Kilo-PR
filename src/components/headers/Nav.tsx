@@ -103,7 +103,9 @@ export const Nav = (): JSX.Element => {
           </GlobalCasesContent>
         </GlobalCasesContentWrapper>
         <Box pl="0.5rem" pb="0.5rem">
-          <SimpleButton onClick={toggleModal}>Show all countries</SimpleButton>
+          <SimpleButton color="#fff" onClick={toggleModal}>
+            Show all countries
+          </SimpleButton>
         </Box>
       </GlobalCases>
 

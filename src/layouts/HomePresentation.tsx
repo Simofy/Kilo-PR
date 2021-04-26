@@ -10,7 +10,7 @@ export const HomePresentation = styled.div`
   color: #fff;
   background: ${primary};
   width: 50%;
-  @media only screen and (max-width: 900px) {
+  @media only screen and (max-width: 1000px) {
     display: none;
   }
 `;

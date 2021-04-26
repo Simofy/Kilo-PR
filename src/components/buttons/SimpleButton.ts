@@ -3,11 +3,10 @@ import styled from "styled-components";
 export const SimpleButton = styled.button`
   background: none;
   border: none;
-  color: #000;
+  color: ${({ color }) => (color ? color : "#000")};
   cursor: pointer;
-  color: #fff;
   transition: all 0.3s ease;
-  font-size: 12px;
+  font-size: 10px;
   &:hover {
     color: #ddd;
   }

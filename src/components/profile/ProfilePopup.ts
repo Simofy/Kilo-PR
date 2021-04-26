@@ -23,6 +23,7 @@ export const ProfilePopup = styled.div<IProfilePopup>`
   transition: 0.3s ease-in-out;
   opacity: 0;
   z-index: -1;
+  font-size: 16px;
   ${({ driveIn }) =>
     driveIn &&
     css`

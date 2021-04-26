@@ -8,7 +8,6 @@ export const Select = styled.select`
   padding-left: 5px;
   font-size: 14px;
   border: none;
-  margin-left: 10px;
 
   option {
     color: black;
