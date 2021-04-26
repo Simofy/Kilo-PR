@@ -12,6 +12,8 @@ import { useAppSelector } from "../../hooks";
 import { Box } from "../wrappers/Box";
 import { useDispatch } from "react-redux";
 import { ActionTypes } from "../../state/action-types";
+import Loader from "react-loader-spinner";
+import AnimatedNumber from "react-animated-numbers";
 
 const NavBar = styled.header`
   display: flex;
@@ -76,6 +78,28 @@ export const Nav = (): JSX.Element => {
     }
   };
 
+  const animatedDeaths = (
+    <AnimatedNumber
+      animateToNumber={deaths}
+      includeComma
+      config={{ tension: 89, friction: 40 }}
+      onStart={() => console.log("onStart")}
+      onFinish={() => console.log("onFinish")}
+      animationType={"calm"}
+    />
+  );
+
+  const animatedCases = (
+    <AnimatedNumber
+      animateToNumber={cases}
+      includeComma
+      config={{ tension: 89, friction: 40 }}
+      onStart={() => console.log("onStart")}
+      onFinish={() => console.log("onFinish")}
+      animationType={"calm"}
+    />
+  );
+
   const toggleModal = useCallback(() => {
     dispatch({ type: ActionTypes.TOGGLE_MODAL });
   }, []);
@@ -90,7 +114,11 @@ export const Nav = (): JSX.Element => {
               Global cases
             </Typography>
             <Typography variant="h2" color="red">
-              {cases ? nf.format(cases) : ""}
+              {cases ? (
+                animatedCases
+              ) : (
+                <Loader type="Puff" width={10} height={10} color="#fff" />
+              )}
             </Typography>
           </GlobalCasesContent>
           <GlobalCasesContent>
@@ -98,7 +126,11 @@ export const Nav = (): JSX.Element => {
               Deaths
             </Typography>
             <Typography variant="h2" color="red">
-              {deaths ? nf.format(deaths) : ""}
+              {deaths ? (
+                animatedDeaths
+              ) : (
+                <Loader type="Puff" width={10} height={10} color="#fff" />
+              )}
             </Typography>
           </GlobalCasesContent>
         </GlobalCasesContentWrapper>
