@@ -24,8 +24,6 @@ export const GoogleMapsSearch = ({
     clearSuggestions,
   } = usePlacesAutocomplete();
 
-  // https://developers.google.com/maps/documentation/javascript/reference/places-autocomplete-service#AutocompletionRequest
-
   const handleInput = (e: { target: { value: string } }) => {
     setValue(e.target.value);
   };

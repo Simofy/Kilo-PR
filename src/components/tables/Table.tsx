@@ -9,6 +9,7 @@ import { Input } from "../inputs/Input";
 import { Box } from "../wrappers/Box";
 import { ButtonGroup } from "../buttons/ButtonGroup";
 import { Button } from "../buttons/Button";
+import { SimpleButton } from "../buttons/SimpleButton";
 
 const nf = Intl.NumberFormat();
 
@@ -156,15 +157,40 @@ export const Table = (): JSX.Element => {
               {pageIndex + 1} of {pageOptions.length}
             </strong>
           </span>
+          <span>
+            <input
+              style={{ width: "50px", marginLeft: "10px" }}
+              type="number"
+              defaultValue={pageIndex + 1}
+              onChange={(e) => {
+                const pageNum = e.target.value ? Number(e.target.value) - 1 : 0;
+                gotoPage(pageNum);
+              }}
+            />
+          </span>
         </Box>
         <Box mt="0.5rem">
           <ButtonGroup>
+            <SimpleButton
+              color="#fff"
+              onClick={() => gotoPage(0)}
+              disabled={!canPreviousPage}
+            >
+              {"<<"}
+            </SimpleButton>
             <Button onClick={previousPage} disabled={!canPreviousPage}>
               Previous
             </Button>
             <Button onClick={nextPage} disabled={!canNextPage}>
               Next
             </Button>
+            <SimpleButton
+              color="#fff"
+              onClick={() => gotoPage(pageCount - 1)}
+              disabled={!canNextPage}
+            >
+              {">>"}
+            </SimpleButton>
           </ButtonGroup>
         </Box>
       </div>

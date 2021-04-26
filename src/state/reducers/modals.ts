@@ -12,8 +12,6 @@ const initialState: IModals = {
 export const modals = (state = initialState, action: Action): IModals => {
   switch (action.type) {
     case ActionTypes.TOGGLE_MODAL:
-      console.log(action.type);
-
       return {
         ...state,
         covidModal: !state.covidModal,

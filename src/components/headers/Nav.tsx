@@ -82,9 +82,8 @@ export const Nav = (): JSX.Element => {
     <AnimatedNumber
       animateToNumber={deaths}
       includeComma
+      delay={1000}
       config={{ tension: 89, friction: 40 }}
-      onStart={() => console.log("onStart")}
-      onFinish={() => console.log("onFinish")}
       animationType={"calm"}
     />
   );
@@ -93,9 +92,8 @@ export const Nav = (): JSX.Element => {
     <AnimatedNumber
       animateToNumber={cases}
       includeComma
+      delay={1000}
       config={{ tension: 89, friction: 40 }}
-      onStart={() => console.log("onStart")}
-      onFinish={() => console.log("onFinish")}
       animationType={"calm"}
     />
   );

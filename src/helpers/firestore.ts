@@ -13,13 +13,5 @@ export const postLocationToFirestore = (
     latitude,
     longitude,
   };
-  locationsCollection
-    .doc(userId)
-    .set(data)
-    .then(() => {
-      console.log("created");
-    })
-    .catch(() => {
-      console.log("something went wrroooong");
-    });
+  locationsCollection.doc(userId).set(data);
 };

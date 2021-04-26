@@ -36,7 +36,6 @@ export const LoginFlow = (): JSX.Element => {
 
         history.push("/");
       } catch (err) {
-        console.log(err);
         setError(err.message);
       }
       setLoading(false);

@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React from "react";
 import { useAppSelector } from "../hooks";
 import {
   ResponsiveContainer,
@@ -57,16 +57,12 @@ export const CovidChart = (): JSX.Element => {
   const { countriesInfo }: { countriesInfo: ICountriesInfo[] } = useAppSelector(
     (state) => state.chartData
   );
-  const logkazka = useAppSelector((state) => state.chartData.countryCode);
-
-  console.log(logkazka);
 
   const dispatch = useDispatch();
 
   const { error } = useAppSelector((state) => state.loadingAndError);
 
   const onChartPeriodChange = (e: any) => {
-    console.log(e.target.value);
     dispatch({
       type: ActionTypes.CONTROL_CHART_PERIOD,
       payload: e.target.value,

@@ -25,7 +25,6 @@ export const CustomGoogleMap = ({
   const covidData: ICovidData[] = useAppSelector(
     (state) => state.chartData.covidData
   );
-  console.log(covidData);
 
   const [selected, setSelected] = React.useState<ICovidData | null>(null);
   const mapRef: google.maps.Map | any = React.useRef(null);

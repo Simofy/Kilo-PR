@@ -38,8 +38,6 @@ export const SignUpFlow = (): JSX.Element => {
         await signup(email, password);
         history.push("/");
       } catch (err) {
-        console.log(err);
-
         setError(err.message);
       }
 

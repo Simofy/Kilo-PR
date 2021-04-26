@@ -62,8 +62,8 @@ export function* getChartData(): Generator<unknown> {
       type: ActionTypes.ERROR_FALSE,
     });
   } catch {
+    yield put({ type: ActionTypes.CONTROL_CHART_PERIOD, payload: "360" });
     yield put({ type: ActionTypes.ERROR_TRUE });
-    console.log("error in chart datas request");
   } finally {
     yield put({ type: ActionTypes.LOADING_FALSE });
   }

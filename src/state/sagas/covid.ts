@@ -19,8 +19,6 @@ export function* getCovidData(): Generator<unknown> {
     yield put({ type: ActionTypes.LOADING_FALSE });
     yield put({ type: ActionTypes.ERROR_FALSE });
   } catch (err) {
-    console.log("error in initial covid data request");
-
     yield put({ type: ActionTypes.ERROR_TRUE });
   }
 }
