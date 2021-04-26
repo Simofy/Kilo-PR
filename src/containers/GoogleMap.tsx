@@ -25,9 +25,11 @@ export const CustomGoogleMap = ({
   const covidData: ICovidData[] = useAppSelector(
     (state) => state.chartData.covidData
   );
-  const dispatch = useDispatch();
+  console.log(covidData);
+
   const [selected, setSelected] = React.useState<ICovidData | null>(null);
-  const mapRef: any = React.useRef(null);
+  const mapRef: google.maps.Map | any = React.useRef(null);
+  const dispatch = useDispatch();
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_TOKEN!,
@@ -47,9 +49,10 @@ export const CustomGoogleMap = ({
     mapRef.current?.setZoom(8);
   }, []);
 
-  const handleMouseClick = (item: { iso2: string }) => {
+  const handleMouseClick = useCallback((item: { iso2: string }) => {
+    dispatch({ type: ActionTypes.SET_COUNTRY, payload: item.iso2 });
     dispatch({ type: ActionTypes.GET_CHART_DATA, payload: item.iso2 });
-  };
+  }, []);
 
   const savedData = useMemo(
     () =>
@@ -81,21 +84,19 @@ export const CustomGoogleMap = ({
     return <Loader type="Puff" height={25} width={25} color="#00BFFF" />;
 
   return (
-    <div>
-      <GoogleMap
-        mapContainerStyle={mapContainerStyle}
-        zoom={4}
-        center={center}
-        options={options}
-        onLoad={onMapLoad}
-      >
-        <GoogleMapsSearch panTo={panTo} />
-        {savedData}
-        {selected && (
-          <CustomInfoWindow selected={selected} setSelected={setSelected} />
-        )}
-        {children}
-      </GoogleMap>
-    </div>
+    <GoogleMap
+      mapContainerStyle={mapContainerStyle}
+      zoom={4}
+      center={center}
+      options={options}
+      onLoad={onMapLoad}
+    >
+      <GoogleMapsSearch panTo={panTo} />
+      {savedData}
+      {selected && (
+        <CustomInfoWindow selected={selected} setSelected={setSelected} />
+      )}
+      {children}
+    </GoogleMap>
   );
 };

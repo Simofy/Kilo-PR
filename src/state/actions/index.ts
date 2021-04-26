@@ -52,6 +52,15 @@ interface SetGlobalCasesAction {
   payload: ICovidData;
 }
 
+interface ToggleModalAction {
+  type: ActionTypes.TOGGLE_MODAL;
+}
+
+interface ControlChartShownPeriodAction {
+  type: ActionTypes.CONTROL_CHART_PERIOD;
+  payload: string;
+}
+
 export type Action =
   | GetCovidDataAction
   | GetCovidDataSuccessAction
@@ -62,4 +71,6 @@ export type Action =
   | LoadingTrueAction
   | LoadingFalseAction
   | SetCountryAction
-  | SetGlobalCasesAction;
+  | SetGlobalCasesAction
+  | ToggleModalAction
+  | ControlChartShownPeriodAction;

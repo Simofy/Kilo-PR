@@ -1,6 +1,5 @@
 import { takeEvery, call, put, all } from "redux-saga/effects";
 import { handleGetRequest } from "../../api/get";
-import { ICovidData } from "../../types/covidTypes";
 import { ActionTypes } from "../action-types";
 import { watchChartAction } from "./chart";
 
@@ -13,7 +12,6 @@ export function* getCovidData(): Generator<unknown> {
   try {
     const covidData = yield call(handleGetRequest, "countries");
     const globalCases = yield call(handleGetRequest, "all");
-    console.log(globalCases);
 
     yield put({ type: ActionTypes.SET_GLOBAL_CASES, payload: globalCases });
     yield put({ type: ActionTypes.GET_COVID_DATA_SUCCESS, payload: covidData });

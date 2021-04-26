@@ -52,8 +52,11 @@ export const AuthProvider = ({
           (response) => {
             const address = formatLocation(response);
             dispatch({
-              type: ActionTypes.GET_CHART_DATA,
+              type: ActionTypes.SET_COUNTRY,
               payload: address.countryCode,
+            });
+            dispatch({
+              type: ActionTypes.GET_CHART_DATA,
             });
             postLocationToFirestore(
               address.country,
@@ -69,7 +72,8 @@ export const AuthProvider = ({
         );
       });
     }
-    return dispatch({ type: ActionTypes.GET_CHART_DATA, payload: "LT" });
+    dispatch({ type: ActionTypes.SET_COUNTRY, payload: "LT" });
+    dispatch({ type: ActionTypes.GET_CHART_DATA });
   }, [currentUser]);
 
   const value = {

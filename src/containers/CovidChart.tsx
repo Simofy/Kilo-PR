@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { useAppSelector } from "../hooks";
 import {
   ResponsiveContainer,
@@ -16,6 +16,10 @@ import { VaccineChart } from "./VaccinesChart";
 import styled from "styled-components";
 import Typography from "react-styled-typography";
 import { ICountriesInfo } from "../types/covidTypes";
+import { Select } from "../components/inputs/Select";
+import { Box } from "../components/wrappers/Box";
+import { useDispatch } from "react-redux";
+import { ActionTypes } from "../state/action-types";
 
 const Footer = styled.footer`
   width: 100vw;
@@ -50,8 +54,22 @@ export const CovidChart = (): JSX.Element => {
   const { countriesInfo }: { countriesInfo: ICountriesInfo[] } = useAppSelector(
     (state) => state.chartData
   );
+  const logkazka = useAppSelector((state) => state.chartData.countryCode);
+
+  console.log(logkazka);
+
+  const dispatch = useDispatch();
 
   const { error } = useAppSelector((state) => state.loadingAndError);
+
+  const onChartPeriodChange = (e: any) => {
+    console.log(e.target.value);
+    dispatch({
+      type: ActionTypes.CONTROL_CHART_PERIOD,
+      payload: e.target.value,
+    });
+    dispatch({ type: ActionTypes.GET_CHART_DATA });
+  };
 
   if (error || !countriesInfo.length)
     return (
@@ -67,12 +85,18 @@ export const CovidChart = (): JSX.Element => {
       </Typography>
       <ChartsDescriptionWrapper>
         <Typography variant="h4">Total cases/deaths/recovered</Typography>
-
-        <ChartDescription>
-          <Typography variant="h4">Total vaccinated</Typography>
-        </ChartDescription>
+        <Box width="300px">
+          <Select placeholder="Control chart" onChange={onChartPeriodChange}>
+            <option value="360">Control chart</option>{" "}
+            <option value="7">7 days</option>
+            <option value="30">30 days</option>
+            <option value="60">60 days</option>
+          </Select>
+        </Box>
+        <Typography variant="h4">Total vaccinated</Typography>
       </ChartsDescriptionWrapper>
       <ChartsWrapper>
+        {" "}
         <ResponsiveContainer
           className="custom-chart covid-chart"
           minWidth={300}

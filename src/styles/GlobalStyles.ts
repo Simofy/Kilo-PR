@@ -64,6 +64,7 @@ h3 {
 table {
   border-collapse: collapse;
   width: 100%;
+  font-size: 16px;
 }
 
 th, td {
@@ -71,10 +72,12 @@ th, td {
   padding: 8px;
 }
 
-tr:nth-child(even){background-color: #f2f2f2}
+tr:nth-child(odd){background-color: ""}
+
+tr:nth-child(even){background-color: #ddd; color: #000}
 
 th {
-  background-color: #4CAF50;
+  background-color: #000;
   color: white;
 }
 `;

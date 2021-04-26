@@ -1,8 +1,6 @@
 export const formatLocation = (
   response: any
 ): { country: string; countryCode: string } => {
-  console.log(response);
-
   let address: { country: string; countryCode: string } = {
     country: "",
     countryCode: "",

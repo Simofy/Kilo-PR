@@ -9,6 +9,9 @@ import { IconButton } from "../buttons/IconButton";
 import { ProfilePopup } from "../profile/ProfilePopup";
 import { Dropdown } from "../others/Dropdown";
 import { useAppSelector } from "../../hooks";
+import { Box } from "../wrappers/Box";
+import { useDispatch } from "react-redux";
+import { ActionTypes } from "../../state/action-types";
 
 const NavBar = styled.header`
   display: flex;
@@ -24,18 +27,21 @@ const NavBar = styled.header`
 `;
 
 const GlobalCases = styled.div`
-  display: flex;
-  background: #000;
-  min-height: 100%;
   color: #fff;
   border: 1px solid #fff;
+
   @media only screen and (max-width: 600px) {
     display: none;
   }
 `;
 
 const GlobalCasesContent = styled.div`
-  padding: 1rem;
+  padding: 0.5rem;
+`;
+
+const GlobalCasesContentWrapper = styled.div`
+  display: flex;
+  background: #000;
 `;
 
 const nf = Intl.NumberFormat();
@@ -46,6 +52,8 @@ export const Nav = (): JSX.Element => {
   const { cases, deaths }: any = useAppSelector(
     (state) => state.chartData.globalCases
   );
+
+  const dispatch = useDispatch();
 
   const [popupActive, setPopUpActive] = useState(false);
   const history = useHistory();
@@ -68,26 +76,35 @@ export const Nav = (): JSX.Element => {
     }
   };
 
+  const toggleModal = useCallback(() => {
+    dispatch({ type: ActionTypes.TOGGLE_MODAL });
+  }, []);
+
   return (
     <NavBar>
       <h1>C19</h1>
       <GlobalCases>
-        <GlobalCasesContent>
-          <Typography variant="p" align="center">
-            Global cases
-          </Typography>
-          <Typography variant="h2" color="red">
-            {cases ? nf.format(cases) : ""}
-          </Typography>
-        </GlobalCasesContent>
-        <GlobalCasesContent>
-          <Typography variant="p" align="center">
-            Deaths
-          </Typography>
-          <Typography variant="h2" color="red">
-            {deaths ? nf.format(deaths) : ""}
-          </Typography>
-        </GlobalCasesContent>
+        <GlobalCasesContentWrapper>
+          <GlobalCasesContent>
+            <Typography variant="p" align="center">
+              Global cases
+            </Typography>
+            <Typography variant="h2" color="red">
+              {cases ? nf.format(cases) : ""}
+            </Typography>
+          </GlobalCasesContent>
+          <GlobalCasesContent>
+            <Typography variant="p" align="center">
+              Deaths
+            </Typography>
+            <Typography variant="h2" color="red">
+              {deaths ? nf.format(deaths) : ""}
+            </Typography>
+          </GlobalCasesContent>
+        </GlobalCasesContentWrapper>
+        <Box pl="0.5rem" pb="0.5rem">
+          <SimpleButton onClick={toggleModal}>Show all countries</SimpleButton>
+        </Box>
       </GlobalCases>
 
       <Dropdown

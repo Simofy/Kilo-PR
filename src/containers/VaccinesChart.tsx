@@ -10,14 +10,9 @@ import {
   YAxis,
   Line,
 } from "recharts";
-import { IVaccinationData } from "../types/covidTypes";
 
 export const VaccineChart = (): JSX.Element => {
-  const vaccineData: IVaccinationData = useAppSelector(
-    (state) => state.chartData.vaccinated
-  );
-
-  console.log(vaccineData);
+  const vaccineData = useAppSelector((state) => state.chartData.vaccinated);
 
   const [data, setData] = useState<{ date: string; Vaccinated: unknown }[]>();
 

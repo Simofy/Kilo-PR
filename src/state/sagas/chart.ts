@@ -1,4 +1,4 @@
-import { takeEvery, call, put, all } from "redux-saga/effects";
+import { takeEvery, call, put, all, select } from "redux-saga/effects";
 import { handleGetRequest } from "../../api/get";
 import { ActionTypes } from "../action-types";
 
@@ -36,18 +36,19 @@ export function* watchChartAction(): Generator<unknown> {
   yield takeEvery(ActionTypes.GET_CHART_DATA, getChartData);
 }
 
-export function* getChartData(action: {
-  type: string;
-  payload: string;
-}): Generator<unknown> {
+export function* getChartData(): Generator<unknown> {
   try {
+    const period = yield select((state) => state.chartData.period);
+
+    const countryISO2 = yield select((state) => state.chartData.countryCode);
+
     yield put({ type: ActionTypes.LOADING_TRUE });
     const [vaccinesData, chartData]: any = yield all([
       call(
         handleGetRequest,
-        `vaccine/coverage/countries/${action.payload}?lastdays=90`
+        `vaccine/coverage/countries/${countryISO2}?lastdays=${period}`
       ),
-      call(handleGetRequest, `historical/${action.payload}?lastdays=360`),
+      call(handleGetRequest, `historical/${countryISO2}?lastdays=${period}`),
     ]);
 
     const modifiedChartData = formatData(chartData);

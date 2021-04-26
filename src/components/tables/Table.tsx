@@ -5,6 +5,10 @@ import uuid from "react-uuid";
 import { useAppSelector } from "../../hooks";
 import { ActionTypes } from "../../state/action-types";
 import { ICovidData } from "../../types/covidTypes";
+import { Input } from "../inputs/Input";
+import { Box } from "../wrappers/Box";
+import { ButtonGroup } from "../buttons/ButtonGroup";
+import { Button } from "../buttons/Button";
 
 const nf = Intl.NumberFormat();
 
@@ -12,31 +16,30 @@ export const Table = (): JSX.Element => {
   const { covidData }: { covidData: ICovidData[] } = useAppSelector(
     (state) => state.chartData
   );
+
   const [filterInput, setFilterInput] = useState("");
 
   // Update the state when input changes
-  const handleFilterChange = useCallback((e: any) => {
+  const handleFilterChange = useCallback((e) => {
     const value = e.target.value || undefined;
     setFilter("country", value);
     setFilterInput(value);
   }, []);
 
-  const data = useMemo(
-    () =>
-      covidData.map(
-        ({ country, cases, recovered, deaths, tests, population }) => {
-          return {
-            country,
-            cases: nf.format(cases),
-            recovered: nf.format(recovered),
-            deaths: nf.format(deaths),
-            tests: nf.format(tests),
-            population: nf.format(population),
-          };
-        }
-      ),
-    []
-  );
+  const data = useMemo(() => {
+    return covidData.map(
+      ({ country, cases, recovered, deaths, tests, population }) => {
+        return {
+          country,
+          cases: nf.format(cases),
+          recovered: nf.format(recovered),
+          deaths: nf.format(deaths),
+          tests: nf.format(tests),
+          population: nf.format(population),
+        };
+      }
+    );
+  }, [covidData]);
 
   const default_columns = [
     {
@@ -65,7 +68,10 @@ export const Table = (): JSX.Element => {
     },
   ];
 
-  const columns: any = useMemo(() => default_columns, []);
+  const columns: { Header: string; accessor: string }[] | any = useMemo(
+    () => default_columns,
+    []
+  );
 
   const {
     getTableProps,
@@ -102,11 +108,14 @@ export const Table = (): JSX.Element => {
   }, []);
   return (
     <>
-      <input
-        value={filterInput}
-        onChange={handleFilterChange}
-        placeholder={"Search name"}
-      />{" "}
+      <Box width="300px" mb="1rem">
+        <Input
+          type="text"
+          value={filterInput}
+          onChange={handleFilterChange}
+          placeholder={"Search by country"}
+        />{" "}
+      </Box>
       <table {...getTableProps()}>
         <thead>
           {headerGroups.map((headerGroup) => (
@@ -140,18 +149,24 @@ export const Table = (): JSX.Element => {
         </tbody>
       </table>
       <div>
-        <span>
-          Page{" "}
-          <strong>
-            {pageIndex + 1} of {pageOptions.length}
-          </strong>
-        </span>
-        <button onClick={previousPage} disabled={!canPreviousPage}>
-          Previous
-        </button>
-        <button onClick={nextPage} disabled={!canNextPage}>
-          Next
-        </button>
+        <Box mt="0.5rem">
+          <span>
+            Page{" "}
+            <strong>
+              {pageIndex + 1} of {pageOptions.length}
+            </strong>
+          </span>
+        </Box>
+        <Box mt="0.5rem">
+          <ButtonGroup>
+            <Button onClick={previousPage} disabled={!canPreviousPage}>
+              Previous
+            </Button>
+            <Button onClick={nextPage} disabled={!canNextPage}>
+              Next
+            </Button>
+          </ButtonGroup>
+        </Box>
       </div>
     </>
   );

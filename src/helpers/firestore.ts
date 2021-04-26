@@ -6,7 +6,7 @@ export const postLocationToFirestore = (
   latitude: number,
   longitude: number,
   userId: string
-) => {
+): void => {
   const data = {
     country,
     iso2,

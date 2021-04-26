@@ -3,10 +3,12 @@ import createSagaMiddleware from "redux-saga";
 import { rootSaga } from "./sagas/covid";
 import { chartReducer } from "./reducers/chartReducer";
 import { loadingAndErrorReducer } from "./reducers/loading&error";
+import { modals } from "./reducers/modals";
 
 const rootReducer = combineReducers({
   chartData: chartReducer,
   loadingAndError: loadingAndErrorReducer,
+  modals: modals,
 });
 
 const sagaMiddleware = createSagaMiddleware();
