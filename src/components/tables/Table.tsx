@@ -5,11 +5,9 @@ import uuid from "react-uuid";
 import { useAppSelector } from "../../hooks";
 import { ActionTypes } from "../../state/action-types";
 import { ICovidData } from "../../types/covidTypes";
-import { Input } from "../inputs/Input";
-import { Box } from "../wrappers/Box";
-import { ButtonGroup } from "../buttons/ButtonGroup";
-import { Button } from "../buttons/Button";
-import { SimpleButton } from "../buttons/SimpleButton";
+import { Input } from "../inputs";
+import { Box } from "../wrappers";
+import { ButtonGroup, Button, SimpleButton } from "../buttons";
 
 const default_columns = [
   {

@@ -1,13 +1,12 @@
 import React, { useState, useCallback } from "react";
-import { Input } from "../components/inputs/Input";
-import { ButtonGroup } from "../components/buttons/ButtonGroup";
-import { Button } from "../components/buttons/Button";
-import { Box } from "../components/wrappers/Box";
+import { Input } from "../components/inputs";
+import { ButtonGroup, Button } from "../components/buttons";
+import { Box } from "../components/wrappers";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import { ErrorMsg } from "../components/errors/ErrorMsg";
-import { StyledForm } from "../components/forms/StyledForm";
+import { ErrorMsg } from "../components/errors";
+import { StyledForm } from "../components/forms";
 import Loader from "react-loader-spinner";
 
 export const LoginFlow = (): JSX.Element => {

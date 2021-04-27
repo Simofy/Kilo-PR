@@ -1,6 +1,5 @@
 import React from "react";
-import { Home } from "./pages/Home";
-import { CovidMap } from "./pages/CovidMap";
+import { Home, CovidMap, Signup, ResetPassword } from "./pages";
 import {
   Route,
   RouteProps,
@@ -9,11 +8,8 @@ import {
 } from "react-router-dom";
 import { GlobalStyle } from "./styles/GlobalStyles";
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-import { Signup } from "./pages/Signup";
 import { useAuth } from "./contexts/AuthContext";
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css";
-import { Table } from "./components/tables/Table";
-import { ResetPassword } from "./pages/ResetPassword";
+import { Table } from "./components/tables";
 
 const PrivateRoute = ({
   children,

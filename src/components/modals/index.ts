@@ -1,0 +1,1 @@
+export { CovidModal } from "./CovidModal";

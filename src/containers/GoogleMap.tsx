@@ -3,7 +3,7 @@ import { GoogleMap, useLoadScript } from "@react-google-maps/api";
 import { useAppSelector } from "../hooks";
 import { CustomMarker } from "../components/map/CustomMarker";
 import "@reach/combobox/styles.css";
-import { CustomInfoWindow } from "../components/map/CustomInfoWindow";
+import { CustomInfoWindow, GoogleMapsSearch } from "../components/map";
 import {
   libraries,
   mapContainerStyle,
@@ -14,7 +14,6 @@ import Loader from "react-loader-spinner";
 import Typography from "react-styled-typography";
 import { ICovidData } from "../types/covidTypes";
 import { ActionTypes } from "../state/action-types";
-import { GoogleMapsSearch } from "../components/map/GoogleMapsSearch";
 import { useDispatch } from "react-redux";
 
 export const CustomGoogleMap = ({

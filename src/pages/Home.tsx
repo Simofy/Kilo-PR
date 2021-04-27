@@ -1,12 +1,12 @@
 import React, { useEffect } from "react";
-import { AuthWrapper } from "../components/wrappers/AuthWrapper";
-import { LoginFlow } from "../containers/LoginFlow";
+import { AuthWrapper } from "../components/wrappers";
+import { LoginFlow } from "../containers";
 import { HomePresentation } from "../layouts/HomePresentation";
 import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 
 export const Home = (): JSX.Element => {
-  const { currentUser } = useAuth();
+  const { currentUser }: any = useAuth();
   const history = useHistory();
 
   useEffect(() => {

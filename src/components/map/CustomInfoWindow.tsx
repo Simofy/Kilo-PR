@@ -1,7 +1,7 @@
 import React, { useCallback } from "react";
 import { InfoWindow } from "@react-google-maps/api";
 import styled from "styled-components";
-import { Box } from "../wrappers/Box";
+import { Box } from "../wrappers";
 import { useAppSelector } from "../../hooks";
 import Loader from "react-loader-spinner";
 import { ICovidData } from "../../types/covidTypes";

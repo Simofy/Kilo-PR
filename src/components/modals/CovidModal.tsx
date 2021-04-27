@@ -3,8 +3,8 @@ import { useDispatch } from "react-redux";
 import styled, { css } from "styled-components";
 import { useAppSelector } from "../../hooks";
 import { ActionTypes } from "../../state/action-types";
-import { Table } from "../tables/Table";
-import { TableWrapper } from "../wrappers/TableWrapper";
+import { Table } from "../tables";
+import { TableWrapper } from "../wrappers";
 
 interface IModal {
   modalAnimation: boolean;

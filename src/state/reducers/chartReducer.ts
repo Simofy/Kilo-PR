@@ -11,7 +11,7 @@ interface IChartData {
   countriesInfo: ICountriesInfo[];
   covidData: ICovidData[];
   countryCode: string;
-  globalCases: ICovidData | string;
+  globalCases?: ICovidData | any;
   period: string;
 }
 

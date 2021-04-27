@@ -10,14 +10,12 @@ import {
   YAxis,
   Line,
 } from "recharts";
-import { NoResultsContainer } from "../components/wrappers/NoResultsContainer";
-import { ChartsWrapper } from "../components/wrappers/ChartWrapper";
 import { VaccineChart } from "./VaccinesChart";
 import styled from "styled-components";
 import Typography from "react-styled-typography";
 import { ICountriesInfo } from "../types/covidTypes";
-import { Select } from "../components/inputs/Select";
-import { Box } from "../components/wrappers/Box";
+import { Select } from "../components/inputs";
+import { Box, ChartsWrapper, NoResultsContainer } from "../components/wrappers";
 import { useDispatch } from "react-redux";
 import { ActionTypes } from "../state/action-types";
 
@@ -62,7 +60,7 @@ export const CovidChart = (): JSX.Element => {
 
   const { error } = useAppSelector((state) => state.loadingAndError);
 
-  const onChartPeriodChange = (e: any) => {
+  const onChartPeriodChange = (e: { target: { value: string } }) => {
     dispatch({
       type: ActionTypes.CONTROL_CHART_PERIOD,
       payload: e.target.value,

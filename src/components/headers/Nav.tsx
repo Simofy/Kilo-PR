@@ -1,15 +1,14 @@
 import React, { useCallback, useState } from "react";
 import styled from "styled-components";
-import { SimpleButton } from "../buttons/SimpleButton";
+import { SimpleButton, IconButton } from "../buttons";
 import { useAuth } from "../../contexts/AuthContext";
 import Typography from "react-styled-typography";
 import { AiOutlineUser } from "react-icons/ai";
 import { useHistory } from "react-router-dom";
-import { IconButton } from "../buttons/IconButton";
-import { ProfilePopup } from "../profile/ProfilePopup";
-import { Dropdown } from "../others/Dropdown";
+import { ProfilePopup } from "../profile";
+import { Dropdown } from "../others";
 import { useAppSelector } from "../../hooks";
-import { Box } from "../wrappers/Box";
+import { Box } from "../wrappers";
 import { useDispatch } from "react-redux";
 import { ActionTypes } from "../../state/action-types";
 import Loader from "react-loader-spinner";
@@ -45,8 +44,6 @@ const GlobalCasesContentWrapper = styled.div`
   display: flex;
   background: #000;
 `;
-
-const nf = Intl.NumberFormat();
 
 export const Nav = (): JSX.Element => {
   const [error, setError] = useState("");

@@ -1,12 +1,12 @@
 import React, { useCallback, useState } from "react";
-import { Input } from "../components/inputs/Input";
-import { Button } from "../components/buttons/Button";
-import { Box } from "../components/wrappers/Box";
+import { Input } from "../components/inputs";
+import { Button } from "../components/buttons";
+import { Box } from "../components/wrappers";
 import { Link } from "react-router-dom";
-import { StyledForm } from "../components/forms/StyledForm";
+import { StyledForm } from "../components/forms";
 import { useAuth } from "../contexts/AuthContext";
-import { SignUpWrapper } from "../components/wrappers/SignUpWrapper";
-import { ErrorMsg } from "../components/errors/ErrorMsg";
+import { SignUpWrapper } from "../components/wrappers";
+import { ErrorMsg } from "../components/errors";
 import Loader from "react-loader-spinner";
 
 export const ResetPassword = (): JSX.Element => {

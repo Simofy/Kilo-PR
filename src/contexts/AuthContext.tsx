@@ -5,6 +5,23 @@ import Geocode from "react-geocode";
 import { ActionTypes } from "../state/action-types";
 import { useDispatch } from "react-redux";
 import { auth } from "../config/firebase";
+import firebase from "firebase/app";
+
+type User = firebase.User;
+
+interface IContextValues {
+  currentUser: User | null;
+  login: (
+    email: string,
+    password: string
+  ) => Promise<firebase.auth.UserCredential>;
+  signup: (
+    email: string,
+    password: string
+  ) => Promise<firebase.auth.UserCredential>;
+  resetPassword: (email: string) => Promise<void>;
+  logout: () => Promise<void>;
+}
 
 const AuthContext = React.createContext<any>(null);
 
