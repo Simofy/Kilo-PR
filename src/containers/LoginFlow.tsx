@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import { Input } from "../components/inputs";
-import { ButtonGroup, Button } from "../components/buttons";
+import { ButtonGroup, Button, IconButton } from "../components/buttons";
 import { Box } from "../components/wrappers";
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
@@ -9,11 +9,13 @@ import { ErrorMsg } from "../components/errors";
 import { StyledForm } from "../components/forms";
 import Loader from "react-loader-spinner";
 import Typography from "react-styled-typography";
+import { VscGithub } from "react-icons/vsc";
+import { FcGoogle } from "react-icons/fc";
 
 export const LoginFlow = (): JSX.Element => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const { login, signInWithGoogle } = useAuth();
+  const { login, signInWithGoogle, signInWithGithub } = useAuth();
 
   const history = useHistory();
 
@@ -46,8 +48,18 @@ export const LoginFlow = (): JSX.Element => {
   return (
     <StyledForm style={{ margin: "auto" }}>
       <form onSubmit={submitForm}>
-        <Box mb="2rem">
+        <Box mb="1rem">
           <h1>Sign in</h1>
+        </Box>
+        <Box mb="1rem">
+          <ButtonGroup>
+            <IconButton onClick={signInWithGithub}>
+              <VscGithub />
+            </IconButton>
+            <IconButton onClick={signInWithGoogle}>
+              <FcGoogle />
+            </IconButton>
+          </ButtonGroup>
         </Box>
         <Box mb="1rem">
           <label htmlFor="email">Email</label>
@@ -80,7 +92,6 @@ export const LoginFlow = (): JSX.Element => {
           </Button>
         </ButtonGroup>
       </form>
-      <Button onClick={signInWithGoogle}>Goggle signin</Button>
     </StyledForm>
   );
 };

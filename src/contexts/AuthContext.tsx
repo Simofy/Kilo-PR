@@ -56,26 +56,11 @@ export const AuthProvider = ({
   };
 
   const signInWithGoogle = async () => {
-    firebase
-      .auth()
-      .signInWithPopup(Providers.google)
-      .then(function (result) {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        // The signed-in user info.
-        const user = result.user;
-        // ...
-        console.log(user);
-      })
-      .catch(function (error) {
-        // Handle Errors here.
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        // The email of the user's account used.
-        const email = error.email;
-        // The firebase.auth.AuthCredential type that was used.
-        const credential = error.credential;
-        // ...
-      });
+    return auth.signInWithPopup(Providers.google);
+  };
+
+  const signInWithGithub = async () => {
+    return auth.signInWithPopup(Providers.github);
   };
 
   useEffect(() => {
@@ -127,6 +112,7 @@ export const AuthProvider = ({
     logout,
     resetPassword,
     signInWithGoogle,
+    signInWithGithub,
   };
 
   return (
