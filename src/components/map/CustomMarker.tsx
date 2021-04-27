@@ -22,6 +22,11 @@ export const CustomMarker = ({
 
   return (
     <Marker
+      animation={
+        countryCode === countryInfo.iso2
+          ? google.maps.Animation.BOUNCE
+          : undefined
+      }
       options={{
         optimized: true,
       }}
