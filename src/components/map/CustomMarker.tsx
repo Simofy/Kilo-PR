@@ -1,9 +1,9 @@
 import React from "react";
 import { Marker } from "@react-google-maps/api";
-import {
-  formatMarkerByCases,
-  formatMarkerSizeByCases,
-} from "../../helpers/formatHelpers";
+import { formatMarkerSizeByCases } from "../../helpers/formatHelpers";
+import oval from "../../assets/oval.svg";
+import greenOval from "../../assets/greenOval.svg";
+import { useAppSelector } from "../../hooks";
 
 export const CustomMarker = ({
   countryInfo,
@@ -15,22 +15,23 @@ export const CustomMarker = ({
   onClick: () => void;
   onMouseOut?: () => void;
   onMouseOver?: () => void;
-  countryInfo: { lat: number; long: number };
+  countryInfo: { lat: number; long: number; iso2: string };
   cases: number;
 }): JSX.Element => {
+  const { countryCode } = useAppSelector((state) => state.chartData);
+
   return (
     <Marker
-      animation={window.google.maps.Animation.DROP}
+      options={{
+        optimized: true,
+      }}
       onMouseOut={onMouseOut}
       onMouseOver={onMouseOver}
       position={{ lat: countryInfo.lat, lng: countryInfo.long }}
       clickable={true}
       onClick={onClick}
       icon={{
-        url: `data:image/svg+xml,%3Csvg  viewBox='0 0 100 100' fill='${formatMarkerByCases(
-          cases
-        )}' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='50'/%3E%3C/svg%3E`,
-
+        url: countryCode === countryInfo.iso2 ? greenOval : oval,
         anchor: new google.maps.Point(17, 46),
         origin: new window.google.maps.Point(0, 0),
 
