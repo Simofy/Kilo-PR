@@ -24,15 +24,8 @@ const Footer = styled.footer`
   min-height: 10vh;
   position: absolute;
   bottom: 0 !important;
-  background: rgb(246, 245, 240);
-  background: linear-gradient(
-    180deg,
-    rgba(246, 245, 240, 0.3617822128851541) 0%,
-    rgba(21, 21, 21, 0.7035189075630253) 0%,
-    rgba(21, 21, 21, 1) 100%
-  );
+  background: rgb(246, 245, 240, 0.98);
   padding: 1rem 2rem 0.2rem 1rem;
-  box-shadow: 0rem 0rem 15em 0.2em #fff;
 `;
 
 const ChartsDescriptionWrapper = styled.div`
@@ -77,11 +70,11 @@ export const CovidChart = (): JSX.Element => {
 
   return (
     <Footer>
-      <Typography variant="h1" color="#fff" marginB="15" align="right">
+      <Typography variant="h1" color="#000" marginB="15" align="right">
         {countriesInfo.length && countriesInfo[0].country}
       </Typography>
       <ChartsDescriptionWrapper>
-        <Typography variant="h4" marginB="10">
+        <Typography variant="h4" marginB="10" color="#000">
           Total cases/deaths/recovered
         </Typography>
         <Box width="300px">
@@ -93,7 +86,7 @@ export const CovidChart = (): JSX.Element => {
           </Select>
         </Box>
         <HideOnMobile>
-          <Typography variant="h4" marginB="10">
+          <Typography variant="h4" marginB="10" color="#000">
             Total vaccinated
           </Typography>
         </HideOnMobile>
@@ -106,26 +99,19 @@ export const CovidChart = (): JSX.Element => {
           height={175}
         >
           <LineChart data={countriesInfo && countriesInfo}>
-            <defs>
-              <linearGradient id="color" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0%" stopColor="red" strokeOpacity={0.4} />
-                <stop offset="75%" stopColor="red" stopOpacity={0.1} />
-              </linearGradient>
-            </defs>
-
-            <Area dataKey="Cases" stroke="#2451b7" fill="url(#color)" />
+            <Area dataKey="Cases" />
             <XAxis
               dataKey="Date"
               axisLine={false}
               tickLine={false}
-              stroke="#fff"
+              stroke="#000"
             />
             <YAxis
               dataKey="Cases"
               axisLine={false}
               tickLine={false}
               tickCount={10}
-              stroke="#fff"
+              stroke="#000"
             />
             <Tooltip />
             <CartesianGrid opacity={0.1} vertical={false} />

@@ -1,4 +1,6 @@
-export const primary = "#2451B7";
+export const primary = "#fffce8";
+export const secondary = "#3E363F";
+
 export const choosenMarker = "%232E8B57";
 
 export enum MarkerColors {

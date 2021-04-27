@@ -83,4 +83,8 @@ th {
   background-color: #000;
   color: white;
 }
+
+.recharts-text, .recharts-cartesian-axis-tick-value {
+  font-weight: 800 ;
+}
 `;

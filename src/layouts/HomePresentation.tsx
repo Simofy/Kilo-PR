@@ -7,7 +7,6 @@ export const HomePresentation = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  color: #fff;
   background: ${primary};
   width: 50%;
   @media only screen and (max-width: 1000px) {

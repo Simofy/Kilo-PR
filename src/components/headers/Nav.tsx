@@ -13,24 +13,18 @@ import { useDispatch } from "react-redux";
 import { ActionTypes } from "../../state/action-types";
 import Loader from "react-loader-spinner";
 import AnimatedNumber from "react-animated-numbers";
+import { primary, secondary } from "../../styles/colors";
 
 const NavBar = styled.header`
   display: flex;
-  width: 100%;
-  min-height: 7vh;
-  padding: 1rem;
+  padding: 0.5rem;
   align-items: center;
   justify-content: space-between;
-  background: #000;
-
-  box-shadow: 30px 0rem 50px #000;
-  color: #fff;
+  background: rgba(246, 245, 240, 0.6);
 `;
 
 const GlobalCases = styled.div`
   color: #fff;
-  border: 1px solid #fff;
-
   @media only screen and (max-width: 600px) {
     display: none;
   }
@@ -42,7 +36,7 @@ const GlobalCasesContent = styled.div`
 
 const GlobalCasesContentWrapper = styled.div`
   display: flex;
-  background: #000;
+  background: ${secondary};
 `;
 
 export const Nav = (): JSX.Element => {
@@ -108,7 +102,7 @@ export const Nav = (): JSX.Element => {
             <Typography variant="p" align="center">
               Global cases
             </Typography>
-            <Typography variant="h2" color="red">
+            <Typography variant="h4">
               {cases ? (
                 animatedCases
               ) : (
@@ -120,7 +114,7 @@ export const Nav = (): JSX.Element => {
             <Typography variant="p" align="center">
               Deaths
             </Typography>
-            <Typography variant="h2" color="red">
+            <Typography variant="h4">
               {deaths ? (
                 animatedDeaths
               ) : (
@@ -129,11 +123,7 @@ export const Nav = (): JSX.Element => {
             </Typography>
           </GlobalCasesContent>
         </GlobalCasesContentWrapper>
-        <Box pl="0.5rem" pb="0.5rem">
-          <SimpleButton color="#fff" onClick={toggleModal}>
-            Show all countries
-          </SimpleButton>
-        </Box>
+        <SimpleButton onClick={toggleModal}>Show all countries</SimpleButton>
       </GlobalCases>
 
       <Dropdown
@@ -142,7 +132,7 @@ export const Nav = (): JSX.Element => {
         onClick={handleMouseEnter}
       >
         <IconButton>
-          <AiOutlineUser size={30} color="#fff" />
+          <AiOutlineUser size={30} />
         </IconButton>
         <ProfilePopup driveIn={popupActive}>
           <Typography variant="h6">User: {currentUser.email} </Typography>

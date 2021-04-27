@@ -48,13 +48,13 @@ export const VaccineChart = (): JSX.Element => {
           </linearGradient>
         </defs>
         <Area dataKey="" stroke="#2451b7" fill="url(#color)" />
-        <XAxis dataKey="date" axisLine={false} tickLine={false} stroke="#fff" />
+        <XAxis dataKey="date" axisLine={false} tickLine={false} stroke="#000" />
         <YAxis
           dataKey="Vaccinated"
           axisLine={false}
           tickLine={false}
           tickCount={10}
-          stroke="#fff"
+          stroke="#000"
         />
         <Tooltip />
         <CartesianGrid opacity={0.1} vertical={false} />
