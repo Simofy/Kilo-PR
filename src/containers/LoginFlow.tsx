@@ -13,7 +13,7 @@ import Typography from "react-styled-typography";
 export const LoginFlow = (): JSX.Element => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-  const { login } = useAuth();
+  const { login, signInWithGoogle } = useAuth();
 
   const history = useHistory();
 
@@ -62,7 +62,7 @@ export const LoginFlow = (): JSX.Element => {
         </Box>
         <Box mb="0.2rem">
           <Typography variant="p">
-            Don`t have account? Sign up <Link to="/signup">here.</Link>
+            Don`t have an account? Sign up <Link to="/signup">here.</Link>
           </Typography>
         </Box>
         <Box mb="0.2rem">
@@ -80,6 +80,7 @@ export const LoginFlow = (): JSX.Element => {
           </Button>
         </ButtonGroup>
       </form>
+      <Button onClick={signInWithGoogle}>Goggle signin</Button>
     </StyledForm>
   );
 };
