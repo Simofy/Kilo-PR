@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, FormEvent } from "react";
 import { Input } from "../components/inputs";
 import { ButtonGroup, Button, IconButton } from "../components/buttons";
 import { Box } from "../components/wrappers";
@@ -45,6 +45,36 @@ export const LoginFlow = (): JSX.Element => {
     []
   );
 
+  const loginWithGithub = async (e: FormEvent) => {
+    e.preventDefault();
+
+    try {
+      setLoading(true);
+      setError("");
+      await signInWithGithub();
+    } catch (err) {
+      setLoading(false);
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const loginWithGoogle = async (e: FormEvent) => {
+    e.preventDefault();
+
+    try {
+      setLoading(true);
+      setError("");
+      await signInWithGoogle();
+    } catch (err) {
+      setLoading(false);
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <StyledForm style={{ margin: "auto" }}>
       <form onSubmit={submitForm}>
@@ -53,10 +83,10 @@ export const LoginFlow = (): JSX.Element => {
         </Box>
         <Box mb="1rem">
           <ButtonGroup>
-            <IconButton onClick={signInWithGithub}>
+            <IconButton onClick={loginWithGithub}>
               <VscGithub />
             </IconButton>
-            <IconButton onClick={signInWithGoogle}>
+            <IconButton onClick={loginWithGoogle}>
               <FcGoogle />
             </IconButton>
           </ButtonGroup>
