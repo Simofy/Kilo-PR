@@ -60,9 +60,14 @@ export const LoginFlow = (): JSX.Element => {
         <Box>
           <ErrorMsg>{error}</ErrorMsg>
         </Box>
-        <Box mb="1rem">
+        <Box mb="0.2rem">
           <p>
             Don`t have account? Sign up <Link to="/signup">here.</Link>
+          </p>
+        </Box>
+        <Box mb="0.2rem">
+          <p>
+            Forgot your password? Reset <Link to="/reset_password">here.</Link>
           </p>
         </Box>
         <ButtonGroup>

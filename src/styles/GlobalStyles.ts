@@ -19,10 +19,12 @@ h1, h2, h3, h4, h5, h6 {
 .search {
   position: absolute;
   max-width: 400px;
-  right: 5rem;
+  right: 4rem;
   top: 0.75em;
   @media only screen and (max-width: 600px) {
-  display: none;
+    right: 0.65rem;
+    top: 3.5rem;
+
 }
 }
 
@@ -56,6 +58,7 @@ h3 {
 }
 
 .vaccine-chart {
+  padding-left: 1rem !important;
   @media only screen and (max-width: 600px) {
     display: none;
   }

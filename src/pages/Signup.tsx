@@ -10,7 +10,7 @@ import { SignUpWrapper } from "../components/wrappers/SignUpWrapper";
 import { ErrorMsg } from "../components/errors/ErrorMsg";
 import Loader from "react-loader-spinner";
 
-export const SignUpFlow = (): JSX.Element => {
+export const Signup = (): JSX.Element => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const { signup } = useAuth();
@@ -40,7 +40,6 @@ export const SignUpFlow = (): JSX.Element => {
       } catch (err) {
         setError(err.message);
       }
-
       setLoading(false);
     },
     []

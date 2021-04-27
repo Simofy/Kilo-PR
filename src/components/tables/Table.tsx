@@ -11,6 +11,33 @@ import { ButtonGroup } from "../buttons/ButtonGroup";
 import { Button } from "../buttons/Button";
 import { SimpleButton } from "../buttons/SimpleButton";
 
+const default_columns = [
+  {
+    Header: "Country",
+    accessor: "country",
+  },
+  {
+    Header: "Cases",
+    accessor: "cases",
+  },
+  {
+    Header: "Recovered",
+    accessor: "recovered",
+  },
+  {
+    Header: "Deaths",
+    accessor: "deaths",
+  },
+  {
+    Header: "Tests",
+    accessor: "tests",
+  },
+  {
+    Header: "Population",
+    accessor: "population",
+  },
+];
+
 const nf = Intl.NumberFormat();
 
 export const Table = (): JSX.Element => {
@@ -41,33 +68,6 @@ export const Table = (): JSX.Element => {
       }
     );
   }, [covidData]);
-
-  const default_columns = [
-    {
-      Header: "Country",
-      accessor: "country",
-    },
-    {
-      Header: "Cases",
-      accessor: "cases",
-    },
-    {
-      Header: "Recovered",
-      accessor: "recovered",
-    },
-    {
-      Header: "Deaths",
-      accessor: "deaths",
-    },
-    {
-      Header: "Tests",
-      accessor: "tests",
-    },
-    {
-      Header: "Population",
-      accessor: "population",
-    },
-  ];
 
   const columns: { Header: string; accessor: string }[] | any = useMemo(
     () => default_columns,
