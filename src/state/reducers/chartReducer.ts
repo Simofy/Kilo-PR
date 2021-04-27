@@ -20,7 +20,7 @@ const initialState: IChartData = {
   countriesInfo: [],
   covidData: [],
   countryCode: "",
-  globalCases: "",
+  globalCases: {},
   period: "360",
 };
 

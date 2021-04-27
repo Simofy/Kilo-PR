@@ -8,6 +8,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { ErrorMsg } from "../components/errors";
 import { StyledForm } from "../components/forms";
 import Loader from "react-loader-spinner";
+import Typography from "react-styled-typography";
 
 export const LoginFlow = (): JSX.Element => {
   const [error, setError] = useState("");
@@ -60,14 +61,14 @@ export const LoginFlow = (): JSX.Element => {
           <ErrorMsg>{error}</ErrorMsg>
         </Box>
         <Box mb="0.2rem">
-          <p>
+          <Typography variant="p">
             Don`t have account? Sign up <Link to="/signup">here.</Link>
-          </p>
+          </Typography>
         </Box>
         <Box mb="0.2rem">
-          <p>
+          <Typography variant="p">
             Forgot your password? Reset <Link to="/reset_password">here.</Link>
-          </p>
+          </Typography>
         </Box>
         <ButtonGroup>
           <Button type="submit" disabled={loading}>

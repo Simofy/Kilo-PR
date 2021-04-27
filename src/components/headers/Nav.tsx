@@ -8,12 +8,11 @@ import { useHistory } from "react-router-dom";
 import { ProfilePopup } from "../profile";
 import { Dropdown } from "../others";
 import { useAppSelector } from "../../hooks";
-import { Box } from "../wrappers";
 import { useDispatch } from "react-redux";
 import { ActionTypes } from "../../state/action-types";
 import Loader from "react-loader-spinner";
 import AnimatedNumber from "react-animated-numbers";
-import { primary, secondary } from "../../styles/colors";
+import { secondary } from "../../styles/colors";
 
 const NavBar = styled.header`
   display: flex;
