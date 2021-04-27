@@ -25,17 +25,26 @@ export const CustomGoogleMap = ({
     (state) => state.chartData.covidData
   );
 
+  type Test = {
+    mapRef?: google.maps.Map | undefined;
+  };
+
   const [selected, setSelected] = React.useState<ICovidData | null>(null);
-  const mapRef: google.maps.Map | any = React.useRef(null);
+  const mapSelector = useMemo<{ mapRef?: google.maps.Map }>((): Test => {
+    return {
+      mapRef: undefined,
+    };
+  }, []);
+
   const dispatch = useDispatch();
 
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_TOKEN!,
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_TOKEN as string,
     libraries,
   });
 
   const onMapLoad = useCallback((map: google.maps.Map) => {
-    mapRef.current = map;
+    mapSelector.mapRef = map;
   }, []);
 
   const handleMarkerMouseOver = useCallback((item) => {
@@ -43,8 +52,8 @@ export const CustomGoogleMap = ({
   }, []);
 
   const panTo = useCallback(({ lat, lng }) => {
-    mapRef.current?.panTo({ lat, lng });
-    mapRef.current?.setZoom(8);
+    mapSelector.mapRef?.panTo({ lat, lng });
+    mapSelector.mapRef?.setZoom(8);
   }, []);
 
   const handleMouseClick = useCallback((item: { iso2: string }) => {

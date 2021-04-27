@@ -5,6 +5,7 @@ import { useAppSelector } from "../../hooks";
 import { ActionTypes } from "../../state/action-types";
 import { Table } from "../tables";
 import { TableWrapper } from "../wrappers";
+import { VscChromeClose } from "react-icons/vsc";
 
 interface IModal {
   modalAnimation: boolean;
@@ -39,7 +40,7 @@ const Modal = styled.div<IModal>`
 const CloseModal = styled.button`
   position: fixed;
   top: 0.5rem;
-  right: 2rem;
+  right: 0.5rem;
   color: #fff;
   font-size: 2rem;
   background: none;
@@ -62,7 +63,9 @@ export const CovidModal = (): JSX.Element => {
   const memoModal = useMemo(() => {
     return (
       <Modal modalAnimation={modalStatus}>
-        <CloseModal onClick={closeModal}>X</CloseModal>
+        <CloseModal onClick={closeModal}>
+          <VscChromeClose size={30} />
+        </CloseModal>
         <TableWrapper>
           <Table />
         </TableWrapper>
