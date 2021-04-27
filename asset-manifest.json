@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.js": "/Kilo-PR/static/js/main.d919eebc.chunk.js",
-    "main.js.map": "/Kilo-PR/static/js/main.d919eebc.chunk.js.map",
+    "main.js": "/Kilo-PR/static/js/main.82458a0b.chunk.js",
+    "main.js.map": "/Kilo-PR/static/js/main.82458a0b.chunk.js.map",
     "runtime-main.js": "/Kilo-PR/static/js/runtime-main.9f01a6de.js",
     "runtime-main.js.map": "/Kilo-PR/static/js/runtime-main.9f01a6de.js.map",
     "static/css/2.1707616c.chunk.css": "/Kilo-PR/static/css/2.1707616c.chunk.css",
@@ -9,12 +9,14 @@
     "static/js/2.28dd469e.chunk.js.map": "/Kilo-PR/static/js/2.28dd469e.chunk.js.map",
     "index.html": "/Kilo-PR/index.html",
     "static/css/2.1707616c.chunk.css.map": "/Kilo-PR/static/css/2.1707616c.chunk.css.map",
-    "static/js/2.28dd469e.chunk.js.LICENSE.txt": "/Kilo-PR/static/js/2.28dd469e.chunk.js.LICENSE.txt"
+    "static/js/2.28dd469e.chunk.js.LICENSE.txt": "/Kilo-PR/static/js/2.28dd469e.chunk.js.LICENSE.txt",
+    "static/media/greenOval.5e6890df.svg": "/Kilo-PR/static/media/greenOval.5e6890df.svg",
+    "static/media/oval.9a66bd4d.svg": "/Kilo-PR/static/media/oval.9a66bd4d.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.9f01a6de.js",
     "static/css/2.1707616c.chunk.css",
     "static/js/2.28dd469e.chunk.js",
-    "static/js/main.d919eebc.chunk.js"
+    "static/js/main.82458a0b.chunk.js"
   ]
 }
