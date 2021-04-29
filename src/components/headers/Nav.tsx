@@ -1,6 +1,6 @@
 import React, { useCallback, useState } from "react";
 import styled from "styled-components";
-import { SimpleButton, IconButton } from "../buttons";
+import { SimpleButton, IconButton, Button } from "../buttons";
 import { useAuth } from "../../contexts/AuthContext";
 import Typography from "react-styled-typography";
 import { AiOutlineUser } from "react-icons/ai";
@@ -13,6 +13,7 @@ import { ActionTypes } from "../../state/action-types";
 import Loader from "react-loader-spinner";
 import AnimatedNumber from "react-animated-numbers";
 import { secondary } from "../../styles/colors";
+import { Box } from "../wrappers";
 
 const NavBar = styled.header`
   display: flex;
@@ -135,7 +136,11 @@ export const Nav = (): JSX.Element => {
         </IconButton>
         <ProfilePopup driveIn={popupActive}>
           <Typography variant="h6">User: {currentUser.email} </Typography>
-          <SimpleButton onClick={handleLogout}>Log out</SimpleButton>
+          <Box mt="1rem">
+            <Button onClick={handleLogout} width="100%">
+              Log out
+            </Button>
+          </Box>
           {error && <Typography variant="h6">{error}</Typography>}
         </ProfilePopup>
       </Dropdown>

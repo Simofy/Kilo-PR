@@ -11,11 +11,7 @@ export const ProfilePopup = styled.div<IProfilePopup>`
   bottom: 0;
   min-height: 100px;
   min-width: 140px;
-  padding: 0.5rem;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
+  padding: 1rem;
   background: #ffff;
   border-radius: 0.2rem;
   color: #000;

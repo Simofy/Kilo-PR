@@ -84,10 +84,10 @@ export const LoginFlow = (): JSX.Element => {
         <Box mb="1rem">
           <ButtonGroup>
             <IconButton onClick={loginWithGithub}>
-              <VscGithub />
+              <VscGithub size={30} />
             </IconButton>
             <IconButton onClick={loginWithGoogle}>
-              <FcGoogle />
+              <FcGoogle size={30} />
             </IconButton>
           </ButtonGroup>
         </Box>

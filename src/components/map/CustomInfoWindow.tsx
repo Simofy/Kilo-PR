@@ -7,6 +7,8 @@ import Loader from "react-loader-spinner";
 import { ICovidData } from "../../types/covidTypes";
 import Typography from "react-styled-typography";
 
+const nf = Intl.NumberFormat();
+
 const CountryInfo = styled.div`
   display: flex;
   justify-content: space-between;
@@ -47,18 +49,18 @@ export const CustomInfoWindow = ({
       <div>
         <Box mb="0.3rem">
           <CountryInfo>
-            <h5>{selected.country}</h5>
+            <h4>{selected.country}</h4>
             <img
               srcSet={selected.countryInfo.flag}
               style={{ height: "15px" }}
             />
           </CountryInfo>
         </Box>
-        <Typography variant="h6" marginT="10">
-          Population: {selected.population}
+        <Typography variant="h5" marginT="10">
+          Population: {nf.format(selected.population)}
         </Typography>
-        <Typography variant="h6" marginT="5" marginB="10">
-          Total cases: {selected.cases}
+        <Typography variant="h5" marginT="5" marginB="10">
+          Total cases: {nf.format(selected.cases)}
         </Typography>
         {loading ? (
           <Loader type="Puff" width={10} height={10} color="#000" />

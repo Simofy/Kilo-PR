@@ -6,6 +6,7 @@ import { ActionTypes } from "../../state/action-types";
 import { Table } from "../tables";
 import { TableWrapper } from "../wrappers";
 import { VscChromeClose } from "react-icons/vsc";
+import { primary } from "../../styles/colors";
 
 interface IModal {
   modalAnimation: boolean;
@@ -17,7 +18,7 @@ const Modal = styled.div<IModal>`
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.9);
+  background: ${primary};
   height: 100vh;
   width: 100vw;
   display: flex;
@@ -40,7 +41,7 @@ const Modal = styled.div<IModal>`
 const CloseModal = styled.button`
   position: fixed;
   top: 0.5rem;
-  right: 0.5rem;
+  right: 1.5rem;
   color: #fff;
   font-size: 2rem;
   background: none;
@@ -64,7 +65,7 @@ export const CovidModal = (): JSX.Element => {
     return (
       <Modal modalAnimation={modalStatus}>
         <CloseModal onClick={closeModal}>
-          <VscChromeClose size={30} />
+          <VscChromeClose size={30} color="#000" />
         </CloseModal>
         <TableWrapper>
           <Table />

@@ -7,7 +7,8 @@ import { ActionTypes } from "../../state/action-types";
 import { ICovidData } from "../../types/covidTypes";
 import { Input } from "../inputs";
 import { Box } from "../wrappers";
-import { ButtonGroup, Button, SimpleButton } from "../buttons";
+import { ButtonGroup, Button } from "../buttons";
+import Typography from "react-styled-typography";
 
 const default_columns = [
   {
@@ -149,13 +150,11 @@ export const Table = (): JSX.Element => {
       </table>
       <div>
         <Box mt="0.5rem">
-          <span>
+          <Typography color="#000" as="span">
             Page{" "}
             <strong>
               {pageIndex + 1} of {pageOptions.length}
-            </strong>
-          </span>
-          <span>
+            </strong>{" "}
             <input
               style={{ width: "50px", marginLeft: "10px" }}
               type="number"
@@ -165,30 +164,30 @@ export const Table = (): JSX.Element => {
                 gotoPage(pageNum);
               }}
             />
-          </span>
+          </Typography>
         </Box>
         <Box mt="0.5rem">
           <ButtonGroup>
-            <SimpleButton
+            <Button
               color="#fff"
               onClick={() => gotoPage(0)}
               disabled={!canPreviousPage}
             >
               {"<<"}
-            </SimpleButton>
+            </Button>
             <Button onClick={previousPage} disabled={!canPreviousPage}>
               Previous
             </Button>
             <Button onClick={nextPage} disabled={!canNextPage}>
               Next
             </Button>
-            <SimpleButton
+            <Button
               color="#fff"
               onClick={() => gotoPage(pageCount - 1)}
               disabled={!canNextPage}
             >
               {">>"}
-            </SimpleButton>
+            </Button>
           </ButtonGroup>
         </Box>
       </div>

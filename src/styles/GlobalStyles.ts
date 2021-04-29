@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { primary, secondary } from "./colors";
 
 export const GlobalStyle = createGlobalStyle`
 * {
@@ -75,12 +76,12 @@ th, td {
   padding: 8px;
 }
 
-tr:nth-child(odd){background-color: ""}
+tr:nth-child(odd){background-color: ${primary}; color: #000}
 
-tr:nth-child(even){background-color: #ddd; color: #000}
+tr:nth-child(even){background-color: ${secondary}; color: #fff}
 
 th {
-  background-color: #000;
+  background-color: ${secondary};
   color: white;
 }
 
