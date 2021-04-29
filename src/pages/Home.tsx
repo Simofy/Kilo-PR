@@ -6,7 +6,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 
 export const Home = (): JSX.Element => {
-  const { currentUser }: any = useAuth();
+  const { currentUser } = useAuth();
   const history = useHistory();
 
   useEffect(() => {

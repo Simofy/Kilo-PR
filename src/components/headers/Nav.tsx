@@ -42,7 +42,7 @@ const GlobalCasesContentWrapper = styled.div`
 export const Nav = (): JSX.Element => {
   const [error, setError] = useState("");
   const { logout, currentUser } = useAuth();
-  const { cases, deaths }: any = useAppSelector(
+  const { cases, deaths } = useAppSelector(
     (state) => state.chartData.globalCases
   );
 
@@ -135,7 +135,7 @@ export const Nav = (): JSX.Element => {
           <AiOutlineUser size={30} />
         </IconButton>
         <ProfilePopup driveIn={popupActive}>
-          <Typography variant="h6">User: {currentUser.email} </Typography>
+          <Typography variant="h6">User: {currentUser?.email} </Typography>
           <Box mt="1rem">
             <Button onClick={handleLogout} width="100%">
               Log out

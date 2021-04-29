@@ -1,7 +1,16 @@
 export const formatLocation = (
-  response: any
+  //Google api any response
+  response: {
+    results: {
+      address_components: {
+        types: string[];
+        long_name: string;
+        short_name: string;
+      }[];
+    }[];
+  }
 ): { country: string; countryCode: string } => {
-  let address: { country: string; countryCode: string } = {
+  let address = {
     country: "",
     countryCode: "",
   };

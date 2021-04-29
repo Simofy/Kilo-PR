@@ -1,41 +1,56 @@
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useTable, useFilters, useSortBy, usePagination } from "react-table";
+import Typography from "react-styled-typography";
+import {
+  Column,
+  useFilters,
+  usePagination,
+  useSortBy,
+  useTable
+} from "react-table";
 import uuid from "react-uuid";
 import { useAppSelector } from "../../hooks";
 import { ActionTypes } from "../../state/action-types";
 import { ICovidData } from "../../types/covidTypes";
+import { Button, ButtonGroup } from "../buttons";
 import { Input } from "../inputs";
 import { Box } from "../wrappers";
-import { ButtonGroup, Button } from "../buttons";
-import Typography from "react-styled-typography";
+
+type TableDataType = {
+  country: string;
+  cases: string;
+  recovered: string;
+  deaths: string;
+  tests: string;
+  population: string;
+};
 
 const default_columns = [
   {
     Header: "Country",
-    accessor: "country",
+    accessor: "country"
   },
   {
     Header: "Cases",
-    accessor: "cases",
+    accessor: "cases"
   },
   {
     Header: "Recovered",
-    accessor: "recovered",
+    accessor: "recovered"
   },
   {
     Header: "Deaths",
-    accessor: "deaths",
+    accessor: "deaths"
   },
   {
     Header: "Tests",
-    accessor: "tests",
+    accessor: "tests"
   },
   {
     Header: "Population",
-    accessor: "population",
-  },
-];
+    accessor: "population"
+  }
+] as Array<Column<TableDataType>>;
 
 const nf = Intl.NumberFormat();
 
@@ -62,16 +77,13 @@ export const Table = (): JSX.Element => {
           recovered: nf.format(recovered),
           deaths: nf.format(deaths),
           tests: nf.format(tests),
-          population: nf.format(population),
+          population: nf.format(population)
         };
       }
     );
   }, [covidData]);
 
-  const columns: { Header: string; accessor: string }[] | any = useMemo(
-    () => default_columns,
-    []
-  );
+  const columns = useMemo(() => default_columns, []);
 
   const {
     getTableProps,
@@ -87,16 +99,15 @@ export const Table = (): JSX.Element => {
     pageOptions,
     state,
     gotoPage,
-    pageCount,
+    pageCount
   } = useTable(
     {
       columns,
-      data,
+      data
     },
     useFilters,
     useSortBy,
-    usePagination // Adding the useFilters Hook to the table
-    // You can add as many Hooks as you want. Check the documentation for details. You can even add custom Hooks for react-table here
+    usePagination
   );
 
   const { pageIndex } = state;

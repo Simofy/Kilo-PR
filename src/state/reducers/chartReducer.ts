@@ -11,7 +11,7 @@ interface IChartData {
   countriesInfo: ICountriesInfo[];
   covidData: ICovidData[];
   countryCode: string;
-  globalCases?: ICovidData | any;
+  globalCases: ICovidData;
   period: string;
 }
 
@@ -20,7 +20,7 @@ const initialState: IChartData = {
   countriesInfo: [],
   covidData: [],
   countryCode: "",
-  globalCases: {},
+  globalCases: {} as ICovidData,
   period: "360",
 };
 

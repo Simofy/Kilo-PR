@@ -1,16 +1,16 @@
-import React, { useContext, useState, useEffect, SetStateAction } from "react";
-import { postLocationToFirestore } from "../helpers/firestore";
-import { formatLocation } from "../helpers/formatLocation";
+import firebase from "firebase/app";
+import React, { useContext, useEffect, useState } from "react";
 import Geocode from "react-geocode";
-import { ActionTypes } from "../state/action-types";
 import { useDispatch } from "react-redux";
 import { auth, Providers } from "../config/firebase";
-import firebase from "firebase/app";
+import { postLocationToFirestore } from "../helpers/firestore";
+import { formatLocation } from "../helpers/formatLocation";
+import { ActionTypes } from "../state/action-types";
 
 type User = firebase.User;
 
 interface IContextValues {
-  currentUser: User | null;
+  currentUser?: User | null;
   login: (
     email: string,
     password: string
@@ -23,18 +23,18 @@ interface IContextValues {
   logout: () => Promise<void>;
 }
 
-const AuthContext = React.createContext<any>(null);
+const AuthContext = React.createContext<IContextValues>({} as any);
 
-export const useAuth = () => {
+export const useAuth = (): IContextValues => {
   return useContext(AuthContext);
 };
 
 export const AuthProvider = ({
-  children,
+  children
 }: {
   children: JSX.Element;
 }): JSX.Element => {
-  const [currentUser, setCurrentUser] = useState<any>();
+  const [currentUser, setCurrentUser] = useState<User | null>();
   const [loading, setLoading] = useState(true);
 
   const dispatch = useDispatch();
@@ -72,20 +72,20 @@ export const AuthProvider = ({
     return unsubscribe;
   }, []);
 
-  useEffect((): any => {
+  useEffect(() => {
     if (currentUser && "geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(function ({
-        coords: { latitude, longitude },
+        coords: { latitude, longitude }
       }) {
         Geocode.fromLatLng(latitude.toString(), longitude.toString()).then(
           (response) => {
             const address = formatLocation(response);
             dispatch({
               type: ActionTypes.SET_COUNTRY,
-              payload: address.countryCode,
+              payload: address.countryCode
             });
             dispatch({
-              type: ActionTypes.GET_CHART_DATA,
+              type: ActionTypes.GET_CHART_DATA
             });
             postLocationToFirestore(
               address.country,
@@ -112,7 +112,7 @@ export const AuthProvider = ({
     logout,
     resetPassword,
     signInWithGoogle,
-    signInWithGithub,
+    signInWithGithub
   };
 
   return (
