@@ -21,6 +21,8 @@ interface IContextValues {
   ) => Promise<firebase.auth.UserCredential>;
   resetPassword: (email: string) => Promise<void>;
   logout: () => Promise<void>;
+  signInWithGoogle: () => Promise<firebase.auth.UserCredential>;
+  signInWithGithub: () => Promise<firebase.auth.UserCredential>;
 }
 
 const AuthContext = React.createContext<IContextValues>({} as any);
