@@ -1,22 +1,22 @@
 {
   "files": {
-    "main.js": "/Kilo-PR/static/js/main.ded8445e.chunk.js",
-    "main.js.map": "/Kilo-PR/static/js/main.ded8445e.chunk.js.map",
+    "main.js": "/Kilo-PR/static/js/main.69608392.chunk.js",
+    "main.js.map": "/Kilo-PR/static/js/main.69608392.chunk.js.map",
     "runtime-main.js": "/Kilo-PR/static/js/runtime-main.9f01a6de.js",
     "runtime-main.js.map": "/Kilo-PR/static/js/runtime-main.9f01a6de.js.map",
     "static/css/2.1707616c.chunk.css": "/Kilo-PR/static/css/2.1707616c.chunk.css",
-    "static/js/2.57036011.chunk.js": "/Kilo-PR/static/js/2.57036011.chunk.js",
-    "static/js/2.57036011.chunk.js.map": "/Kilo-PR/static/js/2.57036011.chunk.js.map",
+    "static/js/2.0b0f2b09.chunk.js": "/Kilo-PR/static/js/2.0b0f2b09.chunk.js",
+    "static/js/2.0b0f2b09.chunk.js.map": "/Kilo-PR/static/js/2.0b0f2b09.chunk.js.map",
     "index.html": "/Kilo-PR/index.html",
     "static/css/2.1707616c.chunk.css.map": "/Kilo-PR/static/css/2.1707616c.chunk.css.map",
-    "static/js/2.57036011.chunk.js.LICENSE.txt": "/Kilo-PR/static/js/2.57036011.chunk.js.LICENSE.txt",
+    "static/js/2.0b0f2b09.chunk.js.LICENSE.txt": "/Kilo-PR/static/js/2.0b0f2b09.chunk.js.LICENSE.txt",
     "static/media/greenOval.5e6890df.svg": "/Kilo-PR/static/media/greenOval.5e6890df.svg",
     "static/media/oval.9a66bd4d.svg": "/Kilo-PR/static/media/oval.9a66bd4d.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.9f01a6de.js",
     "static/css/2.1707616c.chunk.css",
-    "static/js/2.57036011.chunk.js",
-    "static/js/main.ded8445e.chunk.js"
+    "static/js/2.0b0f2b09.chunk.js",
+    "static/js/main.69608392.chunk.js"
   ]
 }
